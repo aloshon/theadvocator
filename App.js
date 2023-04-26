@@ -1,10 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { useState } from "react";
 
 export default function App() {
+  const [index, setIndex] = useState(0);
+  const prompts = [
+    "Do you have any favorite artists or genres?",
+    "What mood are you feeing right now?",
+    "Do you want popular music?",
+    "What era of music do you want to choose from?",
+    "Are you looking for songs within a certain tempo?",
+    "Are you looking for songs with certain instruments?"
+  ]
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <View style={styles.promptContainer}>
+        <Text>{prompts[index]}</Text>
+        <TextInput></TextInput>
+      </View>
+      
       <StatusBar style="auto" />
     </View>
   );
@@ -13,7 +27,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#222',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  promptContainer: {
+    flex: 1,
+    backgroundColor: '#444',
     alignItems: 'center',
     justifyContent: 'center',
   },
