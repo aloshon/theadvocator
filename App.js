@@ -15,7 +15,7 @@ export default function App() {
     "Are you looking for songs with certain instruments?"
   ]
   const answers = [
-
+    
   ]
   return (
     <View style={styles.container}>
