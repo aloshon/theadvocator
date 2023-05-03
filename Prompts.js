@@ -13,10 +13,10 @@ export default function Prompts() {
     "What era of music do you want to choose from?",
     "Are you looking for songs within a certain tempo?",
     "Are you looking for songs with certain instruments?"
-  ]
+  ];
   const answers = [
 
-  ]
+  ];
   return (
     <View style={styles.container}>
       <View style={styles.promptContainer}>

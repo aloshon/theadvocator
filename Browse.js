@@ -6,7 +6,11 @@ export default function Browse({songs=[]}) {
   const [index, setIndex] = useState(0);
   return (
     songs.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
-    <>Hello!</>
+    songs.map(song => (
+        <View>
+            {song.name}
+        </View>
+    ))
   );
 }
 
