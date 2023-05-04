@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState } from "react";
+import {PRIMARY_COLOR1} from "./styles.js";
 
 export default function Browse({songs=[]}) {
   const [index, setIndex] = useState(0);
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   },
   promptContainer: {
     flex: 1,
-    backgroundColor: '#444',
+    backgroundImage: linear-gradient(PRIMARY_COLOR1, SECONDARY_COLOR1),
     alignItems: 'center',
     justifyContent: 'center',
   },
