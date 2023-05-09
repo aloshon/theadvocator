@@ -4,7 +4,7 @@ import { useState } from "react";
 import {PRIMARY_COLOR1} from "./styles.js";
 
 export default function Browse({songs=[]}) {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0); 
   return (
     songs.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
     songs.map(song => (
