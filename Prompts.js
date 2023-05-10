@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState } from "react";
 
-export default function Prompts() {
+export default function Prompts({setSongs, toggleThemes}) {
   const [index, setIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
   const resetUserInput = () => setUserInput("");

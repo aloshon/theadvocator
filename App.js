@@ -26,11 +26,11 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen
             name="Prompts"
-            component={<Prompts setSongs={setSongs} togglePages={togglePages} toggleTheme={toggle} />}
+            component={<Prompts setSongs={setSongs} toggleTheme={toggle} />}
             options={{title: 'Find Songs'}}
           />
           <Stack.Screen name="Browser" 
-            component={<Browse songs={songs} togglePages={togglePages} />}
+            component={<Browse songs={songs} />}
           />
         </Stack.Navigator>
       </NavigationContainer>

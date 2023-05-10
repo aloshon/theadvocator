@@ -1,17 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
 import { useState } from "react";
 import {PRIMARY_COLOR1} from "./styles.js";
 
 export default function Browse({songs=[]}) {
   const [index, setIndex] = useState(0); 
   return (
-    songs.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
-    songs.map(song => (
-        <View>
-            {song.name}
-        </View>
-    ))
+    <ScrollView>
+      {songs.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
+        songs.map(song => (
+					<TouchableOpacity
+            style = {{flex: 1, flexDirection: "row"}}
+            onPress= {() => {}}
+            >
+							<View>
+								{song.name}
+							</View>
+					</TouchableOpacity>
+				))
+			}
+    </ScrollView>
   );
 }
 
