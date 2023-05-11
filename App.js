@@ -19,7 +19,7 @@ export default function App() {
   const ThemeContext = createContext(currentTheme)
 
 
-  const togglePages = useCallback((toggle=false) => setPromptPage(toggle), []);
+  // const togglePages = useCallback((toggle=false) => setPromptPage(toggle), []);
   return (
     <ThemeContext.Provider value={{currentTheme}}>
       <NavigationContainer> 
