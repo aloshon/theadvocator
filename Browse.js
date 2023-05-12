@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   promptContainer: {
     flex: 1,
-    backgroundImage: linear-gradient(PRIMARY_COLOR1, SECONDARY_COLOR1),
+    // backgroundImage: linear-gradient(PRIMARY_COLOR1, SECONDARY_COLOR1),
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -3,10 +3,10 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState, useCallback, createContext } from "react";
 import Prompts from "./Prompts.js";
 import Browse from "./Browse.js";
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [promptPage, setPromptPage] = useState(true);
@@ -22,17 +22,11 @@ export default function App() {
   // const togglePages = useCallback((toggle=false) => setPromptPage(toggle), []);
   return (
     <ThemeContext.Provider value={{currentTheme}}>
-      <NavigationContainer> 
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Prompts"
-            component={<Prompts setSongs={setSongs} toggleTheme={toggle} />}
-            options={{title: 'Find Songs'}}
-          />
-          <Stack.Screen name="Browser" 
-            component={<Browse songs={songs} />}
-          />
-        </Stack.Navigator>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Browse" component={Prompts} initialParams={{setSongs, toggle}} />
+          <Tab.Screen name="Find Songs" component={Browse} initialParams={{songs}} />
+        </Tab.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
     

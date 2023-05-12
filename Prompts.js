@@ -26,6 +26,7 @@ export default function Prompts({setSongs, toggleThemes}) {
         onChange={newInput => setUserInput(newInput)}
         />
         <Button
+				title="Continue"
         onClick={() => {
           answers.push(userInput); 
           setIndex(index++);
