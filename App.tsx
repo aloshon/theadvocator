@@ -12,7 +12,7 @@ export default function App() {
   const [promptPage, setPromptPage] = useState(true);
   const [songs, setSongs] = useState([]);
   const [currentTheme, setCurrentTheme] = useState(themes["light"]);
-  const toggle = (theme) => {
+  const toggle = (theme:string) => {
       setCurrentTheme(themes[theme])
   };
 
@@ -36,7 +36,15 @@ const styles = StyleSheet.create({
   
 });
 
-const themes = {
+type Theme = {
+  name: {
+    primary: string,
+    secondary: string,
+    background: string,
+  }
+};
+
+const themes: Theme = {
   light: {
     primary: 'rgb(120, 120, 120)',
     secondary: 'rgb(180, 180, 200)',
@@ -47,12 +55,12 @@ const themes = {
     secondary: 'rgb(100, 100, 100)',
     background: 'rgb(40, 40, 40)',
   },
-  cool: {
+  "cool": {
     primary: 'rgb(30, 147, 242)',
     secondary: 'rgb(30, 242, 147)',
     background: 'rgb(160, 228, 228)',
   },
-  snug: {
+  "snug": {
     primary: 'rgb(242, 147, 30)',
     secondary: 'rgb(147, 242, 30)',
     background: 'rgb(228, 228, 160)',
