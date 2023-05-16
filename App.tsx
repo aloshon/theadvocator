@@ -16,16 +16,17 @@ export default function App() {
       setCurrentTheme(themes[theme])
   };
 
-  const ThemeContext = createContext(currentTheme)
+  const ThemeContext = createContext(currentTheme);
+  const songs:Song[] = [];
 
 
   // const togglePages = useCallback((toggle=false) => setPromptPage(toggle), []);
   return (
-    <ThemeContext.Provider value={{currentTheme}}>
+    <ThemeContext.Provider value={currentTheme}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Browse" component={Prompts} initialParams={{setSongs, toggle}} />
-          <Tab.Screen name="Find Songs" component={Browse} initialParams={{songs}} />
+          <Tab.Screen name="Find Songs" children={() => <Prompts setSongs={setSongs} toggleThemes={setCurrentTheme} />} />
+          <Tab.Screen name="Browse" component={() => <Browse songs={songs} />} />
         </Tab.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
@@ -36,12 +37,21 @@ const styles = StyleSheet.create({
   
 });
 
+type Song = {
+  title?: string,
+  artists?: [string],
+  background?: string,
+  duration?: number,
+  rank?: number,
+  preview?: string
+};
+
 type Theme = {
-  name: {
+  [key: string]: {
     primary: string,
     secondary: string,
     background: string,
-  }
+  },
 };
 
 const themes: Theme = {
@@ -55,12 +65,12 @@ const themes: Theme = {
     secondary: 'rgb(100, 100, 100)',
     background: 'rgb(40, 40, 40)',
   },
-  "cool": {
+  cool: {
     primary: 'rgb(30, 147, 242)',
     secondary: 'rgb(30, 242, 147)',
     background: 'rgb(160, 228, 228)',
   },
-  "snug": {
+  snug: {
     primary: 'rgb(242, 147, 30)',
     secondary: 'rgb(147, 242, 30)',
     background: 'rgb(228, 228, 160)',

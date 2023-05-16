@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useState } from "react";
-import {PRIMARY_COLOR1} from "./styles.js";
+import PRIMARY_COLOR1 from "./styles.js";
 
-export default function Browse({songs=[]}) {
+export default function Browse(songs:Song[]): JSX.Element {
   const [index, setIndex] = useState(0); 
   return (
     <ScrollView>
@@ -14,7 +14,7 @@ export default function Browse({songs=[]}) {
             onPress= {() => {}}
             >
 							<View>
-								{song.name}
+								{song.title}
 							</View>
 					</TouchableOpacity>
 				))
@@ -22,6 +22,16 @@ export default function Browse({songs=[]}) {
     </ScrollView>
   );
 }
+
+type Song = {
+  title?: string,
+  artists?: [string],
+  background?: string,
+  duration?: number,
+  rank?: number,
+  preview?: string
+};
+
 
 const styles = StyleSheet.create({
   container: {
