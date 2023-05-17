@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, ButtonProps, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState } from "react";
 
-export default function Prompts({setSongs, toggleThemes}) {
+export default function Prompts(setSongs:React.Dispatch<React.SetStateAction<Song[]>>, toggleThemes:React.Dispatch<React.SetStateAction<Theme>>, themes: Theme[]) {
   const [index, setIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
   const resetUserInput = () => setUserInput("");
@@ -14,7 +14,7 @@ export default function Prompts({setSongs, toggleThemes}) {
     "Are you looking for songs within a certain tempo?",
     "Are you looking for songs with certain instruments?"
   ];
-  const answers = [
+  const answers:string[] = [
 
   ];
   return (
@@ -23,13 +23,15 @@ export default function Prompts({setSongs, toggleThemes}) {
         <Text>{prompts[index]}</Text>
         <TextInput
         defaultValue={answers[index] || userInput}
-        onChange={newInput => setUserInput(newInput)}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          setUserInput(userInput);
+      }}
         />
         <Button
 				title="Continue"
         onClick={() => {
           answers.push(userInput); 
-          setIndex(index++);
+          setIndex(index + 1);
           resetUserInput();
         }}>
           Continue
@@ -40,6 +42,23 @@ export default function Prompts({setSongs, toggleThemes}) {
     </View>
   );
 }
+
+type Song = {
+  title?: string,
+  artists?: [string],
+  background?: string,
+  duration?: number,
+  rank?: number,
+  preview?: string
+};
+
+type Theme = {
+  [key: string]: {
+    primary: string,
+    secondary: string,
+    background: string,
+  },
+};
 
 const styles = StyleSheet.create({
   container: {

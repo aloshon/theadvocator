@@ -10,14 +10,13 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [promptPage, setPromptPage] = useState(true);
-  const [songs, setSongs] = useState([]);
+  const [songs, setSongs] = useState<Song[]>([]);
   const [currentTheme, setCurrentTheme] = useState(themes["light"]);
   const toggle = (theme:string) => {
       setCurrentTheme(themes[theme])
   };
 
   const ThemeContext = createContext(currentTheme);
-  const songs:Song[] = [];
 
 
   // const togglePages = useCallback((toggle=false) => setPromptPage(toggle), []);
@@ -25,7 +24,7 @@ export default function App() {
     <ThemeContext.Provider value={currentTheme}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Find Songs" children={() => <Prompts setSongs={setSongs} toggleThemes={setCurrentTheme} />} />
+          <Tab.Screen name="Find Songs" children={() => <Prompts setSongs={setSongs} toggleThemes={setCurrentTheme} themes={themes} />} />
           <Tab.Screen name="Browse" component={() => <Browse songs={songs} />} />
         </Tab.Navigator>
       </NavigationContainer>
