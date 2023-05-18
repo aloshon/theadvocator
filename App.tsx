@@ -11,9 +11,9 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   const [promptPage, setPromptPage] = useState(true);
   const [songs, setSongs] = useState<Song[]>([]);
-  const [currentTheme, setCurrentTheme] = useState(themes["light"]);
+  const [currentTheme, setCurrentTheme] = useState<Theme>(themes["light"]);
   const toggle = (theme:string) => {
-      setCurrentTheme(themes[theme])
+    setCurrentTheme(themes[theme]);
   };
 
   const ThemeContext = createContext(currentTheme);
@@ -24,8 +24,8 @@ export default function App() {
     <ThemeContext.Provider value={currentTheme}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Find Songs" children={() => <Prompts setSongs={setSongs} toggleThemes={setCurrentTheme} themes={themes} />} />
-          <Tab.Screen name="Browse" component={() => <Browse songs={songs} />} />
+          <Tab.Screen name="Find Songs" component={() => <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} />} />
+          <Tab.Screen name="Browse" component={() => <Browse songs={songs}/>} />
         </Tab.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
@@ -45,7 +45,7 @@ type Song = {
   preview?: string
 };
 
-type Theme = {
+type Themes = {
   [key: string]: {
     primary: string,
     secondary: string,
@@ -53,7 +53,13 @@ type Theme = {
   },
 };
 
-const themes: Theme = {
+type Theme = {
+  primary: string,
+  secondary: string,
+  background: string,
+};
+
+const themes: Themes = {
   light: {
     primary: 'rgb(120, 120, 120)',
     secondary: 'rgb(180, 180, 200)',

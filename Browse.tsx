@@ -3,12 +3,25 @@ import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity
 import { useState } from "react";
 import PRIMARY_COLOR1 from "./styles.js";
 
-export default function Browse(songs:Song[]): JSX.Element {
+interface BrowseProps {
+  songs?: Song[],
+};
+
+type Song = {
+  title?: string,
+  artists?: [string],
+  background?: string,
+  duration?: number,
+  rank?: number,
+  preview?: string
+};
+
+export default function Browse({songs}: BrowseProps) {
   const [index, setIndex] = useState(0); 
   return (
     <ScrollView>
-      {songs.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
-        songs.map(song => (
+      {songs?.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
+        songs?.map(song => (
 					<TouchableOpacity
             style = {{flex: 1, flexDirection: "row"}}
             onPress= {() => {}}
@@ -22,16 +35,6 @@ export default function Browse(songs:Song[]): JSX.Element {
     </ScrollView>
   );
 }
-
-type Song = {
-  title?: string,
-  artists?: [string],
-  background?: string,
-  duration?: number,
-  rank?: number,
-  preview?: string
-};
-
 
 const styles = StyleSheet.create({
   container: {
