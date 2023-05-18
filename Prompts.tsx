@@ -29,13 +29,11 @@ export default function Prompts(setSongs:React.Dispatch<React.SetStateAction<Son
         />
         <Button
 				title="Continue"
-        onClick={() => {
+        onClick={():IntrinsicClassAttributes<Button> => {
           answers.push(userInput); 
           setIndex(index + 1);
           resetUserInput();
-        }}>
-          Continue
-        </Button>
+        }}/>
       </View>
       
       <StatusBar style="auto" />
