@@ -1,31 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, ButtonProps, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useState } from "react";
+import { useState, FC } from "react";
+import {Song, Themes} from "./App";
 
-interface Props {
+interface PromptsProps {
   setSongs: React.Dispatch<React.SetStateAction<Song[]>>
   toggleThemes: (theme: string) => void
   themes: Themes
 };
 
-type Song = {
-  title?: string,
-  artists?: [string],
-  background?: string,
-  duration?: number,
-  rank?: number,
-  preview?: string
-};
-
-type Themes = {
-  [key: string]: {
-    primary: string,
-    secondary: string,
-    background: string,
-  },
-};
-
-export default function Prompts ({setSongs, toggleThemes, themes}: Props) {
+export const Prompts: FC<PromptsProps> = ({setSongs, toggleThemes, themes}: PromptsProps) => {
   const [index, setIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
   const resetUserInput = () => setUserInput("");

@@ -1,16 +1,66 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState, useCallback, createContext } from "react";
-import Prompts from "./Prompts.js";
-import Browse from "./Browse.js";
+import { Prompts } from "./Prompts";
+import { Browse } from "./Browse";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
+export interface Song {
+  title?: string,
+  artists?: string[],
+  background?: string,
+  duration?: number,
+  rank?: number,
+  preview?: string
+};
+
+export type Themes = {
+  [key: string]: Theme
+};
+
+export type Theme = {
+  primary: string,
+  secondary: string,
+  background: string,
+};
+
 export default function App() {
   const [promptPage, setPromptPage] = useState(true);
-  const [songs, setSongs] = useState<Song[]>([]);
+  const [songs, setSongs] = useState<Song[]>([{
+    title: "test song1",
+    artists: ["artist1", "artist2"],
+    background: "background",
+    duration: 100,
+    rank: 20,
+    preview: "none"
+  },
+  {
+    title: "test song2",
+    artists: ["artist3", "artist2"],
+    background: "background2",
+    duration: 300,
+    rank: 230,
+    preview: "none"
+  },
+  {
+    title: "test song3",
+    artists: ["artist3", "artist4"],
+    background: "background",
+    duration: 140,
+    rank: 30,
+    preview: "none"
+  },
+  {
+    title: "test song4",
+    artists: ["artist1", "artist4"],
+    background: "background",
+    duration: 200,
+    rank: 10,
+    preview: "none"
+  }]);
   const [currentTheme, setCurrentTheme] = useState<Theme>(themes["light"]);
   const toggle = (theme:string) => {
     setCurrentTheme(themes[theme]);
@@ -24,8 +74,8 @@ export default function App() {
     <ThemeContext.Provider value={currentTheme}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Find Songs" component={() => <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} />} />
-          <Tab.Screen name="Browse" component={() => <Browse songs={songs}/>} />
+          <Tab.Screen name="Find Songs" component={Prompts} setSongs={setSongs} toggleThemes={toggle} themes={themes} />
+          <Tab.Screen name="Browse" component={Browse} songs={songs} currentTheme={currentTheme} />
         </Tab.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
@@ -33,31 +83,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  
+  container: {
+    
+  }
 });
-
-type Song = {
-  title?: string,
-  artists?: [string],
-  background?: string,
-  duration?: number,
-  rank?: number,
-  preview?: string
-};
-
-type Themes = {
-  [key: string]: {
-    primary: string,
-    secondary: string,
-    background: string,
-  },
-};
-
-type Theme = {
-  primary: string,
-  secondary: string,
-  background: string,
-};
 
 const themes: Themes = {
   light: {
