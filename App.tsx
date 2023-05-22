@@ -5,8 +5,10 @@ import { Prompts } from "./Prompts";
 import { Browse } from "./Browse";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 export interface Song {
   title?: string,
@@ -67,16 +69,17 @@ export default function App() {
   };
 
   const ThemeContext = createContext(currentTheme);
+  console.log(currentTheme);
 
 
   // const togglePages = useCallback((toggle=false) => setPromptPage(toggle), []);
   return (
     <ThemeContext.Provider value={currentTheme}>
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Find Songs" component={Prompts} setSongs={setSongs} toggleThemes={toggle} themes={themes} />
-          <Tab.Screen name="Browse" component={Browse} songs={songs} currentTheme={currentTheme} />
-        </Tab.Navigator>
+        <Stack.Navigator>  
+          <Stack.Screen name='Find Songs' component={Prompts} setSongs={setSongs} toggleThemes={toggle} themes={themes} />
+          <Stack.Screen name="Browse" component={Browse} songs={songs} currentTheme={currentTheme} />
+        </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
   );

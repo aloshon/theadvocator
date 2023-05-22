@@ -3,7 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity
 import { useState, FC } from "react";
 import PRIMARY_COLOR1 from "./styles.js";
 import {Song, Theme} from "./App";
-import { StackScreenProps, MyStackParamList } from '@react-navigation/stack'
+import { StackScreenProps} from '@react-navigation/stack'
 // import { MyStackParamList } from './types'
 
 
@@ -21,7 +21,8 @@ interface BrowseProps {
 //   preview?: string
 // };
 
-export const Browse: FC<StackScreenProps<MyStackParamList>> = ({songs, currentTheme}: BrowseProps) => {
+export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => {
+  console.log(currentTheme);
   const styles = StyleSheet.create({
     // container: {
     //   flex: 1,
