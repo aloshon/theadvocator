@@ -3,7 +3,6 @@ import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity
 import { useState, FC } from "react";
 import PRIMARY_COLOR1 from "./styles.js";
 import {Song, Theme} from "./App";
-import { StackScreenProps} from '@react-navigation/stack'
 // import { MyStackParamList } from './types'
 
 
@@ -23,6 +22,7 @@ interface BrowseProps {
 
 export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => {
   console.log(currentTheme);
+  console.log(songs);
   const styles = StyleSheet.create({
     // container: {
     //   flex: 1,
@@ -35,8 +35,8 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
       backgroundColor: currentTheme.background,
       paddingTop: 40,
       paddingHorizontal: 20,
-      // alignItems: 'center',
-      // justifyContent: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     promptContainer: {
       flex: 1,

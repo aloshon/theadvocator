@@ -5,10 +5,8 @@ import { Prompts } from "./Prompts";
 import { Browse } from "./Browse";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 
 export interface Song {
   title?: string,
@@ -76,10 +74,10 @@ export default function App() {
   return (
     <ThemeContext.Provider value={currentTheme}>
       <NavigationContainer>
-        <Stack.Navigator>  
-          <Stack.Screen name='Find Songs' component={Prompts} setSongs={setSongs} toggleThemes={toggle} themes={themes} />
-          <Stack.Screen name="Browse" component={Browse} songs={songs} currentTheme={currentTheme} />
-        </Stack.Navigator>
+        <Tab.Navigator>  
+          <Tab.Screen name='Find Songs' children={() => <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} />} />
+          <Tab.Screen name="Browse" children={() => <Browse songs={songs} currentTheme={currentTheme} />} />
+        </Tab.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
   );
