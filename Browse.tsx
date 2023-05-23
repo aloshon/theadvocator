@@ -34,8 +34,9 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
       flex: 1,
       backgroundColor: currentTheme.background,
       paddingTop: 40,
+      margin: 10,
       paddingHorizontal: 20,
-      alignItems: 'center',
+      // alignItems: 'center',
       justifyContent: 'center',
     },
     promptContainer: {
@@ -44,6 +45,17 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
       alignItems: 'center',
       justifyContent: 'center',
     },
+    item: {
+      marginTop: 24,
+      padding: 30,
+      width: "90%",
+      backgroundColor: currentTheme.secondary,
+      margin: "auto",
+      fontSize: '3 em'
+    },
+    text: {
+      fontFamily: "'Courier New', monospace",
+    }
   });
 
   const [index, setIndex] = useState(0); 
@@ -57,12 +69,12 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
               style = {{flex: 1, flexDirection: "row"}}
               onPress= {() => {}}
             >
-              <View>
-                <Text>{song.title}</Text>
+              <View style={(styles.item)}>
+                <Text style={(styles.text)}>{song.title}</Text>
                 <View>
-                  {song.artists?.length !== 0 && song.artists?.map(artist => <Text>{artist}</Text>)}
+                  {song.artists?.length !== 0 && song.artists?.map(artist => <Text style={(styles.text)}>{artist}</Text>)}
                 </View>
-                <Text>{song.rank}</Text>
+                <Text style={(styles.text)}>{song.rank}</Text>
               </View>
             </TouchableOpacity>
           ))
