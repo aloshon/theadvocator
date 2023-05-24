@@ -3,22 +3,12 @@ import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity
 import { useState, FC } from "react";
 import PRIMARY_COLOR1 from "./styles.js";
 import {Song, Theme} from "./App";
-// import { MyStackParamList } from './types'
 
 
 interface BrowseProps {
   songs?: Song[],
   currentTheme: Theme
 };
-
-// type Song = {
-//   title?: string,
-//   artists?: string[],
-//   background?: string,
-//   duration?: number,
-//   rank?: number,
-//   preview?: string
-// };
 
 export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => {
   console.log(currentTheme);
