@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity
 import { useState, FC } from "react";
 import PRIMARY_COLOR1 from "./styles.js";
 import {Song, Theme} from "./App";
+import { Popup } from './Popup.js';
 
 
 interface BrowseProps {
@@ -49,6 +50,8 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
   });
 
   const [index, setIndex] = useState(0); 
+  const [popupOn, setPopupOn] = useState<boolean>(false);
+  // set useState so we have a selectedSong that populates the Popup component
   return (
     <View style={(styles.container)}>
       <ScrollView>
@@ -57,7 +60,7 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
             <TouchableOpacity
               key={i}
               style = {{flex: 1, flexDirection: "row"}}
-              onPress= {() => {}}
+              onPress= {() => setPopupOn(true)}
             >
               <View style={(styles.item)}>
                 <Text style={(styles.text)}>{song.title}</Text>
@@ -70,6 +73,13 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
           ))
         }
       </ScrollView>
+      {popupOn && <Popup
+          key="popup"
+          data={song}
+          handleClose={() => setPopupOn(false)}
+          currentTheme={currentTheme}
+      />}
+        
     </View>
   );
 }
