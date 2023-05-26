@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
-import { useState, FC } from "react";
+import { useState, FC, useCallback } from "react";
 import PRIMARY_COLOR1 from "./styles.js";
 import {Song, Theme} from "./App";
 import { Popup } from './Popup';
-
 
 interface BrowseProps {
   songs?: Song[],
@@ -23,7 +22,6 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
     // },
     container: {
       flex: 1,
-      backgroundColor: currentTheme.background,
       paddingTop: 40,
       margin: 10,
       paddingHorizontal: 20,
@@ -52,6 +50,7 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
   const [index, setIndex] = useState(0); 
   const [popupOn, setPopupOn] = useState<boolean>(false);
   const [currentSong, setCurrentSong] = useState<Song|null>(null);
+
   return (
     <View style={(styles.container)}>
       <ScrollView>

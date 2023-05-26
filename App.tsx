@@ -6,6 +6,10 @@ import { Browse } from "./Browse";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Particles from 'react-particles';
+import {particles} from './config/configParticles';
+import { loadFull } from "tsparticles";
+import type { Container, Engine, Canvas } from "tsparticles-engine";
 
 const Tab = createBottomTabNavigator();
 
@@ -70,10 +74,38 @@ export default function App() {
   const ThemeContext = createContext(currentTheme);
   console.log(currentTheme);
 
+  // Remove bottom tabs and find an alternative that doesn't take over the background
+  // Use the particle background it is litttt
+
+  const particlesInit = useCallback(async (engine: Engine) => {
+    console.log(engine);
+
+    // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
+    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+    // starting from v2 you can add only the features you need reducing the bundle size
+    await loadFull(engine);
+  }, []);
+
+  const particlesLoaded = useCallback(async (container: Container | undefined) => {
+      await console.log(container);
+  }, []);
 
   // const togglePages = useCallback((toggle=false) => setPromptPage(toggle), []);
   return (
     <ThemeContext.Provider value={currentTheme}>
+      <View style={{ position: "relative", overflow: "hidden" }}>
+        <View style={{ position: "absolute" }}>
+          <Particles 
+            id="tsparticles"
+            style={{ position: "absolute" }}
+            height="100vh" 
+            width="100vw" 
+            init={particlesInit}
+            loaded={particlesLoaded}
+            options={particles} 
+          />
+        </View>
+      </View>
       <NavigationContainer>
         <Tab.Navigator>  
           <Tab.Screen options={{
