@@ -5,6 +5,7 @@ import { Prompts } from "./Prompts";
 import { Browse } from "./Browse";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 
@@ -75,8 +76,14 @@ export default function App() {
     <ThemeContext.Provider value={currentTheme}>
       <NavigationContainer>
         <Tab.Navigator>  
-          <Tab.Screen name='Find Songs' children={() => <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} />} />
-          <Tab.Screen name="Browse" children={() => <Browse songs={songs} currentTheme={currentTheme} />} />
+          <Tab.Screen options={{
+            tabBarIcon: ({ color=currentTheme.primary, size=5 }) => (
+            <MaterialCommunityIcons name="search" color={color} size={size} />
+          )}} name='Find Songs' children={() => <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} />} />
+          <Tab.Screen options={{
+            tabBarIcon: ({ color=currentTheme.primary, size=5 }) => (
+            <MaterialCommunityIcons name="list" color={color} size={size} />
+          )}} name="Browse" children={() => <Browse songs={songs} currentTheme={currentTheme} />} />
         </Tab.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>

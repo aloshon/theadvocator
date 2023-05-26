@@ -60,6 +60,9 @@ export const Popup = ({data, handleClose, currentTheme}: PopupProps) => {
           <Text>{data.title}</Text>
           <Text>{data.rank}</Text>
           <Text>{data.duration}</Text>
+					<View>
+            {data.artists?.length !== 0 && data.artists?.map(artist => <Text style={(styles.text)}>{artist}</Text>)}
+          </View>
         </View>
       </View>
     </View>

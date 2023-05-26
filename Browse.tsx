@@ -3,7 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity
 import { useState, FC } from "react";
 import PRIMARY_COLOR1 from "./styles.js";
 import {Song, Theme} from "./App";
-import { Popup } from './Popup.js';
+import { Popup } from './Popup';
 
 
 interface BrowseProps {
@@ -51,7 +51,7 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
 
   const [index, setIndex] = useState(0); 
   const [popupOn, setPopupOn] = useState<boolean>(false);
-  // set useState so we have a selectedSong that populates the Popup component
+  const [currentSong, setCurrentSong] = useState<Song|null>(null);
   return (
     <View style={(styles.container)}>
       <ScrollView>
@@ -60,26 +60,21 @@ export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => 
             <TouchableOpacity
               key={i}
               style = {{flex: 1, flexDirection: "row"}}
-              onPress= {() => setPopupOn(true)}
+              onPress= {() => setCurrentSong(song)}
             >
               <View style={(styles.item)}>
                 <Text style={(styles.text)}>{song.title}</Text>
-                <View>
-                  {song.artists?.length !== 0 && song.artists?.map(artist => <Text style={(styles.text)}>{artist}</Text>)}
-                </View>
-                <Text style={(styles.text)}>{song.rank}</Text>
               </View>
             </TouchableOpacity>
           ))
         }
       </ScrollView>
-      {popupOn && <Popup
-          key="popup"
-          data={song}
-          handleClose={() => setPopupOn(false)}
-          currentTheme={currentTheme}
+      {currentSong !== null && <Popup
+        key="popup"
+        data={currentSong}
+        handleClose={() => setPopupOn(false)}
+        currentTheme={currentTheme}
       />}
-        
     </View>
   );
 }
