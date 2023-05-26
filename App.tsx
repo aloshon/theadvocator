@@ -77,12 +77,14 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator>  
           <Tab.Screen options={{
+            tabBarLabelPosition: "below-icon",
             tabBarIcon: ({ color=currentTheme.primary, size=5 }) => (
-            <MaterialCommunityIcons name="search" color={color} size={size} />
+            <MaterialCommunityIcons name="search-web" color={color} size={size} />
           )}} name='Find Songs' children={() => <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} />} />
           <Tab.Screen options={{
+            tabBarLabelPosition: "below-icon",
             tabBarIcon: ({ color=currentTheme.primary, size=5 }) => (
-            <MaterialCommunityIcons name="list" color={color} size={size} />
+            <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />
           )}} name="Browse" children={() => <Browse songs={songs} currentTheme={currentTheme} />} />
         </Tab.Navigator>
       </NavigationContainer>
