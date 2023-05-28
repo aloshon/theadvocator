@@ -106,7 +106,8 @@ export default function App() {
           />
         </View>
       </View>
-      <NavigationContainer>
+      <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} />
+      {/* <NavigationContainer>
         <Tab.Navigator>  
           <Tab.Screen options={{
             tabBarLabelPosition: "below-icon",
@@ -119,7 +120,7 @@ export default function App() {
             <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />
           )}} name="Browse" children={() => <Browse songs={songs} currentTheme={currentTheme} />} />
         </Tab.Navigator>
-      </NavigationContainer>
+      </NavigationContainer> */}
     </ThemeContext.Provider>
   );
 }

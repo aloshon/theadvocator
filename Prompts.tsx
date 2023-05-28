@@ -14,7 +14,7 @@ export const Prompts: FC<PromptsProps> = ({setSongs, toggleThemes, themes, curre
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#222',
+      // backgroundColor: '#222',
       alignItems: 'center',
       justifyContent: 'center',
     },
