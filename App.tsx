@@ -93,34 +93,37 @@ export default function App() {
   // const togglePages = useCallback((toggle=false) => setPromptPage(toggle), []);
   return (
     <ThemeContext.Provider value={currentTheme}>
-      <View style={{ position: "relative", overflow: "hidden" }}>
-        <View style={{ position: "absolute" }}>
-          <Particles 
-            id="tsparticles"
-            style={{ position: "absolute" }}
-            height="100vh" 
-            width="100vw" 
-            init={particlesInit}
-            loaded={particlesLoaded}
-            options={particles} 
-          />
-        </View>
-      </View>
-      <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} />
-      {/* <NavigationContainer>
-        <Tab.Navigator>  
+      {/* <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} /> */}
+      <NavigationContainer>
+        <Tab.Navigator
+        screenOptions={{
+          headerTransparent: true,
+        }}>  
           <Tab.Screen options={{
             tabBarLabelPosition: "below-icon",
             tabBarIcon: ({ color=currentTheme.primary, size=5 }) => (
             <MaterialCommunityIcons name="search-web" color={color} size={size} />
-          )}} name='Find Songs' children={() => <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} />} />
+          )}} name='Find Songs' children={() => <View style={{ position: "relative", overflow: "hidden" }}>
+          <View style={{ position: "absolute" }}>
+            <Particles 
+              id="tsparticles"
+              style={{ position: "absolute" }}
+              height="100vh" 
+              width="100vw" 
+              init={particlesInit}
+              loaded={particlesLoaded}
+              options={particles} 
+            />
+          </View>
+          <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} />
+        </View>} />
           <Tab.Screen options={{
             tabBarLabelPosition: "below-icon",
             tabBarIcon: ({ color=currentTheme.primary, size=5 }) => (
             <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />
           )}} name="Browse" children={() => <Browse songs={songs} currentTheme={currentTheme} />} />
         </Tab.Navigator>
-      </NavigationContainer> */}
+      </NavigationContainer>
     </ThemeContext.Provider>
   );
 }
