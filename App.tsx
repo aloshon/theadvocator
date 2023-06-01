@@ -85,8 +85,19 @@ export default function App() {
     // starting from v2 you can add only the features you need reducing the bundle size
     await loadFull(engine);
   }, []);
+  const particlesInit2 = useCallback(async (engine: Engine) => {
+    console.log(engine);
+
+    // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
+    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+    // starting from v2 you can add only the features you need reducing the bundle size
+    await loadFull(engine);
+  }, []);
 
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
+      await console.log(container);
+  }, []);
+  const particlesLoaded2 = useCallback(async (container: Container | undefined) => {
       await console.log(container);
   }, []);
 
@@ -98,6 +109,8 @@ export default function App() {
         <Tab.Navigator
         screenOptions={{
           headerTransparent: true,
+          tabBarActiveBackgroundColor: currentTheme.background,
+          tabBarInactiveBackgroundColor: currentTheme.background,
         }}>  
           <Tab.Screen options={{
             tabBarLabelPosition: "below-icon",
@@ -110,8 +123,8 @@ export default function App() {
               style={{ position: "absolute" }}
               height="100vh" 
               width="100vw" 
-              init={particlesInit}
-              loaded={particlesLoaded}
+              init={particlesInit2}
+              loaded={particlesLoaded2}
               options={particles} 
             />
           </View>
@@ -121,7 +134,20 @@ export default function App() {
             tabBarLabelPosition: "below-icon",
             tabBarIcon: ({ color=currentTheme.primary, size=5 }) => (
             <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />
-          )}} name="Browse" children={() => <Browse songs={songs} currentTheme={currentTheme} />} />
+          )}} name="Browse" children={() => <View style={{ position: "relative", overflow: "hidden" }}>
+            <View style={{ position: "absolute" }}>
+            <Particles 
+              id="tsparticles"
+              style={{ position: "absolute" }}
+              height="100vh" 
+              width="100vw" 
+              init={particlesInit}
+              loaded={particlesLoaded}
+              options={particles} 
+            />
+          </View>
+          <Browse songs={songs} currentTheme={currentTheme} /> 
+          </View>} />
         </Tab.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>

@@ -14,15 +14,22 @@ export const Prompts: FC<PromptsProps> = ({setSongs, toggleThemes, themes, curre
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      display: 'flex',
       // backgroundColor: '#222', 
       alignItems: 'center',
       justifyContent: 'center',
+      // height: "80vh",
+      // width: "100%",
+      flexDirection: 'column',
+      textAlign: 'center',
+      marginTop: '50px'
+      
     },
     promptContainer: {
-      flex: 1,
-      backgroundColor: '#444',
+      display: "flex",
+      // backgroundColor: '#444',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'center', 
     },
   });
 
@@ -42,7 +49,7 @@ export const Prompts: FC<PromptsProps> = ({setSongs, toggleThemes, themes, curre
   ];
   return (
     <View style={styles.container}>
-      <Text>{prompts[index]}</Text>
+      <Text style={styles.promptContainer}>{prompts[index]}</Text>
       <TextInput
         defaultValue={answers[index] || userInput}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
