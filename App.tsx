@@ -1,17 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useState, useCallback, createContext } from "react";
+import { useState, useCallback, createContext, FC } from "react";
 import { Prompts } from "./Prompts";
 import { Browse } from "./Browse";
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Particles from 'react-particles';
 import {particles} from './config/configParticles';
 import { loadFull } from "tsparticles";
 import type { Container, Engine, Canvas } from "tsparticles-engine";
-
-const Tab = createBottomTabNavigator();
 
 export interface Song {
   title?: string,
@@ -67,6 +63,7 @@ export default function App() {
     preview: "none"
   }]);
   const [currentTheme, setCurrentTheme] = useState<Theme>(themes["light"]);
+  const [currentTab, setCurrentTab] = useState<number>(0);
   const toggle = (theme:string) => {
     setCurrentTheme(themes[theme]);
   };
@@ -85,71 +82,28 @@ export default function App() {
     // starting from v2 you can add only the features you need reducing the bundle size
     await loadFull(engine);
   }, []);
-  const particlesInit2 = useCallback(async (engine: Engine) => {
-    console.log(engine);
-
-    // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(engine);
-  }, []);
 
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
       await console.log(container);
   }, []);
-  const particlesLoaded2 = useCallback(async (container: Container | undefined) => {
-      await console.log(container);
-  }, []);
 
-  // const togglePages = useCallback((toggle=false) => setPromptPage(toggle), []);
   return (
     <ThemeContext.Provider value={currentTheme}>
-      {/* <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} /> */}
-      <NavigationContainer>
-        <Tab.Navigator
-        screenOptions={{
-          headerTransparent: true,
-          tabBarActiveBackgroundColor: currentTheme.background,
-          tabBarInactiveBackgroundColor: currentTheme.background,
-        }}>  
-          <Tab.Screen options={{
-            tabBarLabelPosition: "below-icon",
-            tabBarIcon: ({ color=currentTheme.primary, size=5 }) => (
-            <MaterialCommunityIcons name="search-web" color={color} size={size} />
-          )}} name='Find Songs' children={() => <View style={{ position: "relative", overflow: "hidden" }}>
-          <View style={{ position: "absolute" }}>
-            <Particles 
-              id="tsparticles"
-              style={{ position: "absolute" }}
-              height="100vh" 
-              width="100vw" 
-              init={particlesInit2}
-              loaded={particlesLoaded2}
-              options={particles} 
-            />
-          </View>
-          <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} />
-        </View>} />
-          <Tab.Screen options={{
-            tabBarLabelPosition: "below-icon",
-            tabBarIcon: ({ color=currentTheme.primary, size=5 }) => (
-            <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />
-          )}} name="Browse" children={() => <View style={{ position: "relative", overflow: "hidden" }}>
-            <View style={{ position: "absolute" }}>
-            <Particles 
-              id="tsparticles"
-              style={{ position: "absolute" }}
-              height="100vh" 
-              width="100vw" 
-              init={particlesInit}
-              loaded={particlesLoaded}
-              options={particles} 
-            />
-          </View>
-          <Browse songs={songs} currentTheme={currentTheme} /> 
-          </View>} />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <View style={{ position: "relative", overflow: "hidden" }}>
+        <View style={{ position: "absolute" }}>
+          <Particles 
+            id="tsparticles"
+            style={{ position: "absolute" }}
+            height="100vh" 
+            width="100vw" 
+            init={particlesInit}
+            loaded={particlesLoaded}
+            options={particles} 
+          />
+        </View>
+        {promptPage ? <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} /> :
+        <Browse songs={songs} currentTheme={currentTheme} /> }
+      </View>
     </ThemeContext.Provider>
   );
 }
