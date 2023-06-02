@@ -6,12 +6,12 @@ import { View } from "react-native";
 // (just the tab bar not the component, App still displays them)
 // 
 
-interface TabProps {
-    tabs: JSX[],
+interface TabsProps {
+    tabs: string[],
     active: number
   };
 
-export const Tab = ({tabs, active=0}: TabProps) => {
+export const Tabs = ({tabs, active=0}: TabsProps) => {
     const [activeTav, setActiveTab] = useState<Number>(0);
     const [tabsData, setTabsData] = useState<Number>(0);
 

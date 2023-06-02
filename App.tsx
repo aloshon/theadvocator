@@ -64,15 +64,13 @@ export default function App() {
   }]);
   const [currentTheme, setCurrentTheme] = useState<Theme>(themes["light"]);
   const [currentTab, setCurrentTab] = useState<number>(0);
-  const toggle = (theme:string) => {
+
+  const toggleThemes = (theme:string) => {
     setCurrentTheme(themes[theme]);
   };
 
   const ThemeContext = createContext(currentTheme);
   console.log(currentTheme);
-
-  // Remove bottom tabs and find an alternative that doesn't take over the background
-  // Use the particle background it is litttt
 
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
@@ -101,7 +99,7 @@ export default function App() {
             options={particles} 
           />
         </View>
-        {promptPage ? <Prompts setSongs={setSongs} toggleThemes={toggle} themes={themes} currentTheme={currentTheme} /> :
+        {promptPage ? <Prompts setSongs={setSongs} toggleThemes={toggleThemes} themes={themes} currentTheme={currentTheme} /> :
         <Browse songs={songs} currentTheme={currentTheme} /> }
       </View>
     </ThemeContext.Provider>
