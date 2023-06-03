@@ -8,19 +8,21 @@ import { View } from "react-native";
 
 interface TabsProps {
     tabs: string[],
-    active: number
+    activeTab: number,
+    setActiveTab: React.Dispatch<React.SetStateAction<number>>
   };
 
-export const Tabs = ({tabs, active=0}: TabsProps) => {
-    const [activeTav, setActiveTab] = useState<Number>(0);
+export const Tabs = ({tabs, activeTab=0, setActiveTab}: TabsProps) => {
     const [tabsData, setTabsData] = useState<Number>(0);
 
     useEffect(() => {
-        const data = [];
+      const data = [];
     })
+    // map over all tabs and if it is active update the styling
+    // (add animations!!!)
     return (
       <View>
-        {tabs[active]}
+        {tabs[activeTab]}
       </View>
     )
 };

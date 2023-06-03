@@ -3,10 +3,10 @@ import { Button, ButtonProps, StyleSheet, Text, TextInput, View } from 'react-na
 import { useState, FC } from "react";
 import {Song, Themes, Theme} from "./App";
 
-interface PromptsProps {
-  setSongs: React.Dispatch<React.SetStateAction<Song[]>>
-  toggleThemes: (theme: string) => void
-  themes: Themes,
+export interface PromptsProps {
+  setSongs?: React.Dispatch<React.SetStateAction<Song[]>>
+  toggleThemes?: (theme: string) => void
+  themes?: Themes,
   currentTheme: Theme
 };
 

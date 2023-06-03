@@ -5,7 +5,7 @@ import PRIMARY_COLOR1 from "./styles.js";
 import {Song, Theme} from "./App";
 import { Popup } from './Popup';
 
-interface BrowseProps {
+export interface BrowseProps {
   songs?: Song[],
   currentTheme: Theme
 };
