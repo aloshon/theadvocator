@@ -106,9 +106,13 @@ export default function App() {
   const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(Prompts);
   const [currentProps, setCurrentProps] = useState<ActiveComponentProps>(getCurrentProps);
   console.log(tabNames);
+  const updateCurrentComponent = (component: ActiveComponent, props: ActiveComponentProps): void => {
+    setCurrentComponent(component);
+    setCurrentProps(props);
+  }
 
   useEffect(() => {
-    
+    updateCurrentComponent(CurrentComponent, currentProps); //Probably needs to be diffent variables like NewComponent etc
   }, [currentTab]);
 
   return (
