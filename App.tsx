@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState, useCallback, createContext, FC, useEffect } from "react";
 import { Prompts, PromptsProps } from "./Prompts";
@@ -101,10 +100,9 @@ export default function App() {
   }
   // Create onClick function to change tab that updates current component and props
   // Animate tabs being updated!
-  const getCurrentProps = (): ActiveComponentProps => (tabComponents[currentTab][1]);
   const tabNames:string[] = ["Find Songs", "Browse Songs"];
   const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(Prompts);
-  const [currentProps, setCurrentProps] = useState<ActiveComponentProps>(getCurrentProps);
+  const [currentProps, setCurrentProps] = useState<ActiveComponentProps>(tabComponents[currentTab][1]);
   console.log(tabNames);
   const updateCurrentComponent = (component: ActiveComponent, props: ActiveComponentProps): void => {
     setCurrentComponent(component);
@@ -112,7 +110,8 @@ export default function App() {
   }
 
   useEffect(() => {
-    updateCurrentComponent(CurrentComponent, currentProps); //Probably needs to be diffent variables like NewComponent etc
+    const [newComponent, newProps] = tabComponents[currentTab];
+    updateCurrentComponent(newComponent, newProps);
   }, [currentTab]);
 
   return (
@@ -129,10 +128,8 @@ export default function App() {
             options={particles} 
           />
         </View>
-        <Tabs tabs={tabNames} activeTab={currentTab} setActiveTab={setCurrentTab}/>
-        {/* {currentTab === 0 ? <Prompts setSongs={setSongs} toggleThemes={toggleThemes} themes={themes} currentTheme={currentTheme} /> :
-        <Browse songs={songs} currentTheme={currentTheme} /> } */}
-        {<CurrentComponent {...currentProps} />}
+        <Tabs tabs={tabNames} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
+        <CurrentComponent {...currentProps} />
       </View>
     </ThemeContext.Provider>
   );
