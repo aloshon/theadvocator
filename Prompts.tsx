@@ -4,13 +4,14 @@ import { useState, FC } from "react";
 import {Song, Themes, Theme} from "./App";
 
 export interface PromptsProps {
-  setSongs?: React.Dispatch<React.SetStateAction<Song[]>>
-  toggleThemes?: (theme: string) => void
-  themes?: Themes,
-  currentTheme: Theme
+  setSongs: React.Dispatch<React.SetStateAction<Song[]>>
+  toggleThemes: (theme: string) => void
+  themes: Themes,
+  currentTheme: Theme,
+  children?: React.ReactNode
 };
 
-export const Prompts: FC<PromptsProps> = ({setSongs, toggleThemes, themes, currentTheme}: PromptsProps) => {
+export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsProps) => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,

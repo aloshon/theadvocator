@@ -6,11 +6,12 @@ import {Song, Theme} from "./App";
 import { Popup } from './Popup';
 
 export interface BrowseProps {
-  songs?: Song[],
-  currentTheme: Theme
+  songs: Song[],
+  currentTheme: Theme,
+  children?: React.ReactNode
 };
 
-export const Browse: FC<BrowseProps>  = ({songs, currentTheme}: BrowseProps) => {
+export const Browse  = ({songs, currentTheme}: BrowseProps) => {
   console.log(currentTheme);
   console.log(songs);
   const styles = StyleSheet.create({

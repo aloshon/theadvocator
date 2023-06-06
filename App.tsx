@@ -1,5 +1,5 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useState, useCallback, createContext, FC, useEffect } from "react";
+import { useState, useCallback, createContext, FC, useEffect, Component } from "react";
 import { Prompts, PromptsProps } from "./Prompts";
 import { Browse, BrowseProps } from "./Browse";
 import { Tabs } from "./Tabs";
@@ -15,11 +15,12 @@ export interface Song {
   background?: string,
   duration?: number,
   rank?: number,
-  preview?: string
+  preview?: string,
+  children?: React.ReactNode
 };
 
 export type Themes = {
-  [key: string]: Theme
+  [key: string]: Theme,
 };
 
 export type Theme = {
@@ -28,11 +29,10 @@ export type Theme = {
   background: string,
 };
 
-type ActiveComponentProps = (PromptsProps|BrowseProps);
-type ActiveComponent = (FC<PromptsProps>|FC<BrowseProps>);
+type ActiveComponent = Element;
 
 export type TabComponents = {
-  [key: number]: [ActiveComponent, ActiveComponentProps]
+  [key: number]: ActiveComponent
 };
 
 
@@ -79,7 +79,19 @@ export default function App() {
   };
 
   const ThemeContext = createContext(currentTheme);
-  console.log(currentTheme);
+
+  const tabComponents: TabComponents = {
+    0: <Prompts setSongs={setSongs} toggleThemes={toggleThemes} themes={themes} currentTheme={currentTheme} />,
+    1: <Browse songs={songs} currentTheme={currentTheme} />,
+  }
+  // Create onClick function to change tab that updates current component and props
+  // Animate tabs being updated!
+  const tabNames:string[] = ["Find Songs", "Browse Songs"];
+  const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]);
+  console.log(tabNames);
+  console.log(CurrentComponent);
+ 
+  const updateCurrentComponent = (component: ActiveComponent): void => setCurrentComponent(component);
 
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
@@ -94,25 +106,15 @@ export default function App() {
       await console.log(container);
   }, []);
 
-  const tabComponents: TabComponents = {
-    0: [Prompts, {setSongs, toggleThemes, themes, currentTheme}],
-    1: [Browse, {songs, currentTheme}],
-  }
-  // Create onClick function to change tab that updates current component and props
-  // Animate tabs being updated!
-  const tabNames:string[] = ["Find Songs", "Browse Songs"];
-  const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(Prompts);
-  const [currentProps, setCurrentProps] = useState<ActiveComponentProps>(tabComponents[currentTab][1]);
-  console.log(tabNames);
-  const updateCurrentComponent = (component: ActiveComponent, props: ActiveComponentProps): void => {
-    setCurrentComponent(component);
-    setCurrentProps(props);
+  useEffect(() => {
+    const newComponent = tabComponents[currentTab];
+    updateCurrentComponent(newComponent);
+  }, [currentTab]);
+
+  while(setSongs === undefined){
+    return null;
   }
 
-  useEffect(() => {
-    const [newComponent, newProps] = tabComponents[currentTab];
-    updateCurrentComponent(newComponent, newProps);
-  }, [currentTab]);
 
   return (
     <ThemeContext.Provider value={currentTheme}>
@@ -129,7 +131,7 @@ export default function App() {
           />
         </View>
         <Tabs tabs={tabNames} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
-        <CurrentComponent {...currentProps} />
+        <>{CurrentComponent} </>
       </View>
     </ThemeContext.Provider>
   );
