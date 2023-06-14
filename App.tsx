@@ -120,7 +120,7 @@ export default function App() {
     <ThemeContext.Provider value={currentTheme}>
       <View style={{ position: "relative", overflow: "hidden" }}>
         <View style={{ position: "absolute" }}>
-          <Particles 
+          <Particles
             id="tsparticles"
             style={{ position: "absolute" }}
             height="100vh" 
