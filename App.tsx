@@ -106,7 +106,7 @@ export default function App() {
       await console.log(container);
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { 
     const newComponent = tabComponents[currentTab];
     updateCurrentComponent(newComponent);
   }, [currentTab]);
