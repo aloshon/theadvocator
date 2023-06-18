@@ -123,8 +123,8 @@ export default function App() {
           <Particles
             id="tsparticles"
             style={{ position: "absolute" }}
-            height="100vh" 
-            width="100vw" 
+            height="100vh"
+            width="100vw"
             init={particlesInit}
             loaded={particlesLoaded}
             options={particles} 
