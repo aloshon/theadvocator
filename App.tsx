@@ -127,7 +127,7 @@ export default function App() {
             width="100vw"
             init={particlesInit}
             loaded={particlesLoaded}
-            options={particles} 
+            options={particles}
           />
         </View>
         <Tabs tabs={tabNames} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
