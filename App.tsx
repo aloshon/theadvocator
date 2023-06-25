@@ -114,12 +114,12 @@ export default function App() {
   while(setSongs === undefined){
     return null;
   }
-
+// Put current component in its own component so Particles doesnt reload
 
   return (
     <ThemeContext.Provider value={currentTheme}>
-      <View style={{ position: "relative", overflow: "hidden" }}>
-        <View style={{ position: "absolute" }}>
+      <View style={styles.mainContainer}>
+        <View style={styles.container}>
           <Particles
             id="tsparticles"
             style={{ position: "absolute" }}
@@ -139,7 +139,14 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    
+    position: "relative", 
+    overflow: "hidden"
+  },
+  mainContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%"
   }
 });
 

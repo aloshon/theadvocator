@@ -12,6 +12,7 @@ export interface PromptsProps {
 };
 
 export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsProps) => {
+  console.log(currentTheme.secondary)
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -23,7 +24,7 @@ export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsP
       // width: "100%",
       flexDirection: 'column',
       textAlign: 'center',
-      marginTop: '50px'
+      marginBottom: 10
       
     },
     promptContainer: {
@@ -32,10 +33,18 @@ export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsP
       alignItems: 'center',
       justifyContent: 'center', 
     },
+    inputBars: {
+      borderRadius: 8,
+      width: "100%",
+      padding: "8px",
+      margin: "8px",
+      boxSizing: "border-box",
+      border: `2px solid ${currentTheme.secondary}`,
+    }
   });
 
   const [index, setIndex] = useState(0);
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState("hello");
   const resetUserInput = () => setUserInput("");
   const prompts = [
     "Do you have any favorite artists or genres?",
@@ -52,6 +61,7 @@ export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsP
     <View style={styles.container}>
       <Text style={styles.promptContainer}>{prompts[index]}</Text>
       <TextInput
+        style={styles.inputBars}
         defaultValue={answers[index] || userInput}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setUserInput(userInput);
