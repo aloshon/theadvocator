@@ -38,7 +38,7 @@ export type TabComponents = {
 
 
 export default function App() {
-  const [promptPage, setPromptPage] = useState(true);
+  const [promptPage, setPromptPage] = useState(true); 
   const [songs, setSongs] = useState<Song[]>([{
     title: "test song1",
     artists: ["artist1", "artist2"],
