@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, ButtonProps, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState, FC } from "react";
-import {Song, Themes, Theme} from "./App";
+import {Song, Themes, Theme} from "./CurrentComponent";
 
 export interface PromptsProps {
   setSongs: React.Dispatch<React.SetStateAction<Song[]>>
@@ -24,8 +24,7 @@ export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsP
       // width: "100%",
       flexDirection: 'column',
       textAlign: 'center',
-      marginBottom: 10
-      
+      margin: 10
     },
     promptContainer: {
       display: "flex",
@@ -39,7 +38,9 @@ export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsP
       padding: "8px",
       margin: "8px",
       boxSizing: "border-box",
-      border: `2px solid ${currentTheme.secondary}`,
+      border: `4px solid ${currentTheme.secondary}`,
+      backgroundColor: "rgba(200, 200, 200, .45)",  
+      backdropFilter: "saturate(200%) blur(25px)",
     }
   });
 
