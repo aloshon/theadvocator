@@ -1,8 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
-import { useState, FC, useCallback } from "react";
-import PRIMARY_COLOR1 from "./styles.js";
-import {Song, Theme} from "./App";
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { useState } from "react";
+import {Song, Theme} from "./CurrentComponent";
 import { Popup } from './Popup';
 
 export interface BrowseProps {

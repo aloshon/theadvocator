@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, ButtonProps, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useState, FC } from "react";
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useState } from "react";
 import {Song, Themes, Theme} from "./CurrentComponent";
 
 export interface PromptsProps {
