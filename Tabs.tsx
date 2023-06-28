@@ -50,7 +50,7 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
   // (add animations!!!)
   return (
     <View style={styles.container}>
-      {tabs.map((tab, index) => (tab === tabs[activeTab] ? <Text style={styles.tab}><b>{tab}</b></Text> : <div style={styles.tab} onClick={() => setActiveTab(index)}><Text style={{fontSize: (width / 24)}}>{tab}</Text></div>))}
+      {tabs.map((tab, index) => (tab === tabs[activeTab] ? <Text style={styles.tab}><b>{tab}</b></Text> : <Text style={styles.tab} onPress={() => setActiveTab(index)}>{tab}</Text>))}
     </View>
   )
 };
