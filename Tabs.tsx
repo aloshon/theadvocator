@@ -9,6 +9,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 // (just the tab bar not the component, App still displays them)
 // Create onClick function to change tab that updates current component and props
 // Animate tabs being updated!
+// Make sure tabs are at bottom of screen with no margin when on mobile
 
 interface TabsProps {
   tabs: string[],
