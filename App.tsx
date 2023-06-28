@@ -40,6 +40,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  html: {
+    fontFamily: "Fira Sans"
+  },
   container: {
     position: "relative", 
     overflow: "hidden"

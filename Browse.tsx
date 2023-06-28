@@ -13,23 +13,15 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
   console.log(currentTheme);
   console.log(songs);
   const styles = StyleSheet.create({
-    // container: {
-    //   flex: 1,
-    //   backgroundColor: '#222',
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
-    // },
     container: {
       flex: 1,
       paddingTop: 40,
       margin: 10,
       paddingHorizontal: 20,
-      // alignItems: 'center',
       justifyContent: 'center',
     },
     promptContainer: {
       flex: 1,
-      // backgroundImage: linear-gradient(PRIMARY_COLOR1, SECONDARY_COLOR1),
       alignItems: 'center',
       justifyContent: 'center',
     },

@@ -1,4 +1,4 @@
-import {Song, Theme} from "./App";
+import {Song, Theme} from "./CurrentComponent";
 import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
 
 interface PopupProps {
