@@ -1,11 +1,10 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import { useCallback } from "react";
 import { CurrentComponent } from "./CurrentComponent";
 import Particles from 'react-particles';
 import {particles} from './config/configParticles';
 import { loadFull } from "tsparticles";
 import type { Container, Engine } from "tsparticles-engine";
-
 
 export default function App() {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -18,8 +17,11 @@ export default function App() {
   }, []);
 
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
-      await console.log(container);
+    await console.log(container);
   }, []);
+  // const pJSDom = Window;
+
+  // pJSDom[0].pJS.particles.color.value = '#ffffff';
 
   return (
     <View style={styles.mainContainer}>
@@ -40,9 +42,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  html: {
-    fontFamily: "Fira Sans"
-  },
+  // html: {
+  //   fontFamily: "Fira Sans"
+  // },
   container: {
     position: "relative", 
     overflow: "hidden"

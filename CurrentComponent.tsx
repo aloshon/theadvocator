@@ -14,7 +14,9 @@ export type Themes = {
 };
 export type Theme = {
   primary: string,
+  primaryTab: string,
   secondary: string,
+  secondaryTab: string,
   background: string,
   fontColor: string,
 };
@@ -27,7 +29,40 @@ export interface Song {
   preview?: string,
   children?: React.ReactNode
 };
-
+const themes: Themes = {
+  light: {
+    primary: 'rgb(0, 120, 120)',
+    primaryTab: 'rgba(0, 120, 120, 0.9)',
+    secondary: 'rgb(0, 180, 200)',
+    secondaryTab: 'rgba(0, 180, 200, 0.01)',
+    background: 'rgb(240, 240, 240)',
+    fontColor: '#333333',
+  },
+  dark: {
+    primary: 'rgb(200, 200, 200)',
+    primaryTab: 'rgba(200, 200, 200, 0.1)',
+    secondary: 'rgb(100, 100, 100)',
+    secondaryTab: 'rgba(100, 100, 100, 0.4)',
+    background: 'rgb(40, 40, 40)',
+    fontColor: '#CCCCCC',
+  },
+  cool: {
+    primary: 'rgb(30, 147, 242)',
+    primaryTab: 'rgba(30, 147, 242, 0.4)',
+    secondary: 'rgb(30, 242, 147)',
+    secondaryTab: 'rgba(30, 242, 147, 0.4)',
+    background: 'rgb(160, 228, 228)',
+    fontColor: '#CCCCCC',
+  },
+  snug: {
+    primary: 'rgb(242, 147, 30)',
+    primaryTab: 'rgba(242, 147, 30, 0.4)',
+    secondary: 'rgb(147, 242, 30)',
+    secondaryTab: 'rgba(147, 242, 30, 0.4)',
+    background: 'rgb(228, 228, 160)',
+    fontColor: '#333333',
+  },
+}
 export const CurrentComponent = () => {
 	const [songs, setSongs] = useState<Song[]>([{
     title: "test song1",
@@ -61,7 +96,6 @@ export const CurrentComponent = () => {
     rank: 10,
     preview: "none"
   }]);
-
   const [currentTheme, setCurrentTheme] = useState<Theme>(themes["light"]);
   const toggleThemes = (theme:string) => {
     setCurrentTheme(themes[theme]);
@@ -83,7 +117,7 @@ export const CurrentComponent = () => {
   const tabNames:string[] = ["Find Songs", "Browse Songs"];
 
   console.log(CurrentComponent);
-  
+
 	while(setSongs === undefined){
     return null;
   }
@@ -95,30 +129,3 @@ export const CurrentComponent = () => {
     </>
   )
 };
-
-const themes: Themes = {
-  light: {
-    primary: 'rgb(120, 120, 120)',
-    secondary: 'rgb(180, 180, 200)',
-    background: 'rgb(240, 240, 240)',
-    fontColor: '#333333',
-  },
-  dark: {
-    primary: 'rgb(200, 200, 200)',
-    secondary: 'rgb(100, 100, 100)',
-    background: 'rgb(40, 40, 40)',
-    fontColor: '#CCCCCC',
-  },
-  cool: {
-    primary: 'rgb(30, 147, 242)',
-    secondary: 'rgb(30, 242, 147)',
-    background: 'rgb(160, 228, 228)',
-    fontColor: '#CCCCCC',
-  },
-  snug: {
-    primary: 'rgb(242, 147, 30)',
-    secondary: 'rgb(147, 242, 30)',
-    background: 'rgb(228, 228, 160)',
-    fontColor: '#333333',
-  },
-}

@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState } from "react";
 import {Song, Themes, Theme} from "./CurrentComponent";
+import { Dimensions } from 'react-native';
 
 export interface PromptsProps {
   setSongs: React.Dispatch<React.SetStateAction<Song[]>>
@@ -12,25 +13,24 @@ export interface PromptsProps {
 };
 
 export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsProps) => {
-  console.log(currentTheme.secondary)
+  console.log(currentTheme.secondary);
+  const { width } = Dimensions.get('window');
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       display: 'flex',
       // backgroundColor: '#222', 
       alignItems: 'center',
-      justifyContent: 'center',
       // height: "80vh",
       // width: "100%",
       flexDirection: 'column',
       textAlign: 'center',
-      margin: 10
+      margin: 12
     },
-    promptContainer: {
-      display: "flex",
-      // backgroundColor: '#444',
-      alignItems: 'center',
-      justifyContent: 'center', 
+    prompts: {
+      fontSize: (width / 32),
+      fontFamily: "Fira Sans",
+      margin: 60
     },
     inputBars: {
       borderRadius: 8,
@@ -38,14 +38,13 @@ export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsP
       padding: "8px",
       margin: "8px",
       boxSizing: "border-box",
-      border: `4px solid ${currentTheme.secondary}`,
       backgroundColor: "rgba(200, 200, 200, .45)",  
       backdropFilter: "saturate(200%) blur(25px)",
     }
   });
 
   const [index, setIndex] = useState(0);
-  const [userInput, setUserInput] = useState("hello");
+  const [userInput, setUserInput] = useState("");
   const resetUserInput = () => setUserInput("");
   const prompts = [
     "Do you have any favorite artists or genres?",
@@ -58,21 +57,23 @@ export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsP
   const answers:string[] = [
 
   ];
+  const handleChange = (text: string) => {
+    setUserInput(text);
+  };
   return (
     <View style={styles.container}>
-      <Text style={styles.promptContainer}>{prompts[index]}</Text>
+      <Text style={styles.prompts}>{prompts[index]}</Text>
       <TextInput
         style={styles.inputBars}
+        value={userInput}
         defaultValue={answers[index] || userInput}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setUserInput(userInput);
-      }}/>
+        onChangeText={handleChange}/>
       <Button
 				title="Continue"
         onPress={() => {
           answers.push(userInput); 
-          setIndex(index + 1);
           resetUserInput();
+          setIndex(index + 1);
       }}/>
       <StatusBar style="auto" />
     </View>

@@ -2,7 +2,7 @@ import type { RecursivePartial, IParticlesOptions } from "tsparticles-engine";
 export const particles:RecursivePartial<IParticlesOptions> = {
   background: {
     color: {
-        value: "#0d47a1",
+      value: "#0d47a1",
     },
   },
   fpsLimit: 120,

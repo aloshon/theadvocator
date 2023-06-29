@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Theme } from "./CurrentComponent";
-import { Dimensions } from 'react-native'
+import { Dimensions, } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // The tab system should be like so : {number: component}
@@ -21,26 +21,44 @@ interface TabsProps {
 export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps) => {
   const [tabsData, setTabsData] = useState<Number>(0);
   const { width } = Dimensions.get('window');
+  console.log(currentTheme);
 
   const styles = StyleSheet.create({
     container: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-evenly",
-      margin: 12,
       width: "100%",
     },
-    tab: {
-      margin: 12,
+    tabLeft: {
+      // marginTop: 8,
+      marginRight: 20,
+      backdropFilter: "saturate(200%) blur(25px)",
       backgroundColor: "rgba(200, 200, 200, .45)",  
-      backgroundImage: `linear-gradient(to right, ${currentTheme.primary}, ${currentTheme.secondary}`,
+      backgroundImage: `linear-gradient(to right, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
       width: "100%",
+      height: (width / 14),
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       cursor: "pointer",
-      fontSize: (width / 24)
-    }
+      fontSize: (width / 20),
+      fontFamily: "Fira Sans",
+    },
+    tabRight: {
+      // marginTop: 8,
+      marginLeft: 20,
+      backdropFilter: "saturate(200%) blur(25px)",
+      backgroundColor: "rgba(200, 200, 200, .45)",  
+      backgroundImage: `linear-gradient(to left, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
+      width: "100%",
+      height: (width / 14),
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+      fontSize: (width / 20),
+      fontFamily: "Fira Sans"
+    },
   });
 
   useEffect(() => {
@@ -50,7 +68,8 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
   // (add animations!!!)
   return (
     <View style={styles.container}>
-      {tabs.map((tab, index) => (tab === tabs[activeTab] ? <Text style={styles.tab}><b>{tab}</b></Text> : <Text style={styles.tab} onPress={() => setActiveTab(index)}>{tab}</Text>))}
+      {tabs.map((tab, index) => (tab === tabs[activeTab] ? <Text style={index === 0 ? styles.tabLeft : styles.tabRight}><b>{tab}</b></Text> 
+        : <Text style={index === 0 ? styles.tabLeft : styles.tabRight} onPress={() => setActiveTab(index)}>{tab}</Text>))}
     </View>
   )
 };
