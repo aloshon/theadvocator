@@ -1,18 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState } from "react";
-import {Song, Themes, Theme} from "./CurrentComponent";
-import { Dimensions } from 'react-native';
+import { Song } from "./CurrentComponent";
+import { Themes, Theme } from "./App";
 
 export interface PromptsProps {
   setSongs: React.Dispatch<React.SetStateAction<Song[]>>
   toggleThemes: (theme: string) => void
-  themes: Themes,
   currentTheme: Theme,
   children?: React.ReactNode
 };
 
-export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsProps) => {
+export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) => {
   console.log(currentTheme.secondary);
   const { width } = Dimensions.get('window');
   const styles = StyleSheet.create({
@@ -25,22 +24,45 @@ export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsP
       // width: "100%",
       flexDirection: 'column',
       textAlign: 'center',
-      margin: 12
+      margin: 12,
     },
     prompts: {
-      fontSize: (width / 32),
+      fontSize: (width / 20),
       fontFamily: "Fira Sans",
-      margin: 60
+      color: currentTheme.fontColor,
+      margin: 12
+    },
+    promptsContainer: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      borderRadius: 8,
+      margin: 60,
+      padding: 12,
+      backgroundColor: currentTheme.secondaryTab,
+      backdropFilter: "saturate(200%) blur(25px)",
     },
     inputBars: {
       borderRadius: 8,
-      width: "100%",
+      width: "90%",
       padding: "8px",
-      margin: "8px",
+      border: `5px, solid, ${currentTheme.secondaryTab}`,
+      margin: 12,
       boxSizing: "border-box",
-      backgroundColor: "rgba(200, 200, 200, .45)",  
-      backdropFilter: "saturate(200%) blur(25px)",
-    }
+      backgroundColor: currentTheme.secondaryTab,  
+      backdropFilter: "saturate(100%) blur(15px)",
+      color: currentTheme.fontColor
+    },
+    button: {
+      borderRadius: 12,
+      padding: 12,
+      margin: 12,
+      boxSizing: "border-box",
+      backgroundColor: currentTheme.secondary,  
+      backdropFilter: "saturate(100%) blur(15px)",
+      display: "flex",
+      alignItems: "center",
+    },
   });
 
   const [index, setIndex] = useState(0);
@@ -62,19 +84,31 @@ export const Prompts = ({setSongs, toggleThemes, themes, currentTheme}: PromptsP
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.prompts}>{prompts[index]}</Text>
-      <TextInput
-        style={styles.inputBars}
-        value={userInput}
-        defaultValue={answers[index] || userInput}
-        onChangeText={handleChange}/>
-      <Button
-				title="Continue"
-        onPress={() => {
-          answers.push(userInput); 
-          resetUserInput();
-          setIndex(index + 1);
-      }}/>
+      <View style={styles.promptsContainer}>
+        <Text style={styles.prompts}>{prompts[index]}</Text>
+        <TextInput
+          style={styles.inputBars}
+          placeholder="Enter your response here..."
+          value={userInput}
+          defaultValue={answers[index] || userInput}
+          onChangeText={handleChange}
+        />
+      </View>
+      <Pressable
+        style={({pressed}) => [{
+          ...styles.button, backgroundColor: pressed ? currentTheme.secondaryTab 
+            : currentTheme.secondary,
+        }]}>
+        <Text
+          style={{color: currentTheme.fontColor, }}
+          onPress={() => {
+            answers.push(userInput); 
+            resetUserInput();
+            setIndex(index + 1);
+        }}>
+          CONTINUE
+        </Text>
+      </Pressable>
       <StatusBar style="auto" />
     </View>
   );

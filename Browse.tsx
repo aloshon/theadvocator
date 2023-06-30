@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useState } from "react";
-import {Song, Theme} from "./CurrentComponent";
+import { Song } from "./CurrentComponent";
+import { Theme } from "./App";
 import { Popup } from './Popup';
 
 export interface BrowseProps {
@@ -29,12 +30,14 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       marginTop: 24,
       padding: 30,
       width: "90%",
-      backgroundColor: currentTheme.secondary,
+      backgroundColor: currentTheme.primary,
       margin: "auto",
-      fontSize: '3 em'
+      fontSize: '3 em',
+      color: currentTheme.fontColor
     },
     text: {
       fontFamily: "'Courier New', monospace",
+      color: currentTheme.fontColor,
     }
   });
 

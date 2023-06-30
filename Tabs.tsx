@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { Theme } from "./CurrentComponent";
+import { Theme } from "./App";
 import { Dimensions, } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -43,6 +43,7 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
       cursor: "pointer",
       fontSize: (width / 20),
       fontFamily: "Fira Sans",
+      color: currentTheme.fontColor
     },
     tabRight: {
       // marginTop: 8,
@@ -57,7 +58,8 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
       justifyContent: "center",
       cursor: "pointer",
       fontSize: (width / 20),
-      fontFamily: "Fira Sans"
+      fontFamily: "Fira Sans",
+      color: currentTheme.fontColor
     },
   });
 
