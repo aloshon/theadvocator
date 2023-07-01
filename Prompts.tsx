@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, Text, TextInput, View, Animated, Easing } from 'react-native';
+import { Keyframe, } from 'react-native-reanimated';
 import { useState } from "react";
 import { Song } from "./CurrentComponent";
 import { Themes, Theme } from "./App";
@@ -65,6 +66,14 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
     },
   });
 
+  const promptEnteringAnimation = new Keyframe({
+    0: {
+      opacity: 0,
+      transform: translate3d()
+    }
+  })
+  const promptExitingAnimation = new Keyframe({})
+
   const [index, setIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
   const resetUserInput = () => setUserInput("");
@@ -84,16 +93,18 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   };
   return (
     <View style={styles.container}>
-      <View style={styles.promptsContainer}>
-        <Text style={styles.prompts}>{prompts[index]}</Text>
-        <TextInput
-          style={styles.inputBars}
-          placeholder="Enter your response here..."
-          value={userInput}
-          defaultValue={answers[index] || userInput}
-          onChangeText={handleChange}
-        />
-      </View>
+      <Animated.View>
+        <View style={styles.promptsContainer}>
+          <Text style={styles.prompts}>{prompts[index]}</Text>
+          <TextInput
+            style={styles.inputBars}
+            placeholder="Enter your response here..."
+            value={userInput}
+            defaultValue={answers[index] || userInput}
+            onChangeText={handleChange}
+          />
+        </View>
+      </Animated.View>
       <Pressable
         style={({pressed}) => [{
           ...styles.button, backgroundColor: pressed ? currentTheme.secondaryTab 
