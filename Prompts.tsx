@@ -21,7 +21,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       display: 'flex',
       // backgroundColor: '#222', 
       alignItems: 'center',
-      // height: "80vh",
+      // height: "80vh", 
       // width: "100%",
       flexDirection: 'column',
       textAlign: 'center',
