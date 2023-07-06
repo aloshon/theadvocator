@@ -19,7 +19,6 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
     container: {
       flex: 1,
       display: 'flex',
-      // backgroundColor: '#222',
       alignItems: 'center',
       // height: "80vh",
       // width: "100%",
