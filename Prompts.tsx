@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, Pressable, StyleSheet, Text, TextInput, View, Animated, Easing } from 'react-native';
-import { Keyframe, } from 'react-native-reanimated';
-import { useState } from "react";
+import { Dimensions, Pressable, StyleSheet, Text, TextInput, View, Animated, PixelRatio } from 'react-native';
+import { Keyframe, FadingTransition } from 'react-native-reanimated';
+import { useState, useEffect, useRef } from "react";
 import { Song } from "./CurrentComponent";
 import { Themes, Theme } from "./App";
 
@@ -13,8 +13,19 @@ export interface PromptsProps {
 };
 
 export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) => {
+  // this for font sizes is fine just move to App file and export there
+  const { width: screenWidth } = Dimensions.get('window');
+  console.log(screenWidth);
   console.log(currentTheme.secondary);
-  const { width } = Dimensions.get('window');
+  const [largeSize, setLargeSize] = useState<number>(screenWidth <= 500 ? 28 : screenWidth <= 800 ? 48 : 72);
+  console.log(PixelRatio.get())
+  useEffect(() => {
+    setLargeSize(screenWidth <= 500 ? 28 : screenWidth <= 800 ? 48 : 72);
+    console.log(largeSize)
+  }, [Dimensions.get('window').width]);
+  
+  const fontScale:number = PixelRatio.getFontScale();
+  const getLargeFontSize = ():number => largeSize;
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -26,7 +37,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       margin: 12,
     },
     prompts: {
-      fontSize: (width / 20),
+      fontSize: getLargeFontSize(),
       fontFamily: "Fira Sans",
       color: currentTheme.fontColor,
       margin: 12
@@ -36,6 +47,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       justifyContent: "space-between",
       alignItems: "center",
       borderRadius: 8,
+      width: "93%",
       margin: 60,
       padding: 12,
       backgroundColor: currentTheme.secondaryTab,
@@ -64,18 +76,14 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
     },
   });
 
-  const promptEnteringAnimation = new Keyframe({
-    0: {
-      opacity: 0,
-      transform: translate3d()
-    }
-  })
-  const promptExitingAnimation = new Keyframe({})
+  const viewOpacity = useRef(new Animated.Value(0)).current;
+  const viewYPosition = useRef(new Animated.Value(1000)).current;
+  const [clicked, setClicked] = useState<boolean>(false);
+  const [index, setIndex]  = useState<number>(0);
+  const [userInput, setUserInput] = useState<string>("");
+  const resetUserInput = ():void => setUserInput("");
 
-  const [index, setIndex] = useState(0);
-  const [userInput, setUserInput] = useState("");
-  const resetUserInput = () => setUserInput("");
-  const prompts = [
+  const prompts:string[] = [
     "Do you have any favorite artists or genres?",
     "What mood are you feeling right now?",
     "Do you want popular music?",
@@ -86,13 +94,28 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   const answers:string[] = [
 
   ];
-  const handleChange = (text: string) => {
+
+  const delay = (time: number):Promise<unknown> => {
+    return new Promise(() => setTimeout(() => {}, time));
+  }
+  const handleChange = (text: string):void => {
     setUserInput(text);
   };
+
+  useEffect(() => {
+    if(clicked){
+      Animated.timing(viewOpacity, {duration: 1500, toValue: 0, useNativeDriver: true}).start();
+      Animated.timing(viewYPosition, {duration: 0, toValue: -800, useNativeDriver: true}).start();
+      delay(1500)
+      setClicked(false);
+    }
+    Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}).start();
+    Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
+  }, [clicked]);
   return (
     <View style={styles.container}>
-      <Animated.View>
-        <View style={styles.promptsContainer}>
+      <View style={styles.promptsContainer}>
+        <Animated.View style={{opacity: viewOpacity, top: viewYPosition}}>
           <Text style={styles.prompts}>{prompts[index]}</Text>
           <TextInput
             style={styles.inputBars}
@@ -101,8 +124,8 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             defaultValue={answers[index] || userInput}
             onChangeText={handleChange}
           />
-        </View>
-      </Animated.View>
+        </Animated.View>
+      </View>
       <Pressable
         style={({pressed}) => [{
           ...styles.button, backgroundColor: pressed ? currentTheme.secondaryTab 
@@ -114,6 +137,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             answers.push(userInput); 
             resetUserInput();
             setIndex(index + 1);
+            setClicked(true);
         }}>
           CONTINUE
         </Text>
