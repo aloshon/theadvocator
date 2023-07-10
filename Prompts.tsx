@@ -31,7 +31,8 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       flex: 1,
       display: 'flex',
       alignItems: 'center',
-      // height: "80vh",
+      width: "100%",
+      height: "100%",
       flexDirection: 'column',
       textAlign: 'center',
       margin: 12,
@@ -47,7 +48,8 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       justifyContent: "space-between",
       alignItems: "center",
       borderRadius: 8,
-      width: "93%",
+      minWidth: "93%",
+      minHeight: "50%",
       margin: 60,
       padding: 12,
       backgroundColor: currentTheme.secondaryTab,
@@ -103,15 +105,45 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   };
 
   useEffect(() => {
+    // const buttonClicked = async ():Promise<void> => {
+    //   if(clicked){
+    //    console.log(clicked)
+    //     Animated.timing(viewOpacity, {duration: 1500, toValue: 0, useNativeDriver: true}).start();
+    //     Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}).start();
+    //     // await delay(1500)
+    //     setClicked(false);
+    //   }
+    //   console.log(clicked)
+    //   // Animated.parallel([
+    //   //   Animated.timing(viewOpacity, {duration: 1500, toValue: 0, useNativeDriver: true}),
+    //   //   Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}),
+    //   // ]).start(() => {
+    //   //   setTimeout(() => {}, 500)
+    //   // })
+    //   Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}).start();
+    //   Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
+    // }
+    // buttonClicked();
     if(clicked){
-      Animated.timing(viewOpacity, {duration: 1500, toValue: 0, useNativeDriver: true}).start();
-      Animated.timing(viewYPosition, {duration: 0, toValue: -800, useNativeDriver: true}).start();
-      delay(1500)
+      console.log(clicked)
+      Animated.timing(viewOpacity, {duration: -1500, toValue: 0, useNativeDriver: true}).start();
+      Animated.timing(viewYPosition, {duration: -1000, toValue: 800, useNativeDriver: true}).start();
+      // await delay(1500)
       setClicked(false);
     }
-    Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}).start();
-    Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
+    setIndex(index + 1);
+    // console.log(clicked)
+    // // Animated.parallel([
+    // //   Animated.timing(viewOpacity, {duration: 1500, toValue: 0, useNativeDriver: true}),
+    // //   Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}),
+    // // ]).start(() => {
+    // //   setTimeout(() => {}, 500)
+    // // })
+    // Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}).start();
+    // Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
   }, [clicked]);
+  Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}).start();
+  Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
   return (
     <View style={styles.container}>
       <View style={styles.promptsContainer}>
@@ -123,6 +155,11 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             value={userInput}
             defaultValue={answers[index] || userInput}
             onChangeText={handleChange}
+            onSubmitEditing={() => {
+            answers.push(userInput); 
+            resetUserInput();
+            setIndex(index + 1);
+            setClicked(true);}}
           />
         </Animated.View>
       </View>
@@ -133,10 +170,13 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
         }]}>
         <Text
           style={{color: currentTheme.fontColor, }}
-          onPress={() => {
+          onPress={async(): Promise<void> => {
             answers.push(userInput); 
             resetUserInput();
-            setIndex(index + 1);
+            Animated.timing(viewOpacity, {duration: -1500, toValue: 0, useNativeDriver: true}).start();
+            Animated.timing(viewYPosition, {duration: -800, toValue: 1600, useNativeDriver: true}).start();
+            // await delay(1500);
+            console.log("HERE")
             setClicked(true);
         }}>
           CONTINUE
