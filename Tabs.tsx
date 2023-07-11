@@ -70,8 +70,8 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
   // (add animations!!!)
   return (
     <View style={styles.container}>
-      {tabs.map((tab, index) => (tab === tabs[activeTab] ? <Text style={index === 0 ? styles.tabLeft : styles.tabRight}><b>{tab}</b></Text> 
-        : <Text style={index === 0 ? styles.tabLeft : styles.tabRight} onPress={() => setActiveTab(index)}>{tab}</Text>))}
+      {tabs.map((tab, index) => (tab === tabs[activeTab] ? <Text key={index} style={index === 0 ? styles.tabLeft : styles.tabRight}><b>{tab}</b></Text> 
+        : <Text key={index} style={index === 0 ? styles.tabLeft : styles.tabRight} onPress={() => setActiveTab(index)}>{tab}</Text>))}
     </View>
   )
 };
