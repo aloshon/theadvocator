@@ -91,10 +91,10 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   const prompts:string[] = [
     "Do you have any favorite artists or genres?",
     "What mood are you feeling right now?",
+    "Are you looking for songs with certain instruments?",
+    "Are you looking for songs within a certain tempo?",
     "Do you want popular music?",
     "What era of music do you want to choose from?",
-    "Are you looking for songs within a certain tempo?",
-    "Are you looking for songs with certain instruments?"
   ];
   const answers:string[] = [
 
@@ -111,7 +111,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
     // const buttonClicked = async ():Promise<void> => {
       if(clicked){
        console.log(clicked)
-        Animated.timing(viewOpacity, {duration: 1500, toValue: 0, useNativeDriver: true}).start();
+        Animated.timing(viewOpacity, {duration: 500, toValue: 0, useNativeDriver: true}).start();
         Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}).start();
         // await delay(1500)
         setClicked(false);
@@ -123,7 +123,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       // ]).start(() => {
       //   setTimeout(() => {}, 500)
       // })
-      Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}).start();
+      Animated.timing(viewOpacity, {duration: 3500, toValue: 1, useNativeDriver: true}).start();
       Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
     // buttonClicked();
     // if(clicked){
@@ -197,7 +197,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             setClicked(true);
             // await delay(1500);
             // console.log("HERE");
-            // setIndex(index + 1);   
+            setIndex(index + 1);   
         }}>
           CONTINUE
         </Text>
