@@ -195,8 +195,6 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             // Animated.timing(viewOpacity, {duration: -1500, toValue: 0, useNativeDriver: true}).start();
             // Animated.timing(viewYPosition, {duration: -800, toValue: 1600, useNativeDriver: true}).start();
             setClicked(true);
-            // await delay(1500);
-            // console.log("HERE");
             setIndex(index + 1);   
         }}>
           CONTINUE
