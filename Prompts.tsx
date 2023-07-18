@@ -22,7 +22,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   useEffect(() => {
     setLargeSize(screenWidth <= 500 ? 28 : screenWidth <= 800 ? 48 : 72);
     console.log(largeSize)
-  }, [Dimensions.get('window').width]);
+  }, [Dimensions.get('window').width]); 
   
   const fontScale:number = PixelRatio.getFontScale();
   const getLargeFontSize = ():number => largeSize;
