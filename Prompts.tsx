@@ -18,7 +18,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   console.log(screenWidth);
   console.log(currentTheme.secondary);
   const [largeSize, setLargeSize] = useState<number>(screenWidth <= 500 ? 28 : screenWidth <= 800 ? 48 : 72);
-  console.log(PixelRatio.get())
+  console.log(PixelRatio.get());
   useEffect(() => {
     setLargeSize(screenWidth <= 500 ? 28 : screenWidth <= 800 ? 48 : 72);
     console.log(largeSize)
