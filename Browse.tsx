@@ -18,22 +18,32 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       flex: 1,
       paddingTop: 40,
       margin: 10,
+      width: "80%",
       paddingHorizontal: 20,
-      justifyContent: 'center',
+      // justifyContent: 'center',
+      // flexDirection: "column",
+      // alignItems: "center",
+      alignItems: "flex-start",
+      flexDirection: "row",
+      flexWrap: "wrap",
     },
-    promptContainer: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+    song: {
+      minWidth: "49%",
+      height: 100,
+      margin: 1,
     },
     item: {
       marginTop: 24,
       padding: 30,
       width: "90%",
       backgroundColor: currentTheme.primary,
-      margin: "auto",
+      // margin: "auto",
       fontSize: '3 em',
-      color: currentTheme.fontColor
+      color: currentTheme.fontColor,
+      flex: 1, 
+      flexDirection: "row",
+      display: "flex",
+      // flexBasis: '50%',
     },
     text: {
       fontFamily: "'Courier New', monospace",
@@ -46,14 +56,15 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
   const [currentSong, setCurrentSong] = useState<Song|null>(null);
 
   return (
-    <View style={(styles.container)}>
-      <ScrollView>
+    <>
+    <ScrollView>
+      <View style={(styles.container)}>
         {songs?.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
           songs?.map((song, i) => (
             <TouchableOpacity
               key={i}
-              style = {{flex: 1, flexDirection: "row"}}
               onPress= {() => setCurrentSong(song)}
+              style={styles.song}
             >
               <View style={(styles.item)}>
                 <Text style={(styles.text)}>{song.title}</Text>
@@ -61,13 +72,14 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
             </TouchableOpacity>
           ))
         }
-      </ScrollView>
-      {currentSong !== null && <Popup
-        key="popup"
-        data={currentSong}
-        handleClose={() => setPopupOn(false)}
-        currentTheme={currentTheme}
-      />}
-    </View>
+      </View>
+    </ScrollView>
+    {currentSong !== null && <Popup
+      key="popup"
+      data={currentSong}
+      handleClose={() => setPopupOn(false)}
+      currentTheme={currentTheme}
+    />}
+    </>
   );
 }
