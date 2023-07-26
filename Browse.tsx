@@ -16,14 +16,15 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      order: 2,
       paddingTop: 40,
-      margin: 10,
+      margin: 12,
       width: "80%",
       paddingHorizontal: 20,
       // justifyContent: 'center',
       // flexDirection: "column",
-      // alignItems: "center",
-      alignItems: "flex-start",
+      alignItems: "center",
+      // alignItems: "flex-start",
       flexDirection: "row",
       flexWrap: "wrap",
     },
@@ -35,9 +36,9 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
     item: {
       marginTop: 24,
       padding: 30,
-      width: "90%",
+      minwWidth: "100%",
       backgroundColor: currentTheme.primary,
-      // margin: "auto",
+
       fontSize: '3 em',
       color: currentTheme.fontColor,
       flex: 1, 
