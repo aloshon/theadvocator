@@ -44,7 +44,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       flex: 1, 
       flexDirection: "row",
       display: "flex",
-      // flexBasis: '50%',
+      // flexBasis: '50%', 
     },
     text: {
       fontFamily: "'Courier New', monospace",
