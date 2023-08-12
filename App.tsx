@@ -83,7 +83,7 @@ export default function App() {
           loaded={particlesLoaded}
           options={{...particles, background: {color: {value: currentTheme.background}}}}
         />
-      </View>
+      </View> 
       <CurrentComponent currentTheme={currentTheme} toggleThemes={toggleThemes} />
     </View>
   );
