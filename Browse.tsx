@@ -15,36 +15,25 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
   console.log(songs);
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      order: 2,
-      paddingTop: 40,
-      margin: 12,
-      width: "80%",
-      paddingHorizontal: 20,
-      // justifyContent: 'center',
-      // flexDirection: "column",
-      alignItems: "center",
-      // alignItems: "flex-start",
-      flexDirection: "row",
+      display: "flex",
       flexWrap: "wrap",
+      width: "100%",
+      margin: 4,
     },
     song: {
-      minWidth: "49%",
+      maxWidth: "30%",
       height: 100,
-      margin: 1,
+      margin: 12,
+      flex: 49,
     },
     item: {
-      marginTop: 24,
       padding: 30,
-      minwWidth: "100%",
+      width: "100%",
       backgroundColor: currentTheme.primary,
-
       fontSize: '3 em',
       color: currentTheme.fontColor,
-      flex: 1,
       flexDirection: "row",
       display: "flex",
-      // flexBasis: '50%',
     },
     text: {
       fontFamily: "'Courier New', monospace",
@@ -58,8 +47,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
 
   return (
     <>
-    <ScrollView>
-      <View style={(styles.container)}>
+    <ScrollView style={(styles.container)}>
         {songs?.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
           songs?.map((song, i) => (
             <TouchableOpacity
@@ -73,7 +61,6 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
             </TouchableOpacity>
           ))
         }
-      </View>
     </ScrollView>
     {currentSong !== null && <Popup
       key="popup"
