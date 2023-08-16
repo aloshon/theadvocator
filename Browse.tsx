@@ -41,7 +41,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
     }
   });
 
-  const [index, setIndex] = useState(0); 
+  const [index, setIndex] = useState(0);
   const [popupOn, setPopupOn] = useState<boolean>(false);
   const [currentSong, setCurrentSong] = useState<Song|null>(null);
 
