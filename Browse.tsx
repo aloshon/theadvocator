@@ -15,27 +15,31 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
   console.log(songs);
   const styles = StyleSheet.create({
     container: {
+      width: "100vw",
+      height: "100%",
+      marginTop: 16,
       // display: "flex",
-      // // flexWrap: "wrap",
-      // width: "100%",
-      // margin: 4,
-      display: "flex",
-      flexWrap: "wrap"
+      alignItems: 'flex-start',
+      alignContent: 'flex-start',
+      flexWrap: "wrap",
+      flexDirection: "row",
+      flex: 1,
     },
     song: {
       flexGrow: 1,
-      flexBasis: 300,
-      width: "100%",
-      // margin: 12,
-    },
-    item: {
+      // aspectRatio: "auto",
+      // flexBasis: 300,
+      minwWidth: "36%",
+      height: "12%",
+      margin: 20,
       padding: 30,
-      // width: "100%",
       backgroundColor: currentTheme.primary,
       fontSize: '3 em',
-      color: currentTheme.fontColor,
-      // flexDirection: "row",
-      display: "flex",
+      justifyContent: "center",
+      // flexDirection: "column",
+      // flexWrap: "wrap",
+      flex: 1,
+      // display: "flex",
     },
     text: {
       fontFamily: "'Courier New', monospace",
@@ -43,13 +47,13 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
     }
   });
 
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState<number>(0);
   const [popupOn, setPopupOn] = useState<boolean>(false);
   const [currentSong, setCurrentSong] = useState<Song|null>(null); 
 
   return (
     <>
-    <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         {songs?.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
           songs?.map((song, i) => (
             <TouchableOpacity
@@ -57,19 +61,17 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
               onPress= {() => setCurrentSong(song)}
               style={styles.song}
             >
-              <View style={(styles.item)}>
-                <Text style={(styles.text)}>{song.title}</Text>
-              </View>
+              <Text style={(styles.text)}>{song.title}</Text>
             </TouchableOpacity>
           ))
         }
-    </ScrollView>
-    {currentSong !== null && <Popup
-      key="popup"
-      data={currentSong}
-      handleClose={() => setPopupOn(false)}
-      currentTheme={currentTheme}
-    />}
+      </ScrollView>
+      {currentSong !== null && <Popup
+        key="popup"
+        data={currentSong}
+        handleClose={() => setPopupOn(false)}
+        currentTheme={currentTheme}
+      />}
     </>
   );
 }
