@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Platform } from "react-native";
 import { Theme } from "./App";
 import { Dimensions, } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -22,6 +22,7 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
   const [tabsData, setTabsData] = useState<Number>(0);
   const { width } = Dimensions.get('window');
   console.log(currentTheme);
+  const isPC = Platform.OS === "web" || "windows" || "macos";
 
   const styles = StyleSheet.create({
     container: {
@@ -30,13 +31,14 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
       width: "100%",
     },
     tabLeft: {
+      flex: 1,
       // marginTop: 8,
       marginRight: 20,
-      backdropFilter: "saturate(200%) blur(25px)",
+      // backdropFilter: "saturate(200%) blur(25px)",
       backgroundColor: "rgba(200, 200, 200, .45)",  
       backgroundImage: `linear-gradient(to right, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
       width: "100%",
-      height: (width / 14),
+      aspectRatio: isPC ? 10/3 : 9/3,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -46,13 +48,14 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
       color: currentTheme.fontColor
     },
     tabRight: {
+      flex: 1,
       // marginTop: 8,
       marginLeft: 20,
-      backdropFilter: "saturate(200%) blur(25px)",
+      // backdropFilter: "saturate(200%) blur(25px)",
       backgroundColor: "rgba(200, 200, 200, .45)",  
       backgroundImage: `linear-gradient(to left, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
       width: "100%",
-      height: (width / 14),
+      aspectRatio: isPC ? 10/3 : 9/3,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -70,8 +73,8 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
   // (add animations!!!)
   return (
     <View style={styles.container}>
-      {tabs.map((tab, index) => (tab === tabs[activeTab] ? <Text key={index} style={index === 0 ? styles.tabLeft : styles.tabRight}><b>{tab}</b></Text> 
-        : <Text key={index} style={index === 0 ? styles.tabLeft : styles.tabRight} onPress={() => setActiveTab(index)}>{tab}</Text>))}
+      {tabs.map((tab, index) => (tab === tabs[activeTab] ? <Text key={index} numberOfLines={1} adjustsFontSizeToFit style={index === 0 ? StyleSheet.flatten([styles.tabLeft, {fontWeight: "900"}]) : StyleSheet.flatten([styles.tabRight, {fontWeight: "900"}])}>{tab}</Text> 
+        : <Text key={index} numberOfLines={1} adjustsFontSizeToFit style={index === 0 ? styles.tabLeft : styles.tabRight} onPress={() => setActiveTab(index)}>{tab}</Text>))}
     </View>
   )
 };

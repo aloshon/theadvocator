@@ -61,7 +61,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
     1: <Browse songs={songs} currentTheme={currentTheme} />,
   };
 
-  const [currentTab, setCurrentTab] = useState<number>(0);
+  const [currentTab, setCurrentTab] = useState<number>(1);
   const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]);
 	const updateCurrentComponent = (component: ActiveComponent): void => setCurrentComponent(component);
 

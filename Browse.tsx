@@ -16,11 +16,12 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
   const styles = StyleSheet.create({
     container: {
       width: "100vw",
-      height: "100%",
+      height: "100vh",
       marginTop: 16,
       // display: "flex",
       alignItems: 'flex-start',
       alignContent: 'flex-start',
+      justifyContent: 'center',
       flexWrap: "wrap",
       flexDirection: "row",
       flex: 1,
@@ -29,8 +30,11 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       flexGrow: 1,
       // aspectRatio: "auto",
       // flexBasis: 300,
-      minwWidth: "36%",
-      height: "12%",
+      minWidth: "46%",
+      maxWidth: "48%",
+      // minHeight: "80px",
+      // maxHeight: "100px",
+      height: "100px",
       margin: 20,
       padding: 30,
       backgroundColor: currentTheme.primary,
@@ -38,11 +42,11 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       justifyContent: "center",
       // flexDirection: "column",
       // flexWrap: "wrap",
-      flex: 1,
+      // flex: 1,
       // display: "flex",
     },
     text: {
-      fontFamily: "'Courier New', monospace",
+      fontFamily: "Fira Sans",
       color: currentTheme.fontColor,
     }
   });
