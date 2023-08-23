@@ -32,7 +32,7 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
     },
     tabLeft: {
       flex: 1,
-      // marginTop: 8,
+      // marginTop: 8, 
       marginRight: 20,
       // backdropFilter: "saturate(200%) blur(25px)",
       backgroundColor: "rgba(200, 200, 200, .45)",  
