@@ -5,7 +5,7 @@ import { Dimensions, } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // The tab system should be like so : {number: component}
-// Tab Componnent just keeps track of the active tab and displays it 
+// Tab Componnent just keeps track of the active tab and displays it
 // (just the tab bar not the component, App still displays them)
 // Create onClick function to change tab that updates current component and props
 // Animate tabs being updated!
