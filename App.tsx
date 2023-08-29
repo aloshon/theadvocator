@@ -1,5 +1,5 @@
 import { StyleSheet, View, Dimensions } from 'react-native';
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState } from "react";
 import { CurrentComponent } from "./CurrentComponent";
 import Particles from 'react-particles';
 import {particles} from './config/configParticles';
