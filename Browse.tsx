@@ -31,8 +31,6 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       // aspectRatio: "auto",
       minWidth: "46%",
       maxWidth: "48%",
-      // minHeight: "80px",
-      // maxHeight: "100px",
       height: "100px",
       margin: 20,
       padding: 30,
