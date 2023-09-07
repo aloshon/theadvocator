@@ -28,7 +28,6 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
     },
     song: {
       flexGrow: 1,
-      // aspectRatio: "auto",
       minWidth: "46%",
       maxWidth: "48%",
       height: "100px",
