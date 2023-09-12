@@ -23,7 +23,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       alignContent: 'flex-start',
       justifyContent: 'center',
       flexWrap: "wrap",
-      flexDirection: "row",
+      flexDirection: "row", 
       flex: 1,
     },
     song: {
