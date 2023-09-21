@@ -18,7 +18,6 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       width: "100vw",
       height: "100vh",
       marginTop: 16,
-      // display: "flex",
       alignItems: 'flex-start',
       alignContent: 'flex-start',
       justifyContent: 'center',
