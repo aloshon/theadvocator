@@ -35,7 +35,6 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       backgroundColor: currentTheme.primary,
       fontSize: '3 em',
       justifyContent: "center",
-      // flexWrap: "wrap",
       // display: "flex",
     },
     text: {
