@@ -9,7 +9,7 @@ import type { Container, Engine } from "tsparticles-engine";
 export type Themes = {
   [key: string]: Theme,
 };
-export type Theme = {
+export type Theme = { 
   primary: string,
   primaryTab: string,
   secondary: string,
