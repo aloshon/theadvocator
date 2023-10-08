@@ -25,7 +25,7 @@ const themes: Themes = {
     primaryTab: 'rgba(180, 180, 180, 0.9)',
     secondary: 'rgb(240, 240, 240)',
     secondaryTab: 'rgba(210, 210, 210, 0.1)',
-    background: 'rgba(240, 240, 240)',
+    background: 'rgba(240, 240, 240)', 
     fontColor: '#333333',
   },
   dark: {
