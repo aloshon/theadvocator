@@ -78,10 +78,8 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
     },
   });
 
-  const viewOpacity = useRef(new Animated.Value(0)).current;
+  const viewOpacity = useRef(new Animated.Value(0));
   const viewYPosition = useRef(new Animated.Value(1000)).current;
-  // const [viewOpacity, setViewOpacity] = useState(new Animated.Value(0));
-  // const [viewYPosition, setViewYPosition] = useState(new Animated.Value(1000));
 
   const [clicked, setClicked] = useState<boolean>(false);
   const [index, setIndex]  = useState<number>(0);
@@ -108,63 +106,19 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   };
 
   useEffect(() => {
-    // const buttonClicked = async ():Promise<void> => {
-      if(clicked){
-       console.log(clicked)
-        Animated.timing(viewOpacity, {duration: 500, toValue: 0, useNativeDriver: true}).start();
-        Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}).start();
-        // await delay(1500)
-        setClicked(false);
-      }
-      console.log(clicked)
-      // Animated.parallel([
-      //   Animated.timing(viewOpacity, {duration: 1500, toValue: 0, useNativeDriver: true}),
-      //   Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}),
-      // ]).start(() => {
-      //   setTimeout(() => {}, 500)
-      // })
-      Animated.timing(viewOpacity, {duration: 3500, toValue: 1, useNativeDriver: true}).start();
-      Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
-    // buttonClicked();
-    // if(clicked){
-    //   console.log("HERE")
-    //   console.log(clicked)
-    //   Animated.sequence([
-    //     Animated.parallel([
-    //       Animated.timing(viewOpacity, {duration: 1500, toValue: 0, useNativeDriver: true}),
-    //       Animated.timing(viewYPosition, {duration: 800, toValue: -1800, useNativeDriver: true}),
-    //     ]),
-    //     Animated.delay(1500),
-    //     Animated.parallel([
-    //       Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}),
-    //       Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}),
-    //     ]),
-    //   ]).start();
-    //   // await delay(1500);
-    //   setClicked(false);
-    // } else {
-    //   Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}).start();
-    //   Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
-    // }
-    // Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}).start();
-    //   Animated.timing(viewYPosition, {duration: 800, toValue: 800, useNativeDriver: true}).start();
-    console.log(viewOpacity);
-    console.log(viewYPosition);
-    // console.log(clicked)
-    // // Animated.parallel([
-    // //   Animated.timing(viewOpacity, {duration: 1500, toValue: 0, useNativeDriver: true}),
-    // //   Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}),
-    // // ]).start(() => {
-    // //   setTimeout(() => {}, 500)
-    // // })
-    // Animated.timing(viewOpacity, {duration: 1500, toValue: 1, useNativeDriver: true}).start();
-    // Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
+    if(clicked){
+      viewOpacity.current = new Animated.Value(0);
+      Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}).start();
+      setClicked(false);
+    }
+    Animated.timing(viewOpacity.current, {duration: 1000, toValue: 1, useNativeDriver: true}).start();
+    Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
   }, [clicked]);
 
   return (
     <View style={styles.container}>
       <View style={styles.promptsContainer}>
-        <Animated.View style={[{opacity: viewOpacity, top: viewYPosition}]}>
+        <Animated.View style={[{opacity: viewOpacity.current, top: viewYPosition}]}>
           <Text style={styles.prompts}>{prompts[index]}</Text>
           <TextInput
             style={styles.inputBars}
@@ -176,8 +130,6 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             answers.push(userInput); 
             resetUserInput();
             setClicked(true);
-            // await delay(1500);
-            console.log("HERE");
             setIndex(index + 1);}}
           />
         </Animated.View>
@@ -192,8 +144,6 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
           onPress={async(): Promise<void> => {
             answers.push(userInput); 
             resetUserInput();
-            // Animated.timing(viewOpacity, {duration: -1500, toValue: 0, useNativeDriver: true}).start();
-            // Animated.timing(viewYPosition, {duration: -800, toValue: 1600, useNativeDriver: true}).start();
             setClicked(true);
             setIndex(index + 1);   
         }}>

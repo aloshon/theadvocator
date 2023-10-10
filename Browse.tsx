@@ -26,6 +26,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       flex: 1,
     },
     song: {
+      backdropFilter: "saturate(200%) blur(25px)",
       flexGrow: 1,
       minWidth: "46%",
       maxWidth: "48%",
