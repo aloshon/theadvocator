@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, Platform } from "react-native";
 import { Theme } from "./App";
 import { Dimensions, } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Icon } from 'react-native-elements';
 
 // The tab system should be like so : {number: component}
 // Tab Componnent just keeps track of the active tab and displays it
@@ -13,17 +13,18 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 interface TabsProps {
   tabs: string[],
+  icons: Element[],
   activeTab: number,
   setActiveTab: React.Dispatch<React.SetStateAction<number>>,
   currentTheme: Theme
 };
 
-export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps) => {
+export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: TabsProps) => {
   const [tabsData, setTabsData] = useState<Number>(0);
   const { width } = Dimensions.get('window');
   console.log(currentTheme);
   const isPC = Platform.OS === "web" || "windows" || "macos";
-
+  // need to update styling so flex box just makes them all together in even sizes. Like Blackhole
   const styles = StyleSheet.create({
     container: {
       display: "flex",
@@ -73,8 +74,7 @@ export const Tabs = ({tabs, activeTab=0, setActiveTab, currentTheme}: TabsProps)
   // (add animations!!!)
   return (
     <View style={styles.container}>
-      {tabs.map((tab, index) => (tab === tabs[activeTab] ? <Text key={index} numberOfLines={1} adjustsFontSizeToFit style={index === 0 ? StyleSheet.flatten([styles.tabLeft, {fontWeight: "900"}]) : StyleSheet.flatten([styles.tabRight, {fontWeight: "900"}])}>{tab}</Text> 
-        : <Text key={index} numberOfLines={1} adjustsFontSizeToFit style={index === 0 ? styles.tabLeft : styles.tabRight} onPress={() => setActiveTab(index)}>{tab}</Text>))}
+      {tabs.map((tab, index) => (<Text key={index} numberOfLines={1} adjustsFontSizeToFit style={index === 0 ? StyleSheet.flatten([tab === tabs[activeTab] && {fontWeight: "900"}]) : StyleSheet.flatten([styles.tabRight, {fontWeight: "900"}])}>{icons[index]&& tab === tabs[activeTab] && tab}</Text>))}
     </View>
   )
 };

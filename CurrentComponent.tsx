@@ -3,6 +3,7 @@ import { Prompts, PromptsProps } from "./Prompts";
 import { Browse, BrowseProps } from "./Browse";
 import { Tabs } from "./Tabs";
 import { Theme, Themes } from "./App";
+import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type ActiveComponent = Element;
@@ -61,6 +62,12 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
     1: <Browse songs={songs} currentTheme={currentTheme} />,
   };
 
+  const icons:Element[] = [
+    <Icon name="search"/>,
+    <Icon name="list"/>,
+    <Icon name="palette"/>,
+  ]
+
   const [currentTab, setCurrentTab] = useState<number>(1);
   const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]);
 	const updateCurrentComponent = (component: ActiveComponent): void => setCurrentComponent(component);
@@ -70,7 +77,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
     updateCurrentComponent(newComponent);
   }, [currentTab]);
 
-  const tabNames:string[] = ["Find Songs", "Browse Songs"];
+  const tabNames:string[] = ["Find Songs", "Browse Songs", "Theme"];
 
   console.log(CurrentComponent);
 
@@ -80,8 +87,8 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
 
 	return (
     <>
-      <Tabs tabs={tabNames} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
       {CurrentComponent}
+      <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
     </>
   )
 };
