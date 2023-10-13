@@ -35,7 +35,6 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
       flex: 1,
       // marginTop: 8,
       marginRight: 20,
-      // backdropFilter: "saturate(200%) blur(25px)",
       backgroundColor: "rgba(200, 200, 200, .45)",  
       backgroundImage: `linear-gradient(to right, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
       width: "100%",
