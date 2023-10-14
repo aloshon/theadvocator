@@ -21,7 +21,7 @@ interface TabsProps {
 
 export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: TabsProps) => {
   const [tabsData, setTabsData] = useState<Number>(0);
-  const { width } = Dimensions.get('window');
+  const { width } = Dimensions.get('window'); 
   console.log(currentTheme);
   const isPC = Platform.OS === "web" || "windows" || "macos";
   // need to update styling so flex box just makes them all together in even sizes. Like Blackhole
