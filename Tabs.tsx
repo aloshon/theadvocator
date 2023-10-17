@@ -27,7 +27,7 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
   // need to update styling so flex box just makes them all together in even sizes. Like Blackhole
   const styles = StyleSheet.create({
     container: {
-      display: "flex",
+      display: "flex", 
       flexDirection: "row",
       width: "100%",
     },
