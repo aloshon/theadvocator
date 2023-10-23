@@ -78,7 +78,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
   }, [currentTab]);
 
   const tabNames:string[] = ["Find Songs", "Browse Songs", "Theme"];
- 
+
   console.log(CurrentComponent);
 
 	while(setSongs === undefined){
