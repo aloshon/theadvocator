@@ -69,7 +69,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
   ]
 
   const [currentTab, setCurrentTab] = useState<number>(1);
-  const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]); 
+  const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]);
 	const updateCurrentComponent = (component: ActiveComponent): void => setCurrentComponent(component);
 
 	useEffect(() => {
