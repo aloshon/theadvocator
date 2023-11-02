@@ -6,7 +6,7 @@ import {particles} from './config/configParticles';
 import { loadFull } from "tsparticles";
 import type { Container, Engine } from "tsparticles-engine";
 
-export type Themes = {
+export type Themes = { 
   [key: string]: Theme,
 };
 
