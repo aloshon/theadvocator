@@ -4,7 +4,7 @@ import { CurrentComponent } from "./CurrentComponent";
 import Particles from 'react-particles';
 import {particles} from './config/configParticles';
 import { loadFull } from "tsparticles";
-import type { Container, Engine } from "tsparticles-engine";
+import type { Container, Engine } from "tsparticles-engine"; 
 
 export type Themes = { 
   [key: string]: Theme,
