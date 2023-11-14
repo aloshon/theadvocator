@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import { useCallback, useState } from "react";
 import { CurrentComponent } from "./CurrentComponent"; 
 import Particles from 'react-particles';
-import {particles} from './config/configParticles';
+import {particles} from './config/configParticles'; 
 import { loadFull } from "tsparticles";
 import type { Container, Engine } from "tsparticles-engine";
 
