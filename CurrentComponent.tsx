@@ -86,7 +86,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
     updateCurrentComponent(newComponent);
   }, [currentTab]);
 
-  const tabNames:string[] = ["Find Songs", "Browse Songs", "Theme"];
+  const tabNames:string[] = ["Discover", "Browse", "Theme"];
 
   console.log(CurrentComponent);
 
