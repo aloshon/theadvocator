@@ -20,8 +20,8 @@ interface TabsProps {
 };
 
 export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: TabsProps) => {
-  const [tabsData, setTabsData] = useState<Number>(0);
-  const { width } = Dimensions.get('window');
+  // const [tabsData, setTabsData] = useState<Number>(0);
+  // const { width } = Dimensions.get('window');
   const fontScale = PixelRatio.getFontScale();
   console.log(currentTheme);
   const isPC = Platform.OS === "web" || "windows" || "macos";
@@ -30,7 +30,8 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
     container: {
       display: "flex", 
       flexDirection: "row",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
+      alignItems: "stretch",
       width: "100%",
     },
     // tabLeft: {
@@ -60,7 +61,7 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
       fontSize: (20 / fontScale),
       fontFamily: "Fira Sans",
       color: currentTheme.fontColor,
-      // width: "inherit",
+      width: "50%",
       // padding: "flexible",
     },
   });
