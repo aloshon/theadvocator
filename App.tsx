@@ -72,6 +72,20 @@ export default function App() {
     setCurrentTheme(themes[theme]);
   }, []);
 
+  const styles = StyleSheet.create({
+    container: {
+      position: "relative",
+      overflow: "hidden",
+    },
+    mainContainer: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100vw",
+      height: "100vh",
+    },
+  });
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
@@ -89,17 +103,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: "relative",
-    overflow: "hidden",
-  },
-  mainContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100vw",
-    height: "100vh",
-  }
-});

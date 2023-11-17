@@ -1,4 +1,5 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect } from "react";
+import { StyleSheet, Text } from 'react-native';
 import { Prompts, PromptsProps } from "./Prompts";
 import { Browse, BrowseProps } from "./Browse";
 import { Tabs } from "./Tabs";
@@ -66,7 +67,15 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
     <Icon name="search"/>,
     <Icon name="list"/>,
     <Icon name="palette"/>,
-  ]
+  ];
+
+  const styles = StyleSheet.create({
+    appName: {
+      color: currentTheme.fontColor,
+      fontSize: 20,
+      width: 100,
+    }
+  });
 
   const [currentTab, setCurrentTab] = useState<number>(1);
   const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]);
@@ -87,8 +96,9 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
 
 	return (
     <>
-      {CurrentComponent}
+      <Text style={styles.appName}>The Advocator</Text>
       <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
+      {CurrentComponent}
     </>
   )
 };

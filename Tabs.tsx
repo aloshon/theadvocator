@@ -31,29 +31,23 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
       flexDirection: "row",
       width: "100%",
     },
-    tabLeft: {
+    // tabLeft: {
+    //   flex: 1,
+    //   // marginTop: 8,
+    //   marginRight: 20,
+    //   width: "100%",
+    //   aspectRatio: isPC ? 10/3 : 9/3,
+    //   display: "flex",
+    //   alignItems: "center",
+    //   justifyContent: "center",
+    //   cursor: "pointer",
+    //   fontSize: (width / 20),
+    //   fontFamily: "Fira Sans",
+    //   color: currentTheme.fontColor
+    // },
+    tab: {
       flex: 1,
-      // marginTop: 8,
-      marginRight: 20,
-      backgroundColor: "rgba(200, 200, 200, .45)",  
-      backgroundImage: `linear-gradient(to right, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
-      width: "100%",
-      aspectRatio: isPC ? 10/3 : 9/3,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-      fontSize: (width / 20),
-      fontFamily: "Fira Sans",
-      color: currentTheme.fontColor
-    },
-    tabRight: {
-      flex: 1,
-      // marginTop: 8,
-      marginLeft: 20,
-      // backdropFilter: "saturate(200%) blur(25px)",
-      backgroundColor: "rgba(200, 200, 200, .45)",
-      backgroundImage: `linear-gradient(to left, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
+      margin: 8,
       width: "100%",
       aspectRatio: isPC ? 10/3 : 9/3,
       display: "flex",
@@ -73,7 +67,7 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
   // (add animations!!!)
   return (
     <View style={styles.container}>
-      {tabs.map((tab, index) => (<Text key={index} numberOfLines={1} adjustsFontSizeToFit style={index === 0 ? StyleSheet.flatten([tab === tabs[activeTab] && {fontWeight: "900"}]) : StyleSheet.flatten([styles.tabRight, {fontWeight: "900"}])}>{icons[index]&& tab === tabs[activeTab] && tab}</Text>))}
+      {tabs.map((tab, index) => (<Text onPress={() => setActiveTab(index)} key={index} numberOfLines={1} adjustsFontSizeToFit style={StyleSheet.flatten([tab === tabs[activeTab] && {fontWeight: "900"}, styles.tab])}>{tab}</Text>))}
     </View>
   )
 };
