@@ -36,7 +36,7 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
     },
     // tabLeft: {
     //   flex: 1,
-    //   // marginTop: 8,
+    //   // marginTop: 8, 
     //   marginRight: 20,
     //   width: "100%",
     //   aspectRatio: isPC ? 10/3 : 9/3,
@@ -69,6 +69,13 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
   useEffect(() => {
     const data = [];
   }, []);
+  // Tab Animation suedo code
+  //   Have 4 separate animations, left, middle, right, and active
+  //   When a tab is active the activate the active animation (If necessary we need left-active, right-active, etc.)
+  //   The inactive tabs will run their own animations. 
+  //   End goal is on all screen sizes all tab names are visible and easily clickable no matter which is active
+
+
   // map over all tabs and if it is active update the styling
   // (add animations!!!)
   return (
