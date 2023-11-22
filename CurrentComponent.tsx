@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import Swiper from 'react-native-swiper';
 import { Prompts, PromptsProps } from "./Prompts";
 import { Browse, BrowseProps } from "./Browse";
 import { Tabs } from "./Tabs";
@@ -74,7 +75,13 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
       color: currentTheme.fontColor,
       fontSize: 20,
       width: 100,
-    }
+    },
+    slide: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    wrapper: {},
   });
 
   const [currentTab, setCurrentTab] = useState<number>(1);
@@ -95,10 +102,14 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
   }
 
 	return (
-    <>
+    <View style={{flex:1}}>
       <Text style={styles.appName}>The Advocator</Text>
       <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
-      {CurrentComponent}
-    </>
+      {/* {CurrentComponent} */}
+      <Swiper style={styles.wrapper} showsButtons={true} horizontal={true}>
+        <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
+        <Browse songs={songs} currentTheme={currentTheme} />
+      </Swiper>
+    </View>
   )
 };
