@@ -111,5 +111,5 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
         <Browse songs={songs} currentTheme={currentTheme} />
       </Swiper>
     </View>
-  )
+  ) 
 };
