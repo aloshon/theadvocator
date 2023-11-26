@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactNode } from "react";
-import { StyleSheet, Text, View, Dimensions, Platform, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Platform, ScrollView,  } from 'react-native';
 import { Prompts, PromptsProps } from "./Prompts";
 import { Browse, BrowseProps } from "./Browse";
 import { Tabs } from "./Tabs";
@@ -85,7 +85,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
 
   const {height, width} = Platform.OS === 'web' ? Dimensions.get('window') : Dimensions.get('screen');
 
-  const [currentTab, setCurrentTab] = useState<number>(1);
+  const [currentTab, setCurrentTab] = useState<number>(0);
   const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]);
 	const updateCurrentComponent = (component: ActiveComponent): void => setCurrentComponent(component);
 
@@ -97,6 +97,13 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
   const tabNames:string[] = ["Discover", "Browse", "Theme"];
 
   console.log(CurrentComponent);
+  console.log(width);
+
+  const isCloseToEdges = ({layoutMeasurement, contentOffset, contentSize}) => {
+    const currentTabIndex = Math.round(contentOffset.x/width);
+
+    setCurrentTab(currentTabIndex);
+  };
 
 	while(setSongs === undefined){
     return null;
@@ -106,14 +113,23 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
     <>
     <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
     <ScrollView
+      snapToOffsets={[100, 400, 2100]}
+      decelerationRate="fast"
+      snapToEnd={false}
+      snapToStart={false}
+      disableIntervalMomentum={true}
+      onScroll={({nativeEvent}) => {console.log(isCloseToEdges(nativeEvent))}}
+      scrollEventThrottle={400}
+      alwaysBounceVertical={true}
+      directionalLockEnabled={true}
       horizontal={true}
       pagingEnabled
       showsHorizontalScrollIndicator={true}
       style={{ 
-        width: width, 
-        height: height
+        width: "100vw",
+        height: "100vh"
     }}>
-      <View style={{width: width, height: height}}>
+      <View style={{width: "100vw", height: height}}>
     {/* // <Text style={styles.appName}>The Advocator</Text> */}
       {/* {CurrentComponent} */}
       {/* <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} /> */}
@@ -123,7 +139,10 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
       </Swiper> */}
         <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
       </View>
-      <View style={{width: width, height: height}}>
+      <View style={{width: "100vw", height: height}}>
+        <Browse songs={songs} currentTheme={currentTheme} />
+      </View>
+      <View style={{width: "100vw", height: height}}>
         <Browse songs={songs} currentTheme={currentTheme} />
       </View>
     </ScrollView>
