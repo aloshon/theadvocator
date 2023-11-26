@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { useState, useEffect, ReactNode } from "react";
+import { StyleSheet, Text, View, Dimensions, Platform, ScrollView } from 'react-native';
 import { Prompts, PromptsProps } from "./Prompts";
 import { Browse, BrowseProps } from "./Browse";
 import { Tabs } from "./Tabs";
@@ -7,7 +7,7 @@ import { Theme, Themes } from "./App";
 import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-type ActiveComponent = Element;
+type ActiveComponent = ReactNode;
 type TabComponents = {
   [key: number]: ActiveComponent
 };
@@ -83,6 +83,8 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
     wrapper: {},
   });
 
+  const {height, width} = Platform.OS === 'web' ? Dimensions.get('window') : Dimensions.get('screen');
+
   const [currentTab, setCurrentTab] = useState<number>(1);
   const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]);
 	const updateCurrentComponent = (component: ActiveComponent): void => setCurrentComponent(component);
@@ -102,13 +104,29 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
 
 	return (
     <>
-      <Text style={styles.appName}>The Advocator</Text>
-      <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
-      {CurrentComponent}
+    <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
+    <ScrollView
+      horizontal={true}
+      pagingEnabled
+      showsHorizontalScrollIndicator={true}
+      style={{ 
+        width: width, 
+        height: height
+    }}>
+      <View style={{width: width, height: height}}>
+    {/* // <Text style={styles.appName}>The Advocator</Text> */}
+      {/* {CurrentComponent} */}
+      {/* <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} /> */}
       {/* <Swiper style={styles.wrapper} showsButtons={true} horizontal={true}>
         <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
         <Browse songs={songs} currentTheme={currentTheme} />
       </Swiper> */}
+        <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
+      </View>
+      <View style={{width: width, height: height}}>
+        <Browse songs={songs} currentTheme={currentTheme} />
+      </View>
+    </ScrollView>
     </>
   ) 
 };
