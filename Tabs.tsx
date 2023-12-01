@@ -4,24 +4,16 @@ import { Theme } from "./App";
 import { Dimensions, } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-// The tab system should be like so : {number: component}
-// Tab Componnent just keeps track of the active tab and displays it
-// (just the tab bar not the component, App still displays them)
-// Create onClick function to change tab that updates current component and props
-// Animate tabs being updated!
-// Make sure tabs are at bottom of screen with no margin when on mobile
-
 interface TabsProps {
   tabs: string[],
   icons: Element[],
   activeTab: number,
   setActiveTab: React.Dispatch<React.SetStateAction<number>>,
-  currentTheme: Theme
+  currentTheme: Theme,
+  setTabsToEnd: (index: number) => void
 };
 
-export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: TabsProps) => {
-  // const [tabsData, setTabsData] = useState<Number>(0);
-  // const { width } = Dimensions.get('window');
+export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme, setTabsToEnd}: TabsProps) => {
   const fontScale = PixelRatio.getFontScale();
   console.log(currentTheme);
   const isPC = Platform.OS === "web" || "windows" || "macos";
@@ -34,22 +26,8 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
       alignItems: "stretch",
       width: "100%",
     },
-    // tabLeft: {
-    //   flex: 1,
-    //   // marginTop: 8, 
-    //   marginRight: 20,
-    //   width: "100%",
-    //   aspectRatio: isPC ? 10/3 : 9/3,
-    //   display: "flex",
-    //   alignItems: "center",
-    //   justifyContent: "center",
-    //   cursor: "pointer",
-    //   fontSize: (width / 20),
-    //   fontFamily: "Fira Sans",
-    //   color: currentTheme.fontColor
-    // },
     tab: {
-      flex: 1, 
+      flex: 1,
       margin: 8,
       flexGrow: 100,
       // width: "100%",
@@ -69,24 +47,18 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
   useEffect(() => {
     const data = [];
   }, []);
-  // Tab Animation suedo code
-  //   Have 4 separate animations, left, middle, right, and active
-  //   When a tab is active the activate the active animation (If necessary we need left-active, right-active, etc.)
-  //   The inactive tabs will run their own animations. 
-  //   End goal is on all screen sizes all tab names are visible and easily clickable no matter which is active
 
-
-  // map over all tabs and if it is active update the styling
-  // (add animations!!!)
   return (
     <View style={styles.container}>
       {tabs.map((tab, index) => (
-      <Text onPress={() => 
-        setActiveTab(index)} key={index} numberOfLines={1} adjustsFontSizeToFit style={StyleSheet.flatten(
-          [styles.tab, tab === tabs[activeTab] && {fontWeight: "900", fontSize: (36 / fontScale), width: "100%",}]
+      <Text onPress={() => {
+        setTabsToEnd(index)
+        setActiveTab(index);
+      }} key={index} numberOfLines={1} adjustsFontSizeToFit style={StyleSheet.flatten(
+        [styles.tab, tab === tabs[activeTab] && {fontWeight: "900", fontSize: (36 / fontScale), width: "100%",}]
       )}>
       {tab}
-    </Text>))}
+      </Text>))}
     </View>
   )
 };

@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect, ReactNode, useRef } from "react";
 import { StyleSheet, Text, View, Dimensions, Platform, ScrollView,  } from 'react-native';
 import { Prompts, PromptsProps } from "./Prompts";
 import { Browse, BrowseProps } from "./Browse";
@@ -84,8 +84,10 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
   });
 
   const {height, width} = Platform.OS === 'web' ? Dimensions.get('window') : Dimensions.get('screen');
-
+  const scrollViewRef = useRef<any>();
   const [currentTab, setCurrentTab] = useState<number>(0);
+  const [scrollable, setScrollable] = useState<boolean>(true);
+  const [disableFollowTabs, setDisableFollowTabs] = useState<boolean>(false);
   const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]);
 	const updateCurrentComponent = (component: ActiveComponent): void => setCurrentComponent(component);
 
@@ -96,14 +98,29 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
 
   const tabNames:string[] = ["Discover", "Browse", "Theme"];
 
-  console.log(CurrentComponent);
-  console.log(width);
+  const followTabsWithScroll = ({layoutMeasurement, contentOffset, contentSize}) => {
+    if(disableFollowTabs) return;
 
-  const isCloseToEdges = ({layoutMeasurement, contentOffset, contentSize}) => {
     const currentTabIndex = Math.round(contentOffset.x/width);
-
     setCurrentTab(currentTabIndex);
   };
+
+  const setTabsToEnd = (index:number):void => {
+    // disable tab follow so it looks proper
+    setCurrentTab(index);
+    setDisableFollowTabs(true);  
+
+    if (index === tabNames.length-1) scrollViewRef.current?.scrollTo({ x: 999999 })
+    else if (index === 0) scrollViewRef.current?.scrollTo({ x: 0 })
+    else scrollViewRef.current?.scrollTo({ x: width/index })
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+       setDisableFollowTabs(false)
+    }, 900)
+
+  }, [disableFollowTabs]);
 
 	while(setSongs === undefined){
     return null;
@@ -111,41 +128,39 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
 
 	return (
     <>
-    <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} />
-    <ScrollView
-      snapToOffsets={[100, 400, 2100]}
-      decelerationRate="fast"
-      snapToEnd={false}
-      snapToStart={false}
-      disableIntervalMomentum={true}
-      onScroll={({nativeEvent}) => {console.log(isCloseToEdges(nativeEvent))}}
-      scrollEventThrottle={400}
-      alwaysBounceVertical={true}
-      directionalLockEnabled={true}
-      horizontal={true}
-      pagingEnabled
-      showsHorizontalScrollIndicator={true}
-      style={{ 
-        width: "100vw",
-        height: "100vh"
-    }}>
-      <View style={{width: "100vw", height: height}}>
-    {/* // <Text style={styles.appName}>The Advocator</Text> */}
-      {/* {CurrentComponent} */}
-      {/* <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} /> */}
-      {/* <Swiper style={styles.wrapper} showsButtons={true} horizontal={true}>
-        <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
-        <Browse songs={songs} currentTheme={currentTheme} />
-      </Swiper> */}
-        <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
-      </View>
-      <View style={{width: "100vw", height: height}}>
-        <Browse songs={songs} currentTheme={currentTheme} />
-      </View>
-      <View style={{width: "100vw", height: height}}>
-        <Browse songs={songs} currentTheme={currentTheme} />
-      </View>
-    </ScrollView>
+      <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} setTabsToEnd={setTabsToEnd} />
+      <ScrollView
+        ref={scrollViewRef}
+        // snapToOffsets={[100, 800, 2100]}
+        scrollEnabled={scrollable}
+        decelerationRate="fast"
+        snapToEnd={false}
+        snapToStart={false}
+        disableIntervalMomentum={true}
+        onScroll={({nativeEvent}) => {
+          console.log(followTabsWithScroll(nativeEvent));
+          // scrollViewRef.current?.scrollTo({ x: 0 });
+        }}
+        scrollEventThrottle={400}
+        alwaysBounceVertical={true}
+        directionalLockEnabled={true}
+        horizontal={true}
+        pagingEnabled
+        showsHorizontalScrollIndicator={true}
+        style={{ 
+          width: "100vw",
+          height: "100vh"
+      }}>
+        <View style={{width: "100vw", height: height}}>
+          <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
+        </View>
+        <View style={{width: "100vw", height: height}}>
+          <Browse songs={songs} currentTheme={currentTheme} />
+        </View>
+        <View style={{width: "100vw", height: height}}>
+          <Browse songs={songs} currentTheme={currentTheme} />
+        </View>
+      </ScrollView>
     </>
   ) 
 };
