@@ -49,7 +49,7 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme}: Tab
     //   color: currentTheme.fontColor
     // },
     tab: {
-      flex: 1,
+      flex: 1, 
       margin: 8,
       flexGrow: 100,
       // width: "100%",
