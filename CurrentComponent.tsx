@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactNode, useRef } from "react";
-import { StyleSheet, Text, View, Dimensions, Platform, ScrollView,  } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Platform, ScrollView, NativeScrollPoint, NativeScrollEvent } from 'react-native';
 import { Prompts, PromptsProps } from "./Prompts";
 import { Browse, BrowseProps } from "./Browse";
 import { Tabs } from "./Tabs";
@@ -98,12 +98,23 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
 
   const tabNames:string[] = ["Discover", "Browse", "Theme"];
 
-  const followTabsWithScroll = ({layoutMeasurement, contentOffset, contentSize}) => {
+  const followTabsWithScroll = ({layoutMeasurement, contentOffset, contentSize}:NativeScrollEvent) => {
     if(disableFollowTabs) return;
 
     const currentTabIndex = Math.round(contentOffset.x/width);
     setCurrentTab(currentTabIndex);
   };
+
+  const stopOnTabIntervals = (contentOffset:NativeScrollPoint, index:number):void => {
+    console.log("INT THE FUNCTION")
+    if(contentOffset.x === width/index){
+      console.log("HALFWYA", width/index)
+      setScrollable(false);
+      setTimeout(() => {
+        setScrollable(true)
+     }, 300)
+    }
+  }
 
   const setTabsToEnd = (index:number):void => {
     // disable tab follow so it looks proper
@@ -138,7 +149,8 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
         snapToStart={false}
         disableIntervalMomentum={true}
         onScroll={({nativeEvent}) => {
-          console.log(followTabsWithScroll(nativeEvent));
+          followTabsWithScroll(nativeEvent);
+          stopOnTabIntervals(nativeEvent.contentOffset, currentTab)
           // scrollViewRef.current?.scrollTo({ x: 0 });
         }}
         scrollEventThrottle={400}
