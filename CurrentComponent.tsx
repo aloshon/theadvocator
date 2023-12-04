@@ -112,7 +112,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
       setScrollable(false);
       setTimeout(() => {
         setScrollable(true)
-     }, 300)
+     }, 10)
     }
   }
 
@@ -142,7 +142,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
       <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} setTabsToEnd={setTabsToEnd} />
       <ScrollView
         ref={scrollViewRef}
-        // snapToOffsets={[100, 800, 2100]}
+        snapToOffsets={[0, width/2, 999999]}
         scrollEnabled={scrollable}
         decelerationRate="fast"
         snapToEnd={false}
@@ -161,7 +161,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
         showsHorizontalScrollIndicator={true}
         style={{ 
           width: "100vw",
-          height: "100vh"
+          height: "100vh",
       }}>
         <View style={{width: "100vw", height: height}}>
           <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
