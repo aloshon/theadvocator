@@ -6,11 +6,12 @@ import {particles} from './config/configParticles';
 import { loadFull } from "tsparticles";
 import type { Container, Engine } from "tsparticles-engine";
 
-export type Themes = { 
+export type ThemesList = { 
   [key: string]: Theme,
 };
 
 export type Theme = {
+  name: string,
   primary: string,
   primaryTab: string,
   secondary: string,
@@ -19,8 +20,9 @@ export type Theme = {
   fontColor: string,
 };
 
-const themes: Themes = {
+const themes: ThemesList = {
   light: {
+    name: "light",
     primary: 'rgb(180, 180, 180)',
     primaryTab: 'rgba(180, 180, 180, 0.9)',
     secondary: 'rgb(240, 240, 240)',
@@ -29,6 +31,7 @@ const themes: Themes = {
     fontColor: '#333333',
   },
   dark: {
+    name: "dark",
     primary: 'rgb(50, 50, 50)',
     primaryTab: 'rgba(50, 50, 50, 0.9)',
     secondary: 'rgb(80, 80, 80)',
@@ -37,6 +40,7 @@ const themes: Themes = {
     fontColor: '#CCCCCC',
   },
   cool: {
+    name: "cool",
     primary: 'rgb(23, 107, 135)',
     primaryTab: 'rgba(23, 107, 135, 0.9)',
     secondary: 'rgb(100, 204, 197)',
@@ -45,6 +49,7 @@ const themes: Themes = {
     fontColor: '#DAFFFB',
   },
   snug: {
+    name: "snug",
     primary: 'rgb(50, 50, 50)',
     primaryTab: 'rgba(50, 50, 50, 0.9)',
     secondary: 'rgb(80, 80, 80)',
@@ -99,7 +104,7 @@ export default function App() {
           options={{...particles, background: {color: {value: currentTheme.background}}}}
         />
       </View>
-      <CurrentComponent currentTheme={currentTheme} toggleThemes={toggleThemes} />
+      <CurrentComponent allThemes={themes} currentTheme={currentTheme} toggleThemes={toggleThemes} />
     </View>
   );
 }

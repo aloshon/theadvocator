@@ -3,15 +3,17 @@ import { StyleSheet, Text, View, Dimensions, Platform, ScrollView, NativeScrollP
 import { Prompts, PromptsProps } from "./Prompts";
 import { Browse, BrowseProps } from "./Browse";
 import { Tabs } from "./Tabs";
-import { Theme, Themes } from "./App";
+import { Theme, ThemesList } from "./App";
 import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Themes } from "./Themes";
 
 type ActiveComponent = ReactNode;
 type TabComponents = {
   [key: number]: ActiveComponent
 };
 export interface CurrentComponentProps {
+  allThemes: ThemesList,
   currentTheme: Theme,
   toggleThemes: (theme: string) => void
 };
@@ -25,7 +27,7 @@ export interface Song {
   preview?: string,
   children?: React.ReactNode
 };
-export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentProps) => {
+export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: CurrentComponentProps) => {
 	const [songs, setSongs] = useState<Song[]>([{
     title: "test song1",
     artists: ["artist1", "artist2"],
@@ -170,7 +172,7 @@ export const CurrentComponent = ({currentTheme, toggleThemes}: CurrentComponentP
           <Browse songs={songs} currentTheme={currentTheme} />
         </View>
         <View style={{width: "100vw", height: height}}>
-          <Browse songs={songs} currentTheme={currentTheme} />
+          <Themes currentTheme={currentTheme} allThemes={allThemes} toggleThemes={toggleThemes} />
         </View>
       </ScrollView>
     </>

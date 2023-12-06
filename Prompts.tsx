@@ -3,7 +3,7 @@ import { Dimensions, Pressable, StyleSheet, Text, TextInput, View, Animated, Pix
 import { Keyframe, FadingTransition } from 'react-native-reanimated';
 import { useState, useEffect, useRef } from "react";
 import { Song } from "./CurrentComponent";
-import { Themes, Theme } from "./App";
+import { Theme } from "./App";
 
 export interface PromptsProps {
   setSongs: React.Dispatch<React.SetStateAction<Song[]>>
