@@ -148,7 +148,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             setClicked(true);
             setIndex(index + 1);   
         }}>
-          CONTINUE
+          NEXT
         </Text>
       </Pressable>
       <StatusBar style="auto" />

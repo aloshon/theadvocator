@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Platform, PixelRatio } from "react-native";
 import { Theme } from "./App";
 import { Dimensions, } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { getFontSize } from "./tools/FontSIzes";
 
 interface TabsProps {
   tabs: string[],
@@ -25,6 +26,7 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme, setT
       justifyContent: "space-around",
       alignItems: "stretch",
       width: "100%",
+      margin: isPC? 0: 12,
     },
     tab: {
       flex: 1,
@@ -55,7 +57,7 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme, setT
         setTabsToEnd(index)
         setActiveTab(index);
       }} key={index} numberOfLines={1} adjustsFontSizeToFit style={StyleSheet.flatten(
-        [styles.tab, tab === tabs[activeTab] && {fontWeight: "900", fontSize: (36 / fontScale), width: "100%",}]
+        [styles.tab, tab === tabs[activeTab] && {fontWeight: "900", fontSize: getFontSize(36), width: "100%",}]
       )}>
       {tab}
       </Text>))}

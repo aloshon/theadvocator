@@ -8,10 +8,6 @@ import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Themes } from "./Themes";
 
-type ActiveComponent = ReactNode;
-type TabComponents = {
-  [key: number]: ActiveComponent
-};
 export interface CurrentComponentProps {
   allThemes: ThemesList,
   currentTheme: Theme,
@@ -60,10 +56,6 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
     rank: 10,
     preview: "none"
   }]);
-  const tabComponents: TabComponents = {
-    0: <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />,
-    1: <Browse songs={songs} currentTheme={currentTheme} />,
-  };
 
   const icons:Element[] = [
     <Icon name="search"/>,
@@ -90,14 +82,6 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [scrollable, setScrollable] = useState<boolean>(true);
   const [disableFollowTabs, setDisableFollowTabs] = useState<boolean>(false);
-  const [CurrentComponent, setCurrentComponent] = useState<ActiveComponent>(tabComponents[currentTab]);
-	const updateCurrentComponent = (component: ActiveComponent): void => setCurrentComponent(component);
-
-	useEffect(() => {
-    const newComponent = tabComponents[currentTab];
-    updateCurrentComponent(newComponent);
-  }, [currentTab]);
-
   const tabNames:string[] = ["Discover", "Browse", "Theme"];
 
   const followTabsWithScroll = ({layoutMeasurement, contentOffset, contentSize}:NativeScrollEvent) => {
@@ -106,7 +90,6 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
     const currentTabIndex = Math.round(contentOffset.x/width);
     setCurrentTab(currentTabIndex);
   };
-
   const stopOnTabIntervals = (contentOffset:NativeScrollPoint, index:number):void => {
     console.log("INT THE FUNCTION")
     if(contentOffset.x === width/index){
@@ -117,7 +100,6 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
      }, 10)
     }
   }
-
   const setTabsToEnd = (index:number):void => {
     // disable tab follow so it looks proper
     setCurrentTab(index);
@@ -155,7 +137,7 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
           stopOnTabIntervals(nativeEvent.contentOffset, currentTab)
           // scrollViewRef.current?.scrollTo({ x: 0 });
         }}
-        scrollEventThrottle={400}
+        scrollEventThrottle={10}
         alwaysBounceVertical={true}
         directionalLockEnabled={true}
         horizontal={true}

@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import { useCallback, useState } from "react";
 import { CurrentComponent } from "./CurrentComponent";
 import Particles from 'react-particles';
@@ -23,12 +23,12 @@ export type Theme = {
 const themes: ThemesList = {
   light: {
     name: "light",
-    primary: 'rgb(180, 180, 180)',
-    primaryTab: 'rgba(180, 180, 180, 0.9)',
-    secondary: 'rgb(240, 240, 240)',
-    secondaryTab: 'rgba(210, 210, 210, 0.1)',
-    background: 'rgba(240, 240, 240)', 
-    fontColor: '#333333',
+    primary: 'rgb(210, 211, 211)',
+    primaryTab: 'rgba(210, 211, 211, 0.9)',
+    secondary: 'rgb(228, 229, 241)',
+    secondaryTab: 'rgba(228, 229, 241, 0.1)',
+    background: 'rgb(250, 250, 250)', 
+    fontColor: '#77777A',
   },
   dark: {
     name: "dark",
@@ -36,7 +36,7 @@ const themes: ThemesList = {
     primaryTab: 'rgba(50, 50, 50, 0.9)',
     secondary: 'rgb(80, 80, 80)',
     secondaryTab: 'rgba(80, 80, 80, 0.1)',
-    background: 'rgba(20, 20, 20)',
+    background: 'rgb(20, 20, 20)',
     fontColor: '#CCCCCC',
   },
   cool: {
@@ -45,7 +45,7 @@ const themes: ThemesList = {
     primaryTab: 'rgba(23, 107, 135, 0.9)',
     secondary: 'rgb(100, 204, 197)',
     secondaryTab: 'rgba(100, 204, 197, 0.1)',
-    background: 'rgba(7, 31, 51)',
+    background: 'rgb(7, 31, 51)',
     fontColor: '#DAFFFB',
   },
   snug: {
@@ -54,7 +54,7 @@ const themes: ThemesList = {
     primaryTab: 'rgba(50, 50, 50, 0.9)',
     secondary: 'rgb(80, 80, 80)',
     secondaryTab: 'rgba(80, 80, 80, 0.1)',
-    background: 'rgba(20, 20, 20)',
+    background: 'rgb(20, 20, 20)',
     fontColor: '#CCCCCC',
   },
 }
@@ -72,7 +72,7 @@ export default function App() {
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
     await console.log(container);
   }, []);
-  const [currentTheme, setCurrentTheme] = useState<Theme>(themes["cool"]);
+  const [currentTheme, setCurrentTheme] = useState<Theme>(themes["light"]);
   const toggleThemes = useCallback((theme:string) => {
     setCurrentTheme(themes[theme]);
   }, []);
@@ -87,12 +87,12 @@ export default function App() {
       justifyContent: "center",
       alignItems: "center",
       width: "100vw",
-      height: "100vh",
+      height: "100vh", 
     },
   });
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
         <Particles
           id="tsparticles"
@@ -105,6 +105,6 @@ export default function App() {
         />
       </View>
       <CurrentComponent allThemes={themes} currentTheme={currentTheme} toggleThemes={toggleThemes} />
-    </View>
+    </SafeAreaView>
   );
 }
