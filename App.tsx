@@ -25,9 +25,9 @@ const themes: ThemesList = {
     name: "light",
     primary: 'rgb(210, 211, 211)',
     primaryTab: 'rgba(210, 211, 211, 0.9)',
-    secondary: 'rgb(228, 229, 241)',
-    secondaryTab: 'rgba(228, 229, 241, 0.1)',
-    background: 'rgb(250, 250, 250)', 
+    secondary: 'rgb(228, 229, 240)',
+    secondaryTab: 'rgba(228, 229, 240, 0.3)',
+    background: 'rgb(245, 245, 245)', 
     fontColor: '#77777A',
   },
   dark: {
@@ -50,12 +50,12 @@ const themes: ThemesList = {
   },
   snug: {
     name: "snug",
-    primary: 'rgb(50, 50, 50)',
-    primaryTab: 'rgba(50, 50, 50, 0.9)',
-    secondary: 'rgb(80, 80, 80)',
-    secondaryTab: 'rgba(80, 80, 80, 0.1)',
-    background: 'rgb(20, 20, 20)',
-    fontColor: '#CCCCCC',
+    primary: 'rgb(136, 74, 57)',
+    primaryTab: 'rgba(136, 74, 57, 0.9)',
+    secondary: 'rgb(164, 126, 59)',
+    secondaryTab: 'rgba(164, 126, 59, 0.5)',
+    background: 'rgb(227, 139, 41)',
+    fontColor: '#F5CCA0',
   },
 }
 
@@ -72,7 +72,7 @@ export default function App() {
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
     await console.log(container);
   }, []);
-  const [currentTheme, setCurrentTheme] = useState<Theme>(themes["light"]);
+  const [currentTheme, setCurrentTheme] = useState<Theme>(themes["snug"]);
   const toggleThemes = useCallback((theme:string) => {
     setCurrentTheme(themes[theme]);
   }, []);

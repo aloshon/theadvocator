@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Platform, PixelRatio } from "react-native";
 import { Theme } from "./App";
 import { Dimensions, } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { getFontSize } from "./tools/FontSIzes";
+import { getFontSize } from "./tools/FontSizes";
 
 interface TabsProps {
   tabs: string[],

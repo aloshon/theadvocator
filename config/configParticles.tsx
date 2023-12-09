@@ -15,7 +15,7 @@ export const particles:RecursivePartial<IParticlesOptions> = {
       }
     },
     "color": {
-      "value": "#ffffff"
+      "value": "#CCCCCC"
     },
     "shape": {
       "type": "circle",
