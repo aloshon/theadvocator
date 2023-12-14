@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, Pressable, StyleSheet, Text, TextInput, View, Animated, PixelRatio } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, Text, TextInput, View, Animated, PixelRatio, Platform } from 'react-native';
 import { Keyframe, FadingTransition } from 'react-native-reanimated';
 import { useState, useEffect, useRef } from "react";
 import { Song } from "./CurrentComponent";
 import { Theme } from "./App";
+import { getFontSize } from './tools/FontSizes';
 
 export interface PromptsProps {
   setSongs: React.Dispatch<React.SetStateAction<Song[]>>
@@ -14,18 +15,7 @@ export interface PromptsProps {
 
 export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) => {
   // this for font sizes is fine just move to App file and export there
-  const { width: screenWidth } = Dimensions.get('window');
-  console.log(screenWidth);
-  console.log(currentTheme.secondary);
-  const [largeSize, setLargeSize] = useState<number>(screenWidth <= 500 ? 28 : screenWidth <= 800 ? 48 : 72);
-  console.log(PixelRatio.get());
-  useEffect(() => {
-    setLargeSize(screenWidth <= 500 ? 28 : screenWidth <= 800 ? 48 : 72);
-    console.log(largeSize);
-  }, [Dimensions.get('window').width]); 
-  
-  const fontScale:number = PixelRatio.getFontScale();
-  const getLargeFontSize = ():number => largeSize;
+  const isPC = Platform.OS === "web" || "windows" || "macos";
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -39,7 +29,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       margin: 12,
     },
     prompts: {
-      fontSize: getLargeFontSize(),
+      fontSize: getFontSize(40),
       fontFamily: "Fira Sans",
       color: currentTheme.fontColor,
       margin: 12
@@ -50,7 +40,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       alignItems: "center",
       borderRadius: 8,
       minWidth: "90%",
-      minHeight: "50%",
+      minHeight: isPC ? "50%" : "40%",
       margin: 60,
       padding: 12,
       backgroundColor: currentTheme.secondaryTab,

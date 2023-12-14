@@ -79,7 +79,7 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
 
   const {height, width} = Platform.OS === 'web' ? Dimensions.get('window') : Dimensions.get('screen');
   const scrollViewRef = useRef<any>();
-  const [currentTab, setCurrentTab] = useState<number>(0);
+  const [currentTab, setCurrentTab] = useState<number>(2);
   const [scrollable, setScrollable] = useState<boolean>(true);
   const [disableFollowTabs, setDisableFollowTabs] = useState<boolean>(false);
   const tabNames:string[] = ["Discover", "Browse", "Theme"];

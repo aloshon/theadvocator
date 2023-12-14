@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, ScrollView, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions, TouchableHighlight, Platform } from 'react-native';
 import { Theme, ThemesList } from "./App";
 import { Popup } from './Popup';
 import { LinearGradient } from "expo-linear-gradient";
+import { getFontSize } from './tools/FontSizes';
 
 export interface ThemesProps {
   currentTheme: Theme,
@@ -10,7 +11,7 @@ export interface ThemesProps {
 };
 
 export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => {
-// set the colors by puttin ghr object properties instead on hard coding it
+  const isPC = Platform.OS === "web" || "windows" || "macos";
   return (
     <>
       <View style={{
@@ -29,7 +30,7 @@ export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => 
             style = {{
               justifyContent: 'center',
               alignItems: 'center',
-              margin: 16,
+              margin: 20,
             }}
             underlayColor={currentTheme.background}
             onPress = { () => toggleThemes(theme) }
@@ -38,13 +39,15 @@ export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => 
               colors={[allThemes[theme].primary, allThemes[theme].secondary, allThemes[theme].background]}
               style={{
                 borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2,
-                width: Dimensions.get('window').width * 0.3,
-                height: Dimensions.get('window').width * 0.3,
+                minWidth: isPC ? Dimensions.get('window').width * 0.23 : Dimensions.get('window').width * 0.4,
+                minHeight: isPC ? Dimensions.get('window').width * 0.23 : Dimensions.get('window').width * 0.4,
+                // minWidth: Dimensions.get('window').width * 0.23,
+                // minHeight: Dimensions.get('window').width * 0.23,
                 transform: [{ rotate: '45deg'}],
                 justifyContent: "center",
                 alignItems: "center",
             }}>
-              <Text style={{transform: [{ rotate: '315deg'}], color: allThemes[theme].fontColor, fontWeight: "bold"}}>{theme.toUpperCase()}</Text>
+              <Text style={{transform: [{ rotate: '315deg'}], color: allThemes[theme].fontColor, fontWeight: "bold", fontSize: getFontSize(20)}}>{theme.toUpperCase()}</Text>
             </LinearGradient>
           </TouchableHighlight>
         ))}

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Song } from "./CurrentComponent";
 import { Theme } from "./App";
 import { Popup } from './Popup';
+import { getFontSize } from './tools/FontSizes';
 
 export interface BrowseProps {
   songs: Song[],

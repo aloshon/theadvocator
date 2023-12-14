@@ -1,6 +1,7 @@
 import { Song } from "./CurrentComponent";
 import { Theme } from "./App";
 import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
+import { getFontSize } from './tools/FontSizes';
 
 interface PopupProps {
   data: Song
