@@ -10,7 +10,7 @@ export interface PromptsProps {
   setSongs: React.Dispatch<React.SetStateAction<Song[]>>
   toggleThemes: (theme: string) => void
   currentTheme: Theme,
-  children?: React.ReactNode
+  children?: React.ReactNode 
 };
 
 export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) => {
