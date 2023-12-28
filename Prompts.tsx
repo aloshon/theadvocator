@@ -78,7 +78,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   const resetUserInput = ():void => setUserInput("");
 
   const prompts:string[] = [
-    "Do you have any favorite artists or genres?",
+    "Do you have any favorite genres?",
     "What mood are you feeling right now?",
     "Are you looking for songs with certain instruments?",
     "Are you looking for songs within a certain tempo?",
@@ -136,7 +136,8 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             answers.push(userInput); 
             resetUserInput();
             setClicked(true);
-            setIndex(index + 1);   
+            setIndex(index + 1); 
+            console.log(answers);
         }}>
           NEXT
         </Text>

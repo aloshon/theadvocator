@@ -1,4 +1,4 @@
-import { StyleSheet, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Platform } from 'react-native';
 import { useCallback, useState } from "react";
 import { CurrentComponent } from "./CurrentComponent";
 import Particles from 'react-particles';

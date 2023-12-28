@@ -7,6 +7,7 @@ import { Theme, ThemesList } from "./App";
 import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Themes } from "./Themes";
+import EncryptedStorage from "react-native-encrypted-storage";
 
 export interface CurrentComponentProps {
   allThemes: ThemesList,
@@ -24,38 +25,51 @@ export interface Song {
   children?: React.ReactNode
 };
 export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: CurrentComponentProps) => {
-	const [songs, setSongs] = useState<Song[]>([{
-    title: "test song1",
-    artists: ["artist1", "artist2"],
-    background: "background",
-    duration: 100,
-    rank: 20,
-    preview: "none"
-  },
-  {
-    title: "test song2",
-    artists: ["artist3", "artist2"],
-    background: "background2",
-    duration: 300,
-    rank: 230,
-    preview: "none"
-  },
-  {
-    title: "test song3",
-    artists: ["artist3", "artist4"],
-    background: "background",
-    duration: 140,
-    rank: 30,
-    preview: "none"
-  },
-  {
-    title: "test song4",
-    artists: ["artist1", "artist4"],
-    background: "background",
-    duration: 200,
-    rank: 10,
-    preview: "none"
-  }]);
+	// const [songs, setSongs] = useState<Song[]>([{
+  //   title: "test song1",
+  //   artists: ["artist1", "artist2"],
+  //   background: "background",
+  //   duration: 100,
+  //   rank: 20,
+  //   preview: "none"
+  // },
+  // {
+  //   title: "test song2",
+  //   artists: ["artist3", "artist2"],
+  //   background: "background2",
+  //   duration: 300,
+  //   rank: 230,
+  //   preview: "none"
+  // },
+  // {
+  //   title: "test song3",
+  //   artists: ["artist3", "artist4"],
+  //   background: "background",
+  //   duration: 140,
+  //   rank: 30,
+  //   preview: "none"
+  // },
+  // {
+  //   title: "test song4",
+  //   artists: ["artist1", "artist4"],
+  //   background: "background",
+  //   duration: 200,
+  //   rank: 10,
+  //   preview: "none"
+  // }]);
+
+  const [songs, setSongs] = useState<Song[]>([]);
+  const isPC = Platform.OS === "web" || "windows" || "macos";
+
+  useEffect(() => {
+    const getSavedSongs = async () => {
+      const songsPromise:string|null = isPC ? window.localStorage.getItem("songs") : (await EncryptedStorage.getItem("songs"));
+      const savedSongs:Song[] = songsPromise!== null && JSON.parse(songsPromise);
+      setSongs(savedSongs);
+    };
+
+    getSavedSongs();
+  }, []);
 
   const icons:Element[] = [
     <Icon name="search"/>,
@@ -93,7 +107,6 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
   const stopOnTabIntervals = (contentOffset:NativeScrollPoint, index:number):void => {
     console.log("INT THE FUNCTION")
     if(contentOffset.x === width/index){
-      console.log("HALFWYA", width/index)
       setScrollable(false);
       setTimeout(() => {
         setScrollable(true)
@@ -134,8 +147,7 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
         disableIntervalMomentum={true}
         onScroll={({nativeEvent}) => {
           followTabsWithScroll(nativeEvent);
-          stopOnTabIntervals(nativeEvent.contentOffset, currentTab)
-          // scrollViewRef.current?.scrollTo({ x: 0 });
+          stopOnTabIntervals(nativeEvent.contentOffset, currentTab);
         }}
         scrollEventThrottle={10}
         alwaysBounceVertical={true}
