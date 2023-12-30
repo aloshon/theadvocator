@@ -38,7 +38,7 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
   //   artists: ["artist3", "artist2"],
   //   background: "background2",
   //   duration: 300,
-  //   rank: 230,
+  //   rank: 230, 
   //   preview: "none"
   // },
   // {
