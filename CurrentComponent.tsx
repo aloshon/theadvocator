@@ -6,8 +6,8 @@ import { Tabs } from "./Tabs";
 import { Theme, ThemesList } from "./App";
 import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Themes } from "./Themes";
-import EncryptedStorage from "react-native-encrypted-storage";
 
 export interface CurrentComponentProps {
   allThemes: ThemesList,
@@ -63,8 +63,11 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
 
   useEffect(() => {
     const getSavedSongs = async () => {
-      const songsPromise:string|null = isPC ? window.localStorage.getItem("songs") : (await EncryptedStorage.getItem("songs"));
-      const savedSongs:Song[] = songsPromise!== null && JSON.parse(songsPromise);
+      const songsPromise:string|null = (await AsyncStorage.getItem("songs"));
+      
+      console.log("songsPromise", songsPromise)
+      const savedSongs:Song[] = songsPromise!== null ? JSON.parse(songsPromise) : [];
+      console.log("savedSongs", savedSongs)
       setSongs(savedSongs);
     };
 
