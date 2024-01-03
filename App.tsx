@@ -57,6 +57,15 @@ const themes: ThemesList = {
     background: 'rgb(227, 139, 41)',
     fontColor: '#F5CCA0',
   },
+  tera: {
+    name: "tera",
+    primary: 'rgb(0, 155, 77)',
+    primaryTab: 'rgba(0, 155, 77, 0.9)',
+    secondary: 'rgb(255, 204, 0)',
+    secondaryTab: 'rgba(255, 204, 0, 0.3)',
+    background: 'rgb(11, 255, 220)',
+    fontColor: 'rgb(250, 245, 233)',
+  },
 }
 
 export default function App() {
