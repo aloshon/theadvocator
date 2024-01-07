@@ -12,8 +12,6 @@ export interface BrowseProps {
 };
 
 export const Browse  = ({songs, currentTheme}: BrowseProps) => {
-  console.log(currentTheme);
-  console.log(songs);
   const styles = StyleSheet.create({
     container: {
       width: "100vw",
@@ -38,7 +36,6 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       backgroundImage: `linear-gradient(to right, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
       fontSize: '3 em',
       justifyContent: "center",
-      // display: "flex",
     },
     text: {
       fontFamily: "Fira Sans",
