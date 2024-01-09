@@ -50,7 +50,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
   return (
     <>
       <ScrollView contentContainerStyle={styles.container}>
-        {songs?.length === 0 ? <Text>No Songs to browse. Answer the prompts first!</Text>  :
+        {songs?.length === 0 ? <Text style={{color: currentTheme.fontColor, fontSize: getFontSize(24)}}>No Songs to browse. Answer the prompts first!</Text>  :
           songs?.map((song, i) => (
             <TouchableOpacity
               key={i}

@@ -62,7 +62,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       padding: 12,
       margin: 12,
       boxSizing: "border-box",
-      backgroundColor: currentTheme.secondary,  
+      backgroundColor: currentTheme.secondaryTab,  
       backdropFilter: "saturate(100%) blur(15px)",
       display: "flex",
       alignItems: "center",

@@ -59,12 +59,12 @@ const themes: ThemesList = {
   },
   tera: {
     name: "tera",
-    primary: 'rgb(0, 155, 77)',
-    primaryTab: 'rgba(0, 155, 77, 0.9)',
-    secondary: 'rgb(255, 204, 0)',
-    secondaryTab: 'rgba(255, 204, 0, 0.3)',
-    background: 'rgb(11, 255, 220)',
-    fontColor: 'rgb(250, 245, 233)',
+    primary: 'rgb(192, 215, 208)',
+    primaryTab: 'rgba(192, 215, 208, 0.9)',
+    secondary: 'rgb(7, 164, 245)',
+    secondaryTab: 'rgba(7, 164, 245, 0.3)',
+    background: 'rgb(137, 210, 138)',
+    fontColor: 'rgb(0, 255, 255)',
   },
 }
 
@@ -81,7 +81,7 @@ export default function App() {
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
     await console.log(container);
   }, []);
-  const [currentTheme, setCurrentTheme] = useState<Theme>(themes["snug"]);
+  const [currentTheme, setCurrentTheme] = useState<Theme>(themes["tera"]);
   const toggleThemes = useCallback((theme:string) => {
     setCurrentTheme(themes[theme]);
   }, []);
