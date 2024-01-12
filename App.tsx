@@ -61,10 +61,10 @@ const themes: ThemesList = {
     name: "tera",
     primary: 'rgb(192, 215, 208)',
     primaryTab: 'rgba(192, 215, 208, 0.9)',
-    secondary: 'rgb(7, 164, 245)',
-    secondaryTab: 'rgba(7, 164, 245, 0.3)',
-    background: 'rgb(137, 210, 138)',
-    fontColor: 'rgb(0, 255, 255)',
+    secondary: 'rgb(17, 164, 225)',
+    secondaryTab: 'rgba(17, 164, 225, 0.3)',
+    background: 'rgb(30, 110, 50)',
+    fontColor: 'rgb(0, 255, 235)',
   },
 }
 

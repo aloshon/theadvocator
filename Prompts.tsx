@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, Pressable, StyleSheet, Text, TextInput, View, Animated, PixelRatio, Platform } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, Text, TextInput, View, Animated, PixelRatio, Platform, ActivityIndicator } from 'react-native';
 import { Keyframe, FadingTransition } from 'react-native-reanimated';
 import { useState, useEffect, useRef } from "react";
 import { Song } from "./CurrentComponent";
@@ -41,8 +41,8 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       borderRadius: 8,
       // width: "84%",
       minHeight: isPC ? "50%" : "40%",
-      margin: 24,
-      padding: 8,
+      margin: 8,
+      padding: 4,
       backgroundColor: currentTheme.secondaryTab,
       backdropFilter: "saturate(200%) blur(25px)",
     },
@@ -71,7 +71,6 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
 
   const viewOpacity = useRef(new Animated.Value(0));
   const viewYPosition = useRef(new Animated.Value(1000)).current;
-
   const [clicked, setClicked] = useState<boolean>(false);
   const [index, setIndex]  = useState<number>(0);
   const [userInput, setUserInput] = useState<string>("");
@@ -121,6 +120,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             answers.push(userInput); 
             resetUserInput();
             setClicked(true);
+            console.log(answers)
             setIndex(index + 1);}}
           />
         </Animated.View>
