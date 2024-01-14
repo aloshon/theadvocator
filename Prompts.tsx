@@ -28,18 +28,21 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       height: "100vh",
       flexDirection: 'column',
       textAlign: 'center',
-      marginTop: loading ? -140 : 24,
+      marginTop: loading ? -140 : 40,
     },
     prompts: {
       fontSize: getFontSize(40),
       fontFamily: "Fira Sans",
       color: currentTheme.fontColor,
+      justifyContent: "center",
       margin: 12,
       minWidth: "90%",
+      // flex: 1,
+      height: "16vh",
     },
     promptsContainer: {
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
       alignItems: "center",
       borderRadius: 8,
       width: "80%",
@@ -58,7 +61,8 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       boxSizing: "border-box",
       backgroundColor: currentTheme.secondaryTab,  
       backdropFilter: "saturate(100%) blur(15px)",
-      color: currentTheme.fontColor
+      color: currentTheme.fontColor,
+      marginBottom: 20,
     },
     button: {
       borderRadius: 12,
@@ -120,8 +124,9 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
        :<View style={styles.promptsContainer}>
           <Animated.View style={[{opacity: viewOpacity.current, top: viewYPosition}]}>
             <Text style={styles.prompts}>{prompts[index]}</Text>
-            <TextInput
-              style={styles.inputBars}
+          </Animated.View>
+          <TextInput
+              style={{...styles.inputBars,}}
               placeholder="Enter your response here..."
               value={userInput}
               defaultValue={answers[index] || userInput}
@@ -133,7 +138,6 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
               console.log(answers)
               setIndex(index + 1);}}
             />
-          </Animated.View>
         </View>
       }
       {!loading && <Pressable
