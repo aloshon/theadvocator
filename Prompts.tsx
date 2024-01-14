@@ -16,39 +16,42 @@ export interface PromptsProps {
 export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) => {
   // this for font sizes is fine just move to App file and export there
   const isPC = Platform.OS === "web" || "windows" || "macos";
+  const [loading, setLoading] = useState<boolean>(false);
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       display: 'flex',
       alignItems: 'center',
       alignContent: 'center',
+      justifyContent: loading ? "center" : undefined,
       width: "100vw",
       height: "100vh",
       flexDirection: 'column',
       textAlign: 'center',
-      marginTop: 16,
+      marginTop: loading ? -140 : 24,
     },
     prompts: {
       fontSize: getFontSize(40),
       fontFamily: "Fira Sans",
       color: currentTheme.fontColor,
-      margin: 12
+      margin: 12,
+      minWidth: "90%",
     },
     promptsContainer: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
       borderRadius: 8,
-      // width: "84%",
+      width: "80%",
       minHeight: isPC ? "50%" : "40%",
       margin: 8,
-      padding: 4,
+      // padding: 4,
       backgroundColor: currentTheme.secondaryTab,
       backdropFilter: "saturate(200%) blur(25px)",
     },
     inputBars: {
       borderRadius: 8,
-      // width: "100%",
+      minWidth: "90%",
       padding: "8px",
       border: `5px, solid, ${currentTheme.secondaryTab}`,
       margin: 8,
@@ -105,27 +108,35 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
     Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
   }, [clicked]);
 
+  useEffect(() => {
+    if(index !== 0 && index % 5 === 0){
+      setLoading(true);
+    }
+  }, [index])
+
   return (
     <View style={styles.container}>
-      <View style={styles.promptsContainer}>
-        <Animated.View style={[{opacity: viewOpacity.current, top: viewYPosition}]}>
-          <Text style={styles.prompts}>{prompts[index]}</Text>
-          <TextInput
-            style={styles.inputBars}
-            placeholder="Enter your response here..."
-            value={userInput}
-            defaultValue={answers[index] || userInput}
-            onChangeText={handleChange}
-            onSubmitEditing={async ():Promise<void> => {
-            answers.push(userInput); 
-            resetUserInput();
-            setClicked(true);
-            console.log(answers)
-            setIndex(index + 1);}}
-          />
-        </Animated.View>
-      </View>
-      <Pressable
+      {loading ? <ActivityIndicator size="large" color={currentTheme.fontColor} /> 
+       :<View style={styles.promptsContainer}>
+          <Animated.View style={[{opacity: viewOpacity.current, top: viewYPosition}]}>
+            <Text style={styles.prompts}>{prompts[index]}</Text>
+            <TextInput
+              style={styles.inputBars}
+              placeholder="Enter your response here..."
+              value={userInput}
+              defaultValue={answers[index] || userInput}
+              onChangeText={handleChange}
+              onSubmitEditing={async ():Promise<void> => {
+              answers.push(userInput); 
+              resetUserInput();
+              setClicked(true);
+              console.log(answers)
+              setIndex(index + 1);}}
+            />
+          </Animated.View>
+        </View>
+      }
+      {!loading && <Pressable
         style={({pressed}) => [{
           ...styles.button, backgroundColor: pressed ? currentTheme.secondaryTab 
             : currentTheme.secondary,
@@ -141,7 +152,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
         }}>
           NEXT
         </Text>
-      </Pressable>
+      </Pressable>}
       <StatusBar style="auto" />
     </View>
   );
