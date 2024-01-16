@@ -14,7 +14,7 @@ export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => 
   const isPC = Platform.OS === "web" || "windows" || "macos";
   return (
     <>
-      <View style={{
+      <ScrollView contentContainerStyle={{
         width: "100vw",
         height: "100vh",
         marginTop: 16,
@@ -36,11 +36,11 @@ export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => 
             onPress = { () => toggleThemes(theme) }
           >
             <LinearGradient 
-              colors={[allThemes[theme].primary, allThemes[theme].secondary, allThemes[theme].background]}
+              colors={[allThemes[theme].primary, allThemes[theme].secondary, allThemes[theme].background, allThemes[theme].fontColor]}
               style={{
                 borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2,
-                minWidth: isPC ? Dimensions.get('window').width * 0.23 : Dimensions.get('window').width * 0.4,
-                minHeight: isPC ? Dimensions.get('window').width * 0.23 : Dimensions.get('window').width * 0.4,
+                minWidth: isPC ? Dimensions.get('window').width * 0.25 : Dimensions.get('window').width * 0.4,
+                minHeight: isPC ? Dimensions.get('window').width * 0.25 : Dimensions.get('window').width * 0.4,
                 // minWidth: Dimensions.get('window').width * 0.23,
                 // minHeight: Dimensions.get('window').width * 0.23,
                 transform: [{ rotate: '45deg'}],
@@ -51,7 +51,7 @@ export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => 
             </LinearGradient>
           </TouchableHighlight>
         ))}
-      </View>
+      </ScrollView>
     </>
   );
 }

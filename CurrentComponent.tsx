@@ -17,7 +17,7 @@ export interface CurrentComponentProps {
 
 export interface Song {
   title?: string,
-  artists?: string[],
+  artist?: string,
   background?: string,
   duration?: number,
   rank?: number,
@@ -25,54 +25,54 @@ export interface Song {
   children?: React.ReactNode
 };
 export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: CurrentComponentProps) => {
-	// const [songs, setSongs] = useState<Song[]>([{
-  //   title: "test song1",
-  //   artists: ["artist1", "artist2"],
-  //   background: "background",
-  //   duration: 100,
-  //   rank: 20,
-  //   preview: "none"
-  // },
-  // {
-  //   title: "test song2",
-  //   artists: ["artist3", "artist2"],
-  //   background: "background2",
-  //   duration: 300,
-  //   rank: 230, 
-  //   preview: "none"
-  // },
-  // {
-  //   title: "test song3",
-  //   artists: ["artist3", "artist4"],
-  //   background: "background",
-  //   duration: 140,
-  //   rank: 30,
-  //   preview: "none"
-  // },
-  // {
-  //   title: "test song4",
-  //   artists: ["artist1", "artist4"],
-  //   background: "background",
-  //   duration: 200,
-  //   rank: 10,
-  //   preview: "none"
-  // }]);
+	const [songs, setSongs] = useState<Song[]>([{
+    title: "test song1",
+    artist: "artist1",
+    background: "background",
+    duration: 100,
+    rank: 20,
+    preview: "none"
+  },
+  {
+    title: "test song2",
+    artist: "artist3",
+    background: "background2",
+    duration: 300,
+    rank: 230, 
+    preview: "none"
+  },
+  {
+    title: "test song3",
+    artist: "artist3",
+    background: "background",
+    duration: 140,
+    rank: 30,
+    preview: "none"
+  },
+  {
+    title: "test song4",
+    artist: "artist1",
+    background: "background",
+    duration: 200,
+    rank: 10,
+    preview: "none"
+  }]);
 
-  const [songs, setSongs] = useState<Song[]>([]);
+  // const [songs, setSongs] = useState<Song[]>([]);
   const isPC = Platform.OS === "web" || "windows" || "macos";
 
-  useEffect(() => {
-    const getSavedSongs = async () => {
-      const songsPromise:string|null = (await AsyncStorage.getItem("songs"));
+  // useEffect(() => {
+  //   const getSavedSongs = async () => {
+  //     const songsPromise:string|null = (await AsyncStorage.getItem("songs"));
       
-      console.log("songsPromise", songsPromise)
-      const savedSongs:Song[] = songsPromise!== null ? JSON.parse(songsPromise) : [];
-      console.log("savedSongs", savedSongs)
-      setSongs(savedSongs);
-    };
+  //     console.log("songsPromise", songsPromise)
+  //     const savedSongs:Song[] = songsPromise!== null ? JSON.parse(songsPromise) : [];
+  //     console.log("savedSongs", savedSongs)
+  //     setSongs(savedSongs);
+  //   };
 
-    getSavedSongs();
-  }, []);
+  //   getSavedSongs();
+  // }, []);
 
   const icons:Element[] = [
     <Icon name="search"/>,

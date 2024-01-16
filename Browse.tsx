@@ -4,6 +4,8 @@ import { Song } from "./CurrentComponent";
 import { Theme } from "./App";
 import { Popup } from './Popup';
 import { getFontSize } from './tools/FontSizes';
+// import {defaultSong} from './assets/default-song.png';
+import { Image } from 'react-native-elements';
 
 export interface BrowseProps {
   songs: Song[],
@@ -31,21 +33,47 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       maxWidth: "48%",
       height: "100px",
       margin: 20,
-      padding: 30,
+      paddingTop: 20,
+      paddingBottom: 20,
+      paddingLeft: 36,
+      paddingRight: 36,
       backgroundColor: "rgba(200, 200, 200, .45)",  
       backgroundImage: `linear-gradient(to right, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
       fontSize: '3 em',
-      justifyContent: "center",
+      justifyContent: "space-between",
+      alignItems: "center",
+      flexDirection: "row",
     },
     text: {
       fontFamily: "Fira Sans",
       color: currentTheme.fontColor,
-    }
+    },
+    songImage: {
+      width: 40,
+      height: 40,
+    },
+    songTexts: {
+      flexDirection: "column",
+      alignItems: "flex-end",
+    },
+    songTitle: {
+      fontSize: getFontSize(24),
+      marginBottom: 8,
+      color: currentTheme.fontColor,
+    },
+    songArtist: {
+      fontSize: getFontSize(16),
+      marginTop: 8,
+      color: currentTheme.fontColor,
+    },
   });
 
   const [index, setIndex] = useState<number>(0);
   const [popupOn, setPopupOn] = useState<boolean>(false);
   const [currentSong, setCurrentSong] = useState<Song|null>(null); 
+  console.log("songs")
+  console.log(songs)
+  console.log(songs.length)
 
   return (
     <>
@@ -57,7 +85,11 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
               onPress= {() => setCurrentSong(song)}
               style={styles.song}
             >
-              <Text style={(styles.text)}>{song.title}</Text>
+              <Image style={styles.songImage} source={require('./assets/default-song.png')} />
+              <View style={styles.songTexts}>
+                <Text style={styles.songTitle}>{song.title}</Text>
+                <Text style={styles.songArtist}>{song.artist}</Text>
+              </View>
             </TouchableOpacity>
           ))
         }
