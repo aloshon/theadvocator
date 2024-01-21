@@ -84,12 +84,14 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   const resetUserInput = ():void => setUserInput("");
 
   const prompts:string[] = [
-    "Do you have any favorite genres?",
+    "What genre(s)?",
     "What mood are you feeling right now?",
-    "Are you looking for songs with certain instruments?",
-    "Are you looking for songs within a certain tempo?",
+    "What specific instruments, if any?",
+    "What tempo?",
     "Do you want popular music?",
     "What era of music do you want to choose from?",
+    "What artists do you want to hear from?",
+    "What artists do you NOT want to hear from?",
   ];
   const answers:string[] = [
 
