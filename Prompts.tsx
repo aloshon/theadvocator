@@ -82,17 +82,20 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   const [index, setIndex]  = useState<number>(0);
   const [userInput, setUserInput] = useState<string>("");
   const resetUserInput = ():void => setUserInput("");
-
+  // prompts are the initial questions to get the process going.
   const prompts:string[] = [
-    "What genre(s)?",
+    "What genre(s) are you seeking for?",
     "What mood are you feeling right now?",
     "What specific instruments, if any?",
     "What tempo?",
     "Do you want popular music?",
+  ];
+  // extraPrompts are going to be randomized and are only here to add more spark to the inisial batch
+  const extraPromts:string[] = [
     "What era of music do you want to choose from?",
     "What artists do you want to hear from?",
     "What artists do you NOT want to hear from?",
-  ];
+  ]
   const answers:string[] = [
 
   ];
