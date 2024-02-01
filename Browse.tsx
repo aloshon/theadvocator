@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Animated, Easing } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Animated, Easing, Dimensions } from 'react-native';
 import { useState } from "react";
 import { Song } from "./CurrentComponent";
 import { Theme } from "./App";
@@ -14,6 +14,8 @@ export interface BrowseProps {
 };
 
 export const Browse  = ({songs, currentTheme}: BrowseProps) => {
+  const screenWidth = Dimensions.get('window').width;
+  console.log(screenWidth);
   const styles = StyleSheet.create({
     container: {
       width: "100vw",
@@ -33,14 +35,11 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
       maxWidth: "48%",
       height: "100px",
       margin: 20,
-      paddingTop: 20,
-      paddingBottom: 20,
-      paddingLeft: 36,
-      paddingRight: 36,
+      display: "flex",
       backgroundColor: "rgba(200, 200, 200, .45)",  
       backgroundImage: `linear-gradient(to right, ${currentTheme.primaryTab}, ${currentTheme.secondaryTab})`,
       fontSize: '3 em',
-      justifyContent: "space-between",
+      justifyContent: "space-around",
       alignItems: "center",
       flexDirection: "row",
     },
@@ -51,6 +50,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
     songImage: {
       width: 40,
       height: 40,
+      marginRight: screenWidth > 900 ? 160 : 0,
     },
     songTexts: {
       flexDirection: "column",

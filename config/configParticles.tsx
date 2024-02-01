@@ -8,7 +8,7 @@ export const particles:RecursivePartial<IParticlesOptions> = {
   fpsLimit: 120,
   "particles": {
     "number": {
-      "value": 27,
+      "value": 20,
       "density": {
         "enable": true,
         "value_area": 510
