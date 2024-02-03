@@ -81,10 +81,11 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   const [clicked, setClicked] = useState<boolean>(false);
   const [index, setIndex]  = useState<number>(0);
   const [userInput, setUserInput] = useState<string>("");
+  const [answers, setAnswers] = useState<string[]>([]);
   const resetUserInput = ():void => setUserInput("");
   // prompts are the initial questions to get the process going.
   const prompts:string[] = [
-    "What genre(s) are you seeking for?",
+    "What genre(s) are you looking for?",
     "What mood are you feeling right now?",
     "What specific instruments, if any?",
     "What tempo?",
@@ -96,9 +97,9 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
     "What artists do you want to hear from?",
     "What artists do you NOT want to hear from?",
   ]
-  const answers:string[] = [
-
-  ];
+  const addAnswer = (input:string):void => {
+    setAnswers((answers) => [...answers, input]);
+  }
 
   const delay = (time: number):Promise<null> => {
     return new Promise(() => setTimeout(() => { return null}, time));
@@ -113,6 +114,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}).start();
       setClicked(false);
     }
+    console.log(answers);
     Animated.timing(viewOpacity.current, {duration: 1000, toValue: 1, useNativeDriver: true}).start();
     Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
   }, [clicked]);
@@ -137,7 +139,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
               defaultValue={answers[index] || userInput}
               onChangeText={handleChange}
               onSubmitEditing={async ():Promise<void> => {
-              answers.push(userInput); 
+              addAnswer(userInput); 
               resetUserInput();
               setClicked(true);
               console.log(answers)
@@ -153,7 +155,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
         <Text
           style={{color: currentTheme.fontColor, }}
           onPress={async(): Promise<void> => {
-            answers.push(userInput); 
+            addAnswer(userInput); 
             resetUserInput();
             setClicked(true);
             setIndex(index + 1); 

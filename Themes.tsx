@@ -26,7 +26,7 @@ export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => 
         flex: 1,
       }}>
         {Object.keys(allThemes).map(theme => (
-          <View style={{ borderWidth: currentTheme.name === theme ? 1 : 0, borderRadius: 100, borderColor: currentTheme.fontColor, margin: 4}}>
+          <View style={{ borderWidth: currentTheme.name === theme ? 1 : 0, borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2, borderColor: currentTheme.fontColor, margin: 4}}>
             <TouchableHighlight
               style = {{
                 justifyContent: 'center',
