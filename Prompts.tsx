@@ -92,10 +92,12 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
     "Do you want popular music?",
   ];
   // extraPrompts are going to be randomized and are only here to add more spark to the inisial batch
-  const extraPromts:string[] = [
+  // nested prompts will start with a yes/no question and then ask the 2nd question if the user responds yes
+  const extraPromts:(string | string[])[] = [
     "What era of music do you want to choose from?",
     "What artists do you want to hear from?",
     "What artists do you NOT want to hear from?",
+    ["Is there an artist you'd like to get recommendations from?", "What artist?"],
   ]
   const addAnswer = (input:string):void => {
     setAnswers((answers) => [...answers, input]);
@@ -158,8 +160,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
             addAnswer(userInput); 
             resetUserInput();
             setClicked(true);
-            setIndex(index + 1); 
-            console.log(answers);
+            setIndex(index + 1);
         }}>
           NEXT
         </Text>

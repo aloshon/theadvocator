@@ -11,7 +11,8 @@ export interface ThemesProps {
 };
 
 export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => {
-  const isPC = Platform.OS === "web" || "windows" || "macos";
+  const isPC:string|boolean = Platform.OS === "web" || "windows" || "macos";
+  const roundedBorder = Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2;
   return (
     <>
       <ScrollView contentContainerStyle={{
@@ -26,7 +27,7 @@ export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => 
         flex: 1,
       }}>
         {Object.keys(allThemes).map(theme => (
-          <View style={{ borderWidth: currentTheme.name === theme ? 1 : 0, borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2, borderColor: currentTheme.fontColor, margin: 4}}>
+          <View style={{ borderWidth: currentTheme.name === theme ? 1 : 0, borderRadius: roundedBorder, borderColor: currentTheme.fontColor, margin: 4}}>
             <TouchableHighlight
               style = {{
                 justifyContent: 'center',
@@ -39,11 +40,9 @@ export const Themes = ({currentTheme, allThemes, toggleThemes}: ThemesProps) => 
               <LinearGradient 
                 colors={[allThemes[theme].primary, allThemes[theme].secondary, allThemes[theme].background, allThemes[theme].fontColor]}
                 style={{
-                  borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2,
+                  borderRadius: roundedBorder,
                   minWidth: isPC ? Dimensions.get('window').width * 0.25 : Dimensions.get('window').width * 0.4,
                   minHeight: isPC ? Dimensions.get('window').width * 0.25 : Dimensions.get('window').width * 0.4,
-                  // minWidth: Dimensions.get('window').width * 0.23,
-                  // minHeight: Dimensions.get('window').width * 0.23,
                   transform: [{ rotate: '45deg'}],
                   justifyContent: "center",
                   alignItems: "center",

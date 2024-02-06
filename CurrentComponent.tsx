@@ -108,7 +108,6 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
     setCurrentTab(currentTabIndex);
   };
   const stopOnTabIntervals = (contentOffset:NativeScrollPoint, index:number):void => {
-    console.log("INT THE FUNCTION")
     if(contentOffset.x === width/index){
       setScrollable(false);
       setTimeout(() => {
