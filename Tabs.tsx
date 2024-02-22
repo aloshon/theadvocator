@@ -26,8 +26,7 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme, setT
       justifyContent: "space-around",
       alignItems: "stretch",
       width: "100%",
-      padding: 4,
-      margin: isPC? 0: 12,
+      margin: 12,
     },
     tab: {
       flex: 1,
