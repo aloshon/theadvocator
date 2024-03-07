@@ -85,28 +85,9 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   const [userInput, setUserInput] = useState<string>("");
   const [answers, setAnswers] = useState<string[]>([]);
   const resetUserInput = ():void => setUserInput("");
-  // prompts are the initial questions to get the process going.
-  const prompts:string[] = [
-    "What specific genre(s) are you looking for?",
-    "What mood are you feeling right now?",
-    "What instrument or combination of instruments in the music you enjoy if any?",
-    "What pace or tempo do you prefer in the music you enjoy? (e.g., fast, moderate, slow)",
-    "Are you more inclined towards mainstream or indie/alternative music?",
-  ];
-  // extraPrompts are going to be randomized and are only here to add more spark to the inisial batch
-  // nested prompts will start with a yes/no question and then ask the 2nd question if the user responds yes
-  const extraPromts:(string | string[])[] = [
-    "What artists do you want to hear from?",
-    "What artists do you NOT want to hear from?",
-    ["Is there an artist you'd like to get recommendations from?", "What artist?"],
-    "Do you prefer vocals or instrumental music?",
-    "Do you have a preference for a specific time period of music, such as classic, contemporary, or a specific decade?",
-    "Are there any specific themes or topics in lyrics that you tend to enjoy or dislike?",
-    "Do you enjoy songs that are complex or straightforward?",
-    "How do you feel about songs that incorporate electronic elements or synth sounds into the music?",
-    "Do you prefer songs that are nostalgic?",
-    "Are you open to exploring songs from different cultures or languages?",
-  ]
+  // prompts will be generated from chat gpt
+  const prompts:string[] = [];
+  
   const addAnswer = (input:string):void => {
     setAnswers((answers) => [...answers, input]);
   }
