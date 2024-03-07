@@ -90,7 +90,12 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   
   const addAnswer = (input:string):void => {
     setAnswers((answers) => [...answers, input]);
-  }
+  };
+
+  const generatePrompts = ():void => {
+    setStartPrompting(true);
+    setLoading(true);
+  };
 
   const delay = (time: number):Promise<null> => {
     return new Promise(() => setTimeout(() => { return null}, time));
@@ -120,7 +125,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
     <View style={styles.container}>
       <Text 
         style={{display: startPrompting ? "none" : "flex", color: currentTheme.fontColor}}
-        onPress={() => {setStartPrompting(true); setLoading(true);}}>
+        onPress={generatePrompts}>
           START
       </Text>
       {loading ? <ActivityIndicator size="large" color={currentTheme.fontColor} /> 
