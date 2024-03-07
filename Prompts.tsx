@@ -5,6 +5,8 @@ import { useState, useEffect, useRef } from "react";
 import { Song } from "./CurrentComponent";
 import { Theme } from "./App";
 import { getFontSize } from './tools/FontSizes';
+import { Button } from 'react-native-elements';
+import { isStringLiteral } from 'typescript';
 
 export interface PromptsProps {
   setSongs: React.Dispatch<React.SetStateAction<Song[]>>
@@ -17,6 +19,7 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
   // this for font sizes is fine just move to App file and export there
   const isPC = Platform.OS === "web" || "windows" || "macos";
   const [loading, setLoading] = useState<boolean>(false);
+  const [startPrompting, setStartPrompting] = useState<boolean>(false);
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -41,14 +44,13 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       height: "16vh",
     },
     promptsContainer: {
-      display: "flex",
       justifyContent: "space-around",
       alignItems: "center",
       borderRadius: 8,
       width: "80%",
       minHeight: isPC ? "50%" : "40%",
       margin: 8,
-      // padding: 4,
+      display: !startPrompting ? "none" : "flex",
       backgroundColor: currentTheme.secondaryTab,
       backdropFilter: "saturate(200%) blur(25px)",
     },
@@ -71,8 +73,8 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       boxSizing: "border-box",
       backgroundColor: currentTheme.secondaryTab,  
       backdropFilter: "saturate(100%) blur(15px)",
-      display: "flex",
       alignItems: "center",
+      display: !startPrompting ? "none" : "flex",
     },
   });
 
@@ -135,6 +137,11 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
 
   return (
     <View style={styles.container}>
+      <Text 
+        style={{display: startPrompting ? "none" : "flex", color: currentTheme.fontColor}}
+        onPress={() => {setStartPrompting(true); setLoading(true);}}>
+          START
+      </Text>
       {loading ? <ActivityIndicator size="large" color={currentTheme.fontColor} /> 
        :<View style={styles.promptsContainer}>
           <Animated.View style={[{opacity: viewOpacity.current, top: viewYPosition}]}>
