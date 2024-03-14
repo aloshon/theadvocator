@@ -66,6 +66,15 @@ const themes: ThemesList = {
     background: 'rgb(30, 110, 50)',
     fontColor: 'rgb(0, 255, 235)',
   },
+  toxic: {
+    name: "toxic",
+    primary: 'rgb(95, 67, 178)',
+    primaryTab: 'rgb(95, 67, 178, 0.9)',
+    secondary: 'rgb(58, 49, 83)',
+    secondaryTab: 'rgb(58, 49, 83, 0.3)',
+    background: 'rgb(27,1,27)',
+    fontColor: 'rgb(254, 253, 253)',
+  }
 }
 
 export default function App() {
