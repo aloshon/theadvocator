@@ -70,10 +70,10 @@ const themes: ThemesList = {
     name: "toxic",
     primary: 'rgb(95, 67, 178)',
     primaryTab: 'rgb(95, 67, 178, 0.9)',
-    secondary: 'rgb(58, 49, 83)',
-    secondaryTab: 'rgb(58, 49, 83, 0.3)',
-    background: 'rgb(41,7,41)',
-    fontColor: 'rgb(254, 240, 254)',
+    secondary: 'rgb(58, 49, 84)',
+    secondaryTab: 'rgb(58, 49, 84, 0.3)',
+    background: 'rgb(43,7,43)',
+    fontColor: 'rgb(255, 237, 255)',
   }
 }
 
