@@ -72,7 +72,7 @@ const themes: ThemesList = {
     primaryTab: 'rgb(95, 67, 178, 0.9)',
     secondary: 'rgb(58, 49, 84)',
     secondaryTab: 'rgb(58, 49, 84, 0.3)',
-    background: 'rgb(43,7,43)',
+    background: 'rgb(45,7,45)',
     fontColor: 'rgb(255, 237, 255)',
   }
 }
