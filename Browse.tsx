@@ -82,7 +82,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
           songs?.map((song, i) => (
             <TouchableOpacity
               key={i}
-              onPress= {() => setCurrentSong(song)}
+              onPress= {() => {setCurrentSong(song); console.log(song)}}
               style={styles.song}
             >
               <Image style={styles.songImage} source={require('./assets/default-song.png')} />
@@ -94,7 +94,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
           ))
         }
       </ScrollView>
-      {currentSong !== null && <Popup
+      {setPopupOn && <Popup
         key="popup"
         data={currentSong}
         handleClose={() => setPopupOn(false)}
