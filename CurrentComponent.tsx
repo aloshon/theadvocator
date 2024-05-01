@@ -7,7 +7,9 @@ import { Theme, ThemesList } from "./App";
 import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Popup } from './Popup';
 import { Themes } from "./Themes";
+import { set } from "react-native-reanimated";
 
 export interface CurrentComponentProps {
   allThemes: ThemesList,
@@ -99,6 +101,7 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [scrollable, setScrollable] = useState<boolean>(true);
   const [disableFollowTabs, setDisableFollowTabs] = useState<boolean>(false);
+  const [popupOn, setPopupOn] = useState<boolean>(false);
   const tabNames:string[] = ["Discover", "Browse", "Theme"];
 
   const followTabsWithScroll = ({layoutMeasurement, contentOffset, contentSize}:NativeScrollEvent) => {
@@ -165,12 +168,18 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
           <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
         </View>
         <View style={{width: "100vw", height: height}}>
-          <Browse songs={songs} currentTheme={currentTheme} />
+          <Browse songs={songs} currentTheme={currentTheme} setPopupOn={setPopupOn} />
         </View>
         <View style={{width: "100vw", height: height}}>
           <Themes currentTheme={currentTheme} allThemes={allThemes} toggleThemes={toggleThemes} />
         </View>
       </ScrollView>
+      {popupOn && <Popup
+        key="popup"
+        song={currentSong}
+        handleClose={() => setPopupOn(false)}
+        currentTheme={currentTheme}
+      />}
     </>
   ) 
 };

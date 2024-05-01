@@ -19,7 +19,7 @@ export const Popup = ({song, handleClose, currentTheme}: PopupProps) => {
       height: "100vh",
 			top: 0,
 			left: 0,
-			marginTop: "10px",
+			flex: 1,
     },
     box: {
       position: "relative",

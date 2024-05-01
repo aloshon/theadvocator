@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Animated, Easing, Dimensions } from 'react-native';
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { Song } from "./CurrentComponent";
 import { Theme } from "./App";
 import { Popup } from './Popup';
@@ -10,10 +10,11 @@ import { Image } from 'react-native-elements';
 export interface BrowseProps {
   songs: Song[],
   currentTheme: Theme,
+  setPopupOn: Dispatch<SetStateAction<boolean>>,
   children?: React.ReactNode
 };
 
-export const Browse  = ({songs, currentTheme}: BrowseProps) => {
+export const Browse  = ({songs, currentTheme, setPopupOn}: BrowseProps) => {
   const screenWidth = Dimensions.get('window').width;
   console.log(screenWidth);
   const styles = StyleSheet.create({
@@ -69,7 +70,6 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
   });
 
   const [index, setIndex] = useState<number>(0);
-  const [popupOn, setPopupOn] = useState<boolean>(false);
   const [currentSong, setCurrentSong] = useState<Song|null>(null); 
   console.log("songs")
   console.log(songs)
@@ -82,7 +82,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
           songs?.map((song, i) => (
             <TouchableOpacity
               key={i}
-              onPress= {() => {setCurrentSong(song); setPopupOn(true); console.log(song); console.log(popupOn)}}
+              onPress= {() => {setCurrentSong(song); setPopupOn(true); console.log(song);}}
               style={styles.song}
             >
               <Image style={styles.songImage} source={require('./assets/default-song.png')} />
@@ -93,12 +93,6 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
             </TouchableOpacity>
           ))
         }
-        {popupOn && <Popup
-        key="popup"
-        song={currentSong}
-        handleClose={() => setPopupOn(false)}
-        currentTheme={currentTheme}
-      />}
       </ScrollView>
     </>
   );
