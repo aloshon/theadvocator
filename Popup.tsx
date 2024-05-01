@@ -1,15 +1,16 @@
 import { Song } from "./CurrentComponent";
 import { Theme } from "./App";
-import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
 import { getFontSize } from './tools/FontSizes';
 
 interface PopupProps {
-  data: Song|null,
+  song: Song|null,
   handleClose: () => void,
   currentTheme: Theme
 }
 
-export const Popup = ({data, handleClose, currentTheme}: PopupProps) => {
+export const Popup = ({song, handleClose, currentTheme}: PopupProps) => {
+	console.log(song);
   const styles = StyleSheet.create({
     popupBox: {
       position: "absolute",
@@ -54,15 +55,17 @@ export const Popup = ({data, handleClose, currentTheme}: PopupProps) => {
     }
   });
   return (
-    <View>
-	    <View>
-        <Button title="X" onPress={() => handleClose}/>
+    <View style={styles.popupBox}>
+	    <View style={styles.box}>
+        <Pressable style={styles.closeIcon} onPress={handleClose}>
+					<Text>X</Text>
+				</Pressable>
         <View>
-          <Text>{data?.title}</Text>
-          <Text>{data?.title}</Text>
-          <Text>{data?.rank}</Text>
-          <Text>{data?.duration}</Text>
-		  <Text>{data?.artist}</Text>
+          <Text>{song?.title}</Text>
+          <Text>{song?.title}</Text>
+          <Text>{song?.rank}</Text>
+          <Text>{song?.duration}</Text>
+					<Text>{song?.artist}</Text>
         </View>
       </View>
     </View>

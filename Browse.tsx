@@ -82,7 +82,7 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
           songs?.map((song, i) => (
             <TouchableOpacity
               key={i}
-              onPress= {() => {setCurrentSong(song); console.log(song)}}
+              onPress= {() => {setCurrentSong(song); setPopupOn(true); console.log(song); console.log(popupOn)}}
               style={styles.song}
             >
               <Image style={styles.songImage} source={require('./assets/default-song.png')} />
@@ -93,13 +93,13 @@ export const Browse  = ({songs, currentTheme}: BrowseProps) => {
             </TouchableOpacity>
           ))
         }
-      </ScrollView>
-      {setPopupOn && <Popup
+        {popupOn && <Popup
         key="popup"
-        data={currentSong}
+        song={currentSong}
         handleClose={() => setPopupOn(false)}
         currentTheme={currentTheme}
       />}
+      </ScrollView>
     </>
   );
 }
