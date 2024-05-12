@@ -67,9 +67,7 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
   //   const getSavedSongs = async () => {
   //     const songsPromise:string|null = (await AsyncStorage.getItem("songs"));
       
-  //     console.log("songsPromise", songsPromise)
   //     const savedSongs:Song[] = songsPromise!== null ? JSON.parse(songsPromise) : [];
-  //     console.log("savedSongs", savedSongs)
   //     setSongs(savedSongs);
   //   };
 

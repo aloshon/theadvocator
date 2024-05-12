@@ -16,7 +16,6 @@ export interface BrowseProps {
 
 export const Browse  = ({songs, currentTheme, setPopupOn}: BrowseProps) => {
   const screenWidth = Dimensions.get('window').width;
-  console.log(screenWidth);
   const styles = StyleSheet.create({
     container: {
       width: "100vw",
@@ -71,9 +70,6 @@ export const Browse  = ({songs, currentTheme, setPopupOn}: BrowseProps) => {
 
   const [index, setIndex] = useState<number>(0);
   const [currentSong, setCurrentSong] = useState<Song|null>(null); 
-  console.log("songs")
-  console.log(songs)
-  console.log(songs.length)
 
   return (
     <>

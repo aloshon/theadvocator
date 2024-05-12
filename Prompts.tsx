@@ -110,7 +110,6 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
       Animated.timing(viewYPosition, {duration: 0, toValue: 800, useNativeDriver: true}).start();
       setClicked(false);
     }
-    console.log(answers);
     Animated.timing(viewOpacity.current, {duration: 1000, toValue: 1, useNativeDriver: true}).start();
     Animated.timing(viewYPosition, {duration: 800, toValue: 0, useNativeDriver: true}).start();
   }, [clicked]);
@@ -143,7 +142,6 @@ export const Prompts = ({setSongs, toggleThemes, currentTheme}: PromptsProps) =>
               addAnswer(userInput); 
               resetUserInput();
               setClicked(true);
-              console.log(answers)
               setIndex(index + 1);}}
             />
         </View>

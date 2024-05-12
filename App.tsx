@@ -79,7 +79,6 @@ const themes: ThemesList = {
 
 export default function App() {
   const particlesInit = useCallback(async (engine: Engine) => {
-    console.log(engine);
     await loadFull(engine);
   }, []);
 
