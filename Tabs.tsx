@@ -4,8 +4,10 @@ import { Theme } from "./App";
 import { Dimensions, } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { getFontSize } from "./tools/FontSizes";
+import { Background } from "tsparticles-engine";
 
 interface TabsProps {
+  popupOn: boolean,
   tabs: string[],
   icons: Element[],
   activeTab: number,
@@ -14,7 +16,7 @@ interface TabsProps {
   setTabsToEnd: (index: number) => void
 };
 
-export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme, setTabsToEnd}: TabsProps) => {
+export const Tabs = ({popupOn, tabs, icons, activeTab=0, setActiveTab, currentTheme, setTabsToEnd}: TabsProps) => {
   const fontScale = PixelRatio.getFontScale();
   console.log(currentTheme);
   const isPC = Platform.OS === "web" || "windows" || "macos";
@@ -51,7 +53,7 @@ export const Tabs = ({tabs, icons, activeTab=0, setActiveTab, currentTheme, setT
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: popupOn ? "rgba(0,0,0,0.7)" : "rgba(0,0,0,0.0)"}}>
       {tabs.map((tab, index) => (
       <Text onPress={() => {
         setTabsToEnd(index)

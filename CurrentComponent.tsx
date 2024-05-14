@@ -139,7 +139,7 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
 
 	return (
     <>
-      <Tabs tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} setTabsToEnd={setTabsToEnd} />
+      <Tabs popupOn={popupOn} tabs={tabNames} icons={icons} activeTab={currentTab} setActiveTab={setCurrentTab} currentTheme={currentTheme} setTabsToEnd={setTabsToEnd} />
       <ScrollView
         ref={scrollViewRef}
         snapToOffsets={[0, width/2, 999999]}
