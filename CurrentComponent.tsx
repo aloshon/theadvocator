@@ -100,7 +100,9 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
   const [scrollable, setScrollable] = useState<boolean>(true);
   const [disableFollowTabs, setDisableFollowTabs] = useState<boolean>(false);
   const [popupOn, setPopupOn] = useState<boolean>(false);
+  const [currentSong, setCurrentSong] = useState<Song|null>(null); 
   const tabNames:string[] = ["Discover", "Browse", "Theme"];
+  
 
   const followTabsWithScroll = ({layoutMeasurement, contentOffset, contentSize}:NativeScrollEvent) => {
     if(disableFollowTabs) return;
@@ -166,7 +168,7 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
           <Prompts setSongs={setSongs} toggleThemes={toggleThemes} currentTheme={currentTheme} />
         </View>
         <View style={{width: "100vw", height: height}}>
-          <Browse songs={songs} currentTheme={currentTheme} setPopupOn={setPopupOn} />
+          <Browse songs={songs} currentSong={currentSong} setCurrentSong={setCurrentSong} currentTheme={currentTheme} setPopupOn={setPopupOn} />
         </View>
         <View style={{width: "100vw", height: height}}>
           <Themes currentTheme={currentTheme} allThemes={allThemes} toggleThemes={toggleThemes} />
