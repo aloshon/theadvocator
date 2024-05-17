@@ -9,12 +9,14 @@ import { Image } from 'react-native-elements';
 
 export interface BrowseProps {
   songs: Song[],
+  currentSong: Song|null,
+  setCurrentSong: Dispatch<SetStateAction<Song|null>>,
   currentTheme: Theme,
   setPopupOn: Dispatch<SetStateAction<boolean>>,
   children?: React.ReactNode
 };
 
-export const Browse  = ({songs, currentTheme, setPopupOn}: BrowseProps) => {
+export const Browse  = ({songs, currentSong, setCurrentSong, currentTheme, setPopupOn}: BrowseProps) => {
   const screenWidth = Dimensions.get('window').width;
   const styles = StyleSheet.create({
     container: {
@@ -69,7 +71,6 @@ export const Browse  = ({songs, currentTheme, setPopupOn}: BrowseProps) => {
   });
 
   const [index, setIndex] = useState<number>(0);
-  const [currentSong, setCurrentSong] = useState<Song|null>(null); 
 
   return (
     <>
