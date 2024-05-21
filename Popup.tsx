@@ -1,6 +1,6 @@
 import { Song } from "./CurrentComponent";
 import { Theme } from "./App";
-import { Pressable, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { getFontSize } from './tools/FontSizes';
 
 interface PopupProps {
@@ -11,8 +11,9 @@ interface PopupProps {
 
 export const Popup = ({song, handleClose, currentTheme}: PopupProps) => {
 	console.log(song);
+	const isPC = Platform.OS === "web" || "windows" || "macos";
   const styles = StyleSheet.create({
-    popupBox: {
+    popupBoxBackground: {
       position: "absolute",
       backgroundColor: "rgba(0,0,0,0.7)",
     	width: "100vw",
@@ -23,29 +24,42 @@ export const Popup = ({song, handleClose, currentTheme}: PopupProps) => {
     },
     box: {
       position: "relative",
-			width: "70%",
+			display: "flex",
+			width: isPC ? "50%" : "75%",
 			margin: "auto",
 			height: "auto",
 			maxHeight: "70vh",
-			marginTop: "calc(100vh - 85vh - 20px)",
+			marginTop: "calc(25vh - 20px)",
 			backgroundColor: "#fff",
-			borderRadius: 4,
+			borderRadius: 7,
 			padding: "15px",
 			border: "1px solid #999",
 			overflow: "visible",
+			alignItems: "center",
 			color: "gray",
     },
+		songDetails: {
+			display: "flex",
+			justifyContent: "center",
+			alignItems: "center",
+			bottom: 40,
+		},
 		closeIcon: {
 			cursor: "pointer",
-			position: "absolute",
-			right: "calc(15% - 10px)",
-			top: "calc(100vh - 85vh - 25px)",
+			display: "flex",
+			// position: "absolute",
+			zIndex: 7,
 			backgroundColor: "#eeeeee",
-			width: 25,
-			height: 25,
-			borderRadius: 0.5,
+			alignSelf: "flex-end",
+			width: "2em",
+			height: "2em",
+			left: 36,
+			bottom: 44,
+			borderRadius: 50,
+			justifyContent: "center",
+			alignItems: "center",
 			lineHeight: 20,
-			textAlign: "center",
+			// textAlign: "center",
 			border: "1px solid grey",
 			fontSize: 20,
 			marginTop: 10
@@ -55,12 +69,12 @@ export const Popup = ({song, handleClose, currentTheme}: PopupProps) => {
     }
   });
   return (
-    <View style={styles.popupBox}>
+    <View style={styles.popupBoxBackground}>
 	    <View style={styles.box}>
-        <Pressable style={styles.closeIcon} onPress={handleClose}>
+				<Pressable style={styles.closeIcon} onPress={handleClose}>
 					<Text>X</Text>
 				</Pressable>
-        <View>
+        <View style={styles.songDetails}>
           <Text>{song?.title}</Text>
           <Text>{song?.title}</Text>
           <Text>{song?.rank}</Text>
