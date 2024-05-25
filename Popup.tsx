@@ -40,9 +40,10 @@ export const Popup = ({song, handleClose, currentTheme}: PopupProps) => {
     },
 		songDetails: {
 			display: "flex",
-			justifyContent: "center",
 			alignItems: "center",
-			bottom: 40,
+			alignContent: "space-between",
+			bottom: 28,
+			
 		},
 		closeIcon: {
 			cursor: "pointer",
@@ -64,6 +65,9 @@ export const Popup = ({song, handleClose, currentTheme}: PopupProps) => {
 			fontSize: 20,
 			marginTop: 10
 		},
+		property: {
+			margin: 4,
+		},
     text: {
       fontFamily: "'Courier New', monospace",
     }
@@ -75,11 +79,11 @@ export const Popup = ({song, handleClose, currentTheme}: PopupProps) => {
 					<Text>X</Text>
 				</Pressable>
         <View style={styles.songDetails}>
-          <Text>{song?.title}</Text>
-          <Text>{song?.title}</Text>
-          <Text>{song?.rank}</Text>
-          <Text>{song?.duration}</Text>
-					<Text>{song?.artist}</Text>
+          <Text style={{...styles.property, fontSize: 20}}>{song?.title}</Text>
+          <Text style={styles.property}>{song?.title}</Text>
+          <Text style={styles.property}>{song?.rank}</Text>
+          <Text style={styles.property}>{song?.duration}</Text>
+					<Text style={styles.property}>{song?.artist}</Text>
         </View>
       </View>
     </View>
