@@ -78,15 +78,15 @@ const themes: ThemesList = {
 }
 
 export default function App() {
-  const particlesInit = useCallback(async (engine: Engine) => {
+  const particlesInit:(engine: Engine) => Promise<void> = useCallback(async (engine: Engine) => {
     await loadFull(engine);
   }, []);
 
-  const particlesLoaded = useCallback(async (container: Container | undefined) => {
+  const particlesLoaded:(container: Container | undefined) => Promise<void> = useCallback(async (container: Container | undefined) => {
     await console.log(container);
   }, []);
   const [currentTheme, setCurrentTheme] = useState<Theme>(themes["tera"]);
-  const toggleThemes = useCallback((theme:string) => {
+  const toggleThemes:(theme: string) => void = useCallback((theme:string) => {
     setCurrentTheme(themes[theme]);
   }, []);
 

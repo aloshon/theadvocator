@@ -10,8 +10,8 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:8080";
 class AdvocatorAPI {
 
   static async request(endpoint, data = {}, method = "get") {
-    const url = `${BASE_URL}/${endpoint}`;
-    const params = (method === "get")
+    const url:string = `${BASE_URL}/${endpoint}`;
+    const params:Object = (method === "get")
         ? data
         : {};
 
@@ -19,7 +19,7 @@ class AdvocatorAPI {
       return (await axios({ url, method, data, params })).data;
     } catch (err: any) {
       console.error("AdvocatorAPI Error:", err.response);
-      let message = err.response.data.error.message;
+      let message:string = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];
     }
   }

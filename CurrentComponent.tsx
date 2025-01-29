@@ -61,7 +61,7 @@ export const CurrentComponent = ({allThemes, currentTheme, toggleThemes}: Curren
   }]);
 
   // const [songs, setSongs] = useState<Song[]>([]);
-  const isPC = Platform.OS === "web" || "windows" || "macos";
+  const isPC:boolean|string = (Platform.OS === "web" || "windows" || "macos");
 
   // useEffect(() => {
   //   const getSavedSongs = async () => {

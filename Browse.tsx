@@ -17,7 +17,7 @@ export interface BrowseProps {
 };
 
 export const Browse  = ({songs, currentSong, setCurrentSong, currentTheme, setPopupOn}: BrowseProps) => {
-  const screenWidth = Dimensions.get('window').width;
+  const screenWidth:number = Dimensions.get('window').width;
   const styles = StyleSheet.create({
     container: {
       width: "100vw",
